@@ -10,7 +10,6 @@ generate: clean
 		-i $(SPEC_URL) \
 		-g go \
 		-o $(OUTPUT_DIR) \
-		--skip-validate-spec \
 		--enable-post-process-file \
 		--git-user-id=$(GIT_USER_ID) \
 		--git-repo-id=$(GIT_REPO_ID) \
