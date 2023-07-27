@@ -1,0 +1,7 @@
+docs/
+api/
+test/
+.gitignore
+.travis.yml
+git_push.sh
+README.md
