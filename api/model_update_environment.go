@@ -20,16 +20,17 @@ var _ MappedNullable = &UpdateEnvironment{}
 
 // UpdateEnvironment An object containing the new title for an Environment
 type UpdateEnvironment struct {
-	Title string `json:"title"`
+	Title *string `json:"title,omitempty"`
+	// Whether or not an environment is considered to have elevated responsibilities over other environments. Useful for distinguishing a production environment from a staging environment. Multiple primary environments are allowed. Your organization must have at least one primary environment.
+	Primary *bool `json:"primary,omitempty"`
 }
 
 // NewUpdateEnvironment instantiates a new UpdateEnvironment object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateEnvironment(title string) *UpdateEnvironment {
+func NewUpdateEnvironment() *UpdateEnvironment {
 	this := UpdateEnvironment{}
-	this.Title = title
 	return &this
 }
 
@@ -41,28 +42,68 @@ func NewUpdateEnvironmentWithDefaults() *UpdateEnvironment {
 	return &this
 }
 
-// GetTitle returns the Title field value
+// GetTitle returns the Title field value if set, zero value otherwise.
 func (o *UpdateEnvironment) GetTitle() string {
-	if o == nil {
+	if o == nil || IsNil(o.Title) {
 		var ret string
 		return ret
 	}
-
-	return o.Title
+	return *o.Title
 }
 
-// GetTitleOk returns a tuple with the Title field value
+// GetTitleOk returns a tuple with the Title field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateEnvironment) GetTitleOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Title) {
 		return nil, false
 	}
-	return &o.Title, true
+	return o.Title, true
 }
 
-// SetTitle sets field value
+// HasTitle returns a boolean if a field has been set.
+func (o *UpdateEnvironment) HasTitle() bool {
+	if o != nil && !IsNil(o.Title) {
+		return true
+	}
+
+	return false
+}
+
+// SetTitle gets a reference to the given string and assigns it to the Title field.
 func (o *UpdateEnvironment) SetTitle(v string) {
-	o.Title = v
+	o.Title = &v
+}
+
+// GetPrimary returns the Primary field value if set, zero value otherwise.
+func (o *UpdateEnvironment) GetPrimary() bool {
+	if o == nil || IsNil(o.Primary) {
+		var ret bool
+		return ret
+	}
+	return *o.Primary
+}
+
+// GetPrimaryOk returns a tuple with the Primary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateEnvironment) GetPrimaryOk() (*bool, bool) {
+	if o == nil || IsNil(o.Primary) {
+		return nil, false
+	}
+	return o.Primary, true
+}
+
+// HasPrimary returns a boolean if a field has been set.
+func (o *UpdateEnvironment) HasPrimary() bool {
+	if o != nil && !IsNil(o.Primary) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrimary gets a reference to the given bool and assigns it to the Primary field.
+func (o *UpdateEnvironment) SetPrimary(v bool) {
+	o.Primary = &v
 }
 
 func (o UpdateEnvironment) MarshalJSON() ([]byte, error) {
@@ -75,7 +116,12 @@ func (o UpdateEnvironment) MarshalJSON() ([]byte, error) {
 
 func (o UpdateEnvironment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["title"] = o.Title
+	if !IsNil(o.Title) {
+		toSerialize["title"] = o.Title
+	}
+	if !IsNil(o.Primary) {
+		toSerialize["primary"] = o.Primary
+	}
 	return toSerialize, nil
 }
 

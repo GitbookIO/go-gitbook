@@ -21,12 +21,18 @@ type SubscriptionChannel struct {
 	BackofficeUserInfoChannel         *BackofficeUserInfoChannel
 	ChangeRequestReviewsChannel       *ChangeRequestReviewsChannel
 	OrganizationCustomFieldsChannel   *OrganizationCustomFieldsChannel
+	OrganizationEntitiesChannel       *OrganizationEntitiesChannel
 	OrganizationEnvironmentsChannel   *OrganizationEnvironmentsChannel
 	OrganizationMemberChannel         *OrganizationMemberChannel
 	OrganizationMembersChannel        *OrganizationMembersChannel
 	OrganizationSpaceRelationsChannel *OrganizationSpaceRelationsChannel
 	OrganizationSpacesChannel         *OrganizationSpacesChannel
+	OrganizationTeamChannel           *OrganizationTeamChannel
+	OrganizationTeamMemberChannel     *OrganizationTeamMemberChannel
+	OrganizationTeamMembersChannel    *OrganizationTeamMembersChannel
+	OrganizationTeamsChannel          *OrganizationTeamsChannel
 	SpaceCustomFieldsChannel          *SpaceCustomFieldsChannel
+	SpaceEntitiesChannel              *SpaceEntitiesChannel
 	SpaceInfoChannel                  *SpaceInfoChannel
 	SpaceIntegrationsChannel          *SpaceIntegrationsChannel
 	SpacePublishingAuthChannel        *SpacePublishingAuthChannel
@@ -56,6 +62,13 @@ func ChangeRequestReviewsChannelAsSubscriptionChannel(v *ChangeRequestReviewsCha
 func OrganizationCustomFieldsChannelAsSubscriptionChannel(v *OrganizationCustomFieldsChannel) SubscriptionChannel {
 	return SubscriptionChannel{
 		OrganizationCustomFieldsChannel: v,
+	}
+}
+
+// OrganizationEntitiesChannelAsSubscriptionChannel is a convenience function that returns OrganizationEntitiesChannel wrapped in SubscriptionChannel
+func OrganizationEntitiesChannelAsSubscriptionChannel(v *OrganizationEntitiesChannel) SubscriptionChannel {
+	return SubscriptionChannel{
+		OrganizationEntitiesChannel: v,
 	}
 }
 
@@ -94,10 +107,45 @@ func OrganizationSpacesChannelAsSubscriptionChannel(v *OrganizationSpacesChannel
 	}
 }
 
+// OrganizationTeamChannelAsSubscriptionChannel is a convenience function that returns OrganizationTeamChannel wrapped in SubscriptionChannel
+func OrganizationTeamChannelAsSubscriptionChannel(v *OrganizationTeamChannel) SubscriptionChannel {
+	return SubscriptionChannel{
+		OrganizationTeamChannel: v,
+	}
+}
+
+// OrganizationTeamMemberChannelAsSubscriptionChannel is a convenience function that returns OrganizationTeamMemberChannel wrapped in SubscriptionChannel
+func OrganizationTeamMemberChannelAsSubscriptionChannel(v *OrganizationTeamMemberChannel) SubscriptionChannel {
+	return SubscriptionChannel{
+		OrganizationTeamMemberChannel: v,
+	}
+}
+
+// OrganizationTeamMembersChannelAsSubscriptionChannel is a convenience function that returns OrganizationTeamMembersChannel wrapped in SubscriptionChannel
+func OrganizationTeamMembersChannelAsSubscriptionChannel(v *OrganizationTeamMembersChannel) SubscriptionChannel {
+	return SubscriptionChannel{
+		OrganizationTeamMembersChannel: v,
+	}
+}
+
+// OrganizationTeamsChannelAsSubscriptionChannel is a convenience function that returns OrganizationTeamsChannel wrapped in SubscriptionChannel
+func OrganizationTeamsChannelAsSubscriptionChannel(v *OrganizationTeamsChannel) SubscriptionChannel {
+	return SubscriptionChannel{
+		OrganizationTeamsChannel: v,
+	}
+}
+
 // SpaceCustomFieldsChannelAsSubscriptionChannel is a convenience function that returns SpaceCustomFieldsChannel wrapped in SubscriptionChannel
 func SpaceCustomFieldsChannelAsSubscriptionChannel(v *SpaceCustomFieldsChannel) SubscriptionChannel {
 	return SubscriptionChannel{
 		SpaceCustomFieldsChannel: v,
+	}
+}
+
+// SpaceEntitiesChannelAsSubscriptionChannel is a convenience function that returns SpaceEntitiesChannel wrapped in SubscriptionChannel
+func SpaceEntitiesChannelAsSubscriptionChannel(v *SpaceEntitiesChannel) SubscriptionChannel {
+	return SubscriptionChannel{
+		SpaceEntitiesChannel: v,
 	}
 }
 
@@ -207,6 +255,19 @@ func (dst *SubscriptionChannel) UnmarshalJSON(data []byte) error {
 		dst.OrganizationCustomFieldsChannel = nil
 	}
 
+	// try to unmarshal data into OrganizationEntitiesChannel
+	err = newStrictDecoder(data).Decode(&dst.OrganizationEntitiesChannel)
+	if err == nil {
+		jsonOrganizationEntitiesChannel, _ := json.Marshal(dst.OrganizationEntitiesChannel)
+		if string(jsonOrganizationEntitiesChannel) == "{}" { // empty struct
+			dst.OrganizationEntitiesChannel = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.OrganizationEntitiesChannel = nil
+	}
+
 	// try to unmarshal data into OrganizationEnvironmentsChannel
 	err = newStrictDecoder(data).Decode(&dst.OrganizationEnvironmentsChannel)
 	if err == nil {
@@ -272,6 +333,58 @@ func (dst *SubscriptionChannel) UnmarshalJSON(data []byte) error {
 		dst.OrganizationSpacesChannel = nil
 	}
 
+	// try to unmarshal data into OrganizationTeamChannel
+	err = newStrictDecoder(data).Decode(&dst.OrganizationTeamChannel)
+	if err == nil {
+		jsonOrganizationTeamChannel, _ := json.Marshal(dst.OrganizationTeamChannel)
+		if string(jsonOrganizationTeamChannel) == "{}" { // empty struct
+			dst.OrganizationTeamChannel = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.OrganizationTeamChannel = nil
+	}
+
+	// try to unmarshal data into OrganizationTeamMemberChannel
+	err = newStrictDecoder(data).Decode(&dst.OrganizationTeamMemberChannel)
+	if err == nil {
+		jsonOrganizationTeamMemberChannel, _ := json.Marshal(dst.OrganizationTeamMemberChannel)
+		if string(jsonOrganizationTeamMemberChannel) == "{}" { // empty struct
+			dst.OrganizationTeamMemberChannel = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.OrganizationTeamMemberChannel = nil
+	}
+
+	// try to unmarshal data into OrganizationTeamMembersChannel
+	err = newStrictDecoder(data).Decode(&dst.OrganizationTeamMembersChannel)
+	if err == nil {
+		jsonOrganizationTeamMembersChannel, _ := json.Marshal(dst.OrganizationTeamMembersChannel)
+		if string(jsonOrganizationTeamMembersChannel) == "{}" { // empty struct
+			dst.OrganizationTeamMembersChannel = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.OrganizationTeamMembersChannel = nil
+	}
+
+	// try to unmarshal data into OrganizationTeamsChannel
+	err = newStrictDecoder(data).Decode(&dst.OrganizationTeamsChannel)
+	if err == nil {
+		jsonOrganizationTeamsChannel, _ := json.Marshal(dst.OrganizationTeamsChannel)
+		if string(jsonOrganizationTeamsChannel) == "{}" { // empty struct
+			dst.OrganizationTeamsChannel = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.OrganizationTeamsChannel = nil
+	}
+
 	// try to unmarshal data into SpaceCustomFieldsChannel
 	err = newStrictDecoder(data).Decode(&dst.SpaceCustomFieldsChannel)
 	if err == nil {
@@ -283,6 +396,19 @@ func (dst *SubscriptionChannel) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.SpaceCustomFieldsChannel = nil
+	}
+
+	// try to unmarshal data into SpaceEntitiesChannel
+	err = newStrictDecoder(data).Decode(&dst.SpaceEntitiesChannel)
+	if err == nil {
+		jsonSpaceEntitiesChannel, _ := json.Marshal(dst.SpaceEntitiesChannel)
+		if string(jsonSpaceEntitiesChannel) == "{}" { // empty struct
+			dst.SpaceEntitiesChannel = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.SpaceEntitiesChannel = nil
 	}
 
 	// try to unmarshal data into SpaceInfoChannel
@@ -407,12 +533,18 @@ func (dst *SubscriptionChannel) UnmarshalJSON(data []byte) error {
 		dst.BackofficeUserInfoChannel = nil
 		dst.ChangeRequestReviewsChannel = nil
 		dst.OrganizationCustomFieldsChannel = nil
+		dst.OrganizationEntitiesChannel = nil
 		dst.OrganizationEnvironmentsChannel = nil
 		dst.OrganizationMemberChannel = nil
 		dst.OrganizationMembersChannel = nil
 		dst.OrganizationSpaceRelationsChannel = nil
 		dst.OrganizationSpacesChannel = nil
+		dst.OrganizationTeamChannel = nil
+		dst.OrganizationTeamMemberChannel = nil
+		dst.OrganizationTeamMembersChannel = nil
+		dst.OrganizationTeamsChannel = nil
 		dst.SpaceCustomFieldsChannel = nil
+		dst.SpaceEntitiesChannel = nil
 		dst.SpaceInfoChannel = nil
 		dst.SpaceIntegrationsChannel = nil
 		dst.SpacePublishingAuthChannel = nil
@@ -445,6 +577,10 @@ func (src SubscriptionChannel) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.OrganizationCustomFieldsChannel)
 	}
 
+	if src.OrganizationEntitiesChannel != nil {
+		return json.Marshal(&src.OrganizationEntitiesChannel)
+	}
+
 	if src.OrganizationEnvironmentsChannel != nil {
 		return json.Marshal(&src.OrganizationEnvironmentsChannel)
 	}
@@ -465,8 +601,28 @@ func (src SubscriptionChannel) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.OrganizationSpacesChannel)
 	}
 
+	if src.OrganizationTeamChannel != nil {
+		return json.Marshal(&src.OrganizationTeamChannel)
+	}
+
+	if src.OrganizationTeamMemberChannel != nil {
+		return json.Marshal(&src.OrganizationTeamMemberChannel)
+	}
+
+	if src.OrganizationTeamMembersChannel != nil {
+		return json.Marshal(&src.OrganizationTeamMembersChannel)
+	}
+
+	if src.OrganizationTeamsChannel != nil {
+		return json.Marshal(&src.OrganizationTeamsChannel)
+	}
+
 	if src.SpaceCustomFieldsChannel != nil {
 		return json.Marshal(&src.SpaceCustomFieldsChannel)
+	}
+
+	if src.SpaceEntitiesChannel != nil {
+		return json.Marshal(&src.SpaceEntitiesChannel)
 	}
 
 	if src.SpaceInfoChannel != nil {
@@ -525,6 +681,10 @@ func (obj *SubscriptionChannel) GetActualInstance() interface{} {
 		return obj.OrganizationCustomFieldsChannel
 	}
 
+	if obj.OrganizationEntitiesChannel != nil {
+		return obj.OrganizationEntitiesChannel
+	}
+
 	if obj.OrganizationEnvironmentsChannel != nil {
 		return obj.OrganizationEnvironmentsChannel
 	}
@@ -545,8 +705,28 @@ func (obj *SubscriptionChannel) GetActualInstance() interface{} {
 		return obj.OrganizationSpacesChannel
 	}
 
+	if obj.OrganizationTeamChannel != nil {
+		return obj.OrganizationTeamChannel
+	}
+
+	if obj.OrganizationTeamMemberChannel != nil {
+		return obj.OrganizationTeamMemberChannel
+	}
+
+	if obj.OrganizationTeamMembersChannel != nil {
+		return obj.OrganizationTeamMembersChannel
+	}
+
+	if obj.OrganizationTeamsChannel != nil {
+		return obj.OrganizationTeamsChannel
+	}
+
 	if obj.SpaceCustomFieldsChannel != nil {
 		return obj.SpaceCustomFieldsChannel
+	}
+
+	if obj.SpaceEntitiesChannel != nil {
+		return obj.SpaceEntitiesChannel
 	}
 
 	if obj.SpaceInfoChannel != nil {

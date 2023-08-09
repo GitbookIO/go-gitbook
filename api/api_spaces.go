@@ -23,6 +23,115 @@ import (
 // SpacesApiService SpacesApi service
 type SpacesApiService service
 
+type SpacesApiAddSpaceEntitiesRequest struct {
+	ctx                     context.Context
+	ApiService              *SpacesApiService
+	spaceId                 string
+	addSpaceEntitiesRequest *AddSpaceEntitiesRequest
+}
+
+func (r SpacesApiAddSpaceEntitiesRequest) AddSpaceEntitiesRequest(addSpaceEntitiesRequest AddSpaceEntitiesRequest) SpacesApiAddSpaceEntitiesRequest {
+	r.addSpaceEntitiesRequest = &addSpaceEntitiesRequest
+	return r
+}
+
+func (r SpacesApiAddSpaceEntitiesRequest) Execute() (*http.Response, error) {
+	return r.ApiService.AddSpaceEntitiesExecute(r)
+}
+
+/*
+AddSpaceEntities Link the space to entities
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param spaceId The unique id of the space
+	@return SpacesApiAddSpaceEntitiesRequest
+*/
+func (a *SpacesApiService) AddSpaceEntities(ctx context.Context, spaceId string) SpacesApiAddSpaceEntitiesRequest {
+	return SpacesApiAddSpaceEntitiesRequest{
+		ApiService: a,
+		ctx:        ctx,
+		spaceId:    spaceId,
+	}
+}
+
+// Execute executes the request
+func (a *SpacesApiService) AddSpaceEntitiesExecute(r SpacesApiAddSpaceEntitiesRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod = http.MethodPost
+		localVarPostBody   interface{}
+		formFiles          []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SpacesApiService.AddSpaceEntities")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/spaces/{spaceId}/entities"
+	localVarPath = strings.Replace(localVarPath, "{"+"spaceId"+"}", url.PathEscape(parameterValueToString(r.spaceId, "spaceId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.addSpaceEntitiesRequest == nil {
+		return nil, reportError("addSpaceEntitiesRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.addSpaceEntitiesRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type SpacesApiCreateChangeRequestRequest struct {
 	ctx                        context.Context
 	ApiService                 *SpacesApiService
@@ -749,6 +858,112 @@ func (a *SpacesApiService) DeleteCommentReplyInSpaceExecute(r SpacesApiDeleteCom
 	localVarPath = strings.Replace(localVarPath, "{"+"spaceId"+"}", url.PathEscape(parameterValueToString(r.spaceId, "spaceId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"commentId"+"}", url.PathEscape(parameterValueToString(r.commentId, "commentId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"commentReplyId"+"}", url.PathEscape(parameterValueToString(r.commentReplyId, "commentReplyId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type SpacesApiDeleteSpaceEntityRequest struct {
+	ctx             context.Context
+	ApiService      *SpacesApiService
+	spaceId         string
+	integrationName string
+	entityId        string
+}
+
+func (r SpacesApiDeleteSpaceEntityRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteSpaceEntityExecute(r)
+}
+
+/*
+DeleteSpaceEntity Delete a space entity
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param spaceId The unique id of the space
+	@param integrationName Name of the integration
+	@param entityId ID of the entity in the space
+	@return SpacesApiDeleteSpaceEntityRequest
+*/
+func (a *SpacesApiService) DeleteSpaceEntity(ctx context.Context, spaceId string, integrationName string, entityId string) SpacesApiDeleteSpaceEntityRequest {
+	return SpacesApiDeleteSpaceEntityRequest{
+		ApiService:      a,
+		ctx:             ctx,
+		spaceId:         spaceId,
+		integrationName: integrationName,
+		entityId:        entityId,
+	}
+}
+
+// Execute executes the request
+func (a *SpacesApiService) DeleteSpaceEntityExecute(r SpacesApiDeleteSpaceEntityRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SpacesApiService.DeleteSpaceEntity")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/spaces/{spaceId}/entities/{integrationName}/{entityId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"spaceId"+"}", url.PathEscape(parameterValueToString(r.spaceId, "spaceId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"integrationName"+"}", url.PathEscape(parameterValueToString(r.integrationName, "integrationName")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"entityId"+"}", url.PathEscape(parameterValueToString(r.entityId, "entityId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -2628,6 +2843,124 @@ func (a *SpacesApiService) GetSpaceCustomFieldsExecute(r SpacesApiGetSpaceCustom
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type SpacesApiGetSpaceEntityRequest struct {
+	ctx             context.Context
+	ApiService      *SpacesApiService
+	spaceId         string
+	integrationName string
+	entityId        string
+}
+
+func (r SpacesApiGetSpaceEntityRequest) Execute() (*SpaceEntity, *http.Response, error) {
+	return r.ApiService.GetSpaceEntityExecute(r)
+}
+
+/*
+GetSpaceEntity Get a space entity
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param spaceId The unique id of the space
+	@param integrationName Name of the integration
+	@param entityId ID of the entity in the space
+	@return SpacesApiGetSpaceEntityRequest
+*/
+func (a *SpacesApiService) GetSpaceEntity(ctx context.Context, spaceId string, integrationName string, entityId string) SpacesApiGetSpaceEntityRequest {
+	return SpacesApiGetSpaceEntityRequest{
+		ApiService:      a,
+		ctx:             ctx,
+		spaceId:         spaceId,
+		integrationName: integrationName,
+		entityId:        entityId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return SpaceEntity
+func (a *SpacesApiService) GetSpaceEntityExecute(r SpacesApiGetSpaceEntityRequest) (*SpaceEntity, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SpaceEntity
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SpacesApiService.GetSpaceEntity")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/spaces/{spaceId}/entities/{integrationName}/{entityId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"spaceId"+"}", url.PathEscape(parameterValueToString(r.spaceId, "spaceId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"integrationName"+"}", url.PathEscape(parameterValueToString(r.integrationName, "integrationName")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"entityId"+"}", url.PathEscape(parameterValueToString(r.entityId, "entityId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type SpacesApiGetSpacePublishingAuthByIdRequest struct {
 	ctx        context.Context
 	ApiService *SpacesApiService
@@ -3840,6 +4173,136 @@ func (a *SpacesApiService) ListCommentsInSpaceExecute(r SpacesApiListCommentsInS
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type SpacesApiListEntitiesInOrganizationRequest struct {
+	ctx            context.Context
+	ApiService     *SpacesApiService
+	organizationId string
+	page           *string
+	limit          *float32
+}
+
+// Identifier of the page results to fetch.
+func (r SpacesApiListEntitiesInOrganizationRequest) Page(page string) SpacesApiListEntitiesInOrganizationRequest {
+	r.page = &page
+	return r
+}
+
+// The number of results per page
+func (r SpacesApiListEntitiesInOrganizationRequest) Limit(limit float32) SpacesApiListEntitiesInOrganizationRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r SpacesApiListEntitiesInOrganizationRequest) Execute() (*GetIntegrationEntities200Response, *http.Response, error) {
+	return r.ApiService.ListEntitiesInOrganizationExecute(r)
+}
+
+/*
+ListEntitiesInOrganization List all entities in an organization.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique id of the organization
+	@return SpacesApiListEntitiesInOrganizationRequest
+*/
+func (a *SpacesApiService) ListEntitiesInOrganization(ctx context.Context, organizationId string) SpacesApiListEntitiesInOrganizationRequest {
+	return SpacesApiListEntitiesInOrganizationRequest{
+		ApiService:     a,
+		ctx:            ctx,
+		organizationId: organizationId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetIntegrationEntities200Response
+func (a *SpacesApiService) ListEntitiesInOrganizationExecute(r SpacesApiListEntitiesInOrganizationRequest) (*GetIntegrationEntities200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetIntegrationEntities200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SpacesApiService.ListEntitiesInOrganization")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/orgs/{organizationId}/entities"
+	localVarPath = strings.Replace(localVarPath, "{"+"organizationId"+"}", url.PathEscape(parameterValueToString(r.organizationId, "organizationId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type SpacesApiListPermissionsAggregateInCollectionRequest struct {
 	ctx          context.Context
 	ApiService   *SpacesApiService
@@ -4057,6 +4520,136 @@ func (a *SpacesApiService) ListPermissionsAggregateInSpaceExecute(r SpacesApiLis
 	}
 	if r.role != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "role", r.role, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type SpacesApiListSpaceEntitiesRequest struct {
+	ctx        context.Context
+	ApiService *SpacesApiService
+	spaceId    string
+	page       *string
+	limit      *float32
+}
+
+// Identifier of the page results to fetch.
+func (r SpacesApiListSpaceEntitiesRequest) Page(page string) SpacesApiListSpaceEntitiesRequest {
+	r.page = &page
+	return r
+}
+
+// The number of results per page
+func (r SpacesApiListSpaceEntitiesRequest) Limit(limit float32) SpacesApiListSpaceEntitiesRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r SpacesApiListSpaceEntitiesRequest) Execute() (*ListSpaceEntities200Response, *http.Response, error) {
+	return r.ApiService.ListSpaceEntitiesExecute(r)
+}
+
+/*
+ListSpaceEntities List all entities linked to a space
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param spaceId The unique id of the space
+	@return SpacesApiListSpaceEntitiesRequest
+*/
+func (a *SpacesApiService) ListSpaceEntities(ctx context.Context, spaceId string) SpacesApiListSpaceEntitiesRequest {
+	return SpacesApiListSpaceEntitiesRequest{
+		ApiService: a,
+		ctx:        ctx,
+		spaceId:    spaceId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ListSpaceEntities200Response
+func (a *SpacesApiService) ListSpaceEntitiesExecute(r SpacesApiListSpaceEntitiesRequest) (*ListSpaceEntities200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListSpaceEntities200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SpacesApiService.ListSpaceEntities")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/spaces/{spaceId}/entities"
+	localVarPath = strings.Replace(localVarPath, "{"+"spaceId"+"}", url.PathEscape(parameterValueToString(r.spaceId, "spaceId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6323,6 +6916,123 @@ func (a *SpacesApiService) UpdateSpaceCustomFieldsExecute(r SpacesApiUpdateSpace
 	}
 	// body params
 	localVarPostBody = r.updateCustomFieldValues
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type SpacesApiUpdateSpaceEntityRequest struct {
+	ctx                      context.Context
+	ApiService               *SpacesApiService
+	spaceId                  string
+	integrationName          string
+	entityId                 string
+	updateSpaceEntityRequest *UpdateSpaceEntityRequest
+}
+
+func (r SpacesApiUpdateSpaceEntityRequest) UpdateSpaceEntityRequest(updateSpaceEntityRequest UpdateSpaceEntityRequest) SpacesApiUpdateSpaceEntityRequest {
+	r.updateSpaceEntityRequest = &updateSpaceEntityRequest
+	return r
+}
+
+func (r SpacesApiUpdateSpaceEntityRequest) Execute() (*http.Response, error) {
+	return r.ApiService.UpdateSpaceEntityExecute(r)
+}
+
+/*
+UpdateSpaceEntity Update a space entity
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param spaceId The unique id of the space
+	@param integrationName Name of the integration
+	@param entityId ID of the entity in the space
+	@return SpacesApiUpdateSpaceEntityRequest
+*/
+func (a *SpacesApiService) UpdateSpaceEntity(ctx context.Context, spaceId string, integrationName string, entityId string) SpacesApiUpdateSpaceEntityRequest {
+	return SpacesApiUpdateSpaceEntityRequest{
+		ApiService:      a,
+		ctx:             ctx,
+		spaceId:         spaceId,
+		integrationName: integrationName,
+		entityId:        entityId,
+	}
+}
+
+// Execute executes the request
+func (a *SpacesApiService) UpdateSpaceEntityExecute(r SpacesApiUpdateSpaceEntityRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod = http.MethodPatch
+		localVarPostBody   interface{}
+		formFiles          []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SpacesApiService.UpdateSpaceEntity")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/spaces/{spaceId}/entities/{integrationName}/{entityId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"spaceId"+"}", url.PathEscape(parameterValueToString(r.spaceId, "spaceId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"integrationName"+"}", url.PathEscape(parameterValueToString(r.integrationName, "integrationName")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"entityId"+"}", url.PathEscape(parameterValueToString(r.entityId, "entityId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.updateSpaceEntityRequest == nil {
+		return nil, reportError("updateSpaceEntityRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.updateSpaceEntityRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err

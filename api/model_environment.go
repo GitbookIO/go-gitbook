@@ -20,21 +20,24 @@ var _ MappedNullable = &Environment{}
 
 // Environment An environment
 type Environment struct {
-	Id    string          `json:"id"`
-	Name  string          `json:"name"`
-	Title string          `json:"title"`
-	Urls  EnvironmentUrls `json:"urls"`
+	Id    string `json:"id"`
+	Name  string `json:"name"`
+	Title string `json:"title"`
+	// Whether or not an environment is considered to have elevated responsibilities over other environments. Useful for distinguishing a production environment from a staging environment. Multiple primary environments are allowed. Your organization must have at least one primary environment.
+	Primary bool            `json:"primary"`
+	Urls    EnvironmentUrls `json:"urls"`
 }
 
 // NewEnvironment instantiates a new Environment object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEnvironment(id string, name string, title string, urls EnvironmentUrls) *Environment {
+func NewEnvironment(id string, name string, title string, primary bool, urls EnvironmentUrls) *Environment {
 	this := Environment{}
 	this.Id = id
 	this.Name = name
 	this.Title = title
+	this.Primary = primary
 	this.Urls = urls
 	return &this
 }
@@ -119,6 +122,30 @@ func (o *Environment) SetTitle(v string) {
 	o.Title = v
 }
 
+// GetPrimary returns the Primary field value
+func (o *Environment) GetPrimary() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Primary
+}
+
+// GetPrimaryOk returns a tuple with the Primary field value
+// and a boolean to check if the value has been set.
+func (o *Environment) GetPrimaryOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Primary, true
+}
+
+// SetPrimary sets field value
+func (o *Environment) SetPrimary(v bool) {
+	o.Primary = v
+}
+
 // GetUrls returns the Urls field value
 func (o *Environment) GetUrls() EnvironmentUrls {
 	if o == nil {
@@ -156,6 +183,7 @@ func (o Environment) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
 	toSerialize["title"] = o.Title
+	toSerialize["primary"] = o.Primary
 	toSerialize["urls"] = o.Urls
 	return toSerialize, nil
 }

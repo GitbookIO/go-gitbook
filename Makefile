@@ -1,5 +1,5 @@
 # Filepath or URL:
-SPEC_INPUT = https://api.gitbook.com/v1/openapi.json
+SPEC_INPUT = /Users/dstotijn/projects/gitbook-x/packages/api-client/static/openapi.json
 OUTPUT_DIR = .
 PACKAGE_NAME = gitbook
 GIT_USER_ID = GitbookIO
@@ -15,12 +15,14 @@ generate: clean
 		--additional-properties=packageName=$(PACKAGE_NAME) \
 		--additional-properties=structPrefix=true \
 		--additional-properties=enumClassPrefix=true
+	mkdir -p ./api
+	mv *.go ./api
 	find . -type f -name "*.go" -print0 | xargs -0 sed -i "" "s/MapmapOfStringinterface{}/Properties/g"
-	gofmt -w .
+	gofmt -w ./api
 	go mod tidy
 
 clean:
-	rm -rf *.go go.mod go.sum
+	rm -rf api go.mod go.sum
 
 
 .PHONY: generate clean

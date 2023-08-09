@@ -22,6 +22,8 @@ var _ MappedNullable = &CreateEnvironment{}
 type CreateEnvironment struct {
 	Name  string `json:"name"`
 	Title string `json:"title"`
+	// Whether or not an environment is considered to have elevated responsibilities over other environments. Useful for distinguishing a production environment from a staging environment. Multiple primary environments are allowed. Your organization must have at least one primary environment.
+	Primary *bool `json:"primary,omitempty"`
 }
 
 // NewCreateEnvironment instantiates a new CreateEnvironment object
@@ -91,6 +93,38 @@ func (o *CreateEnvironment) SetTitle(v string) {
 	o.Title = v
 }
 
+// GetPrimary returns the Primary field value if set, zero value otherwise.
+func (o *CreateEnvironment) GetPrimary() bool {
+	if o == nil || IsNil(o.Primary) {
+		var ret bool
+		return ret
+	}
+	return *o.Primary
+}
+
+// GetPrimaryOk returns a tuple with the Primary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateEnvironment) GetPrimaryOk() (*bool, bool) {
+	if o == nil || IsNil(o.Primary) {
+		return nil, false
+	}
+	return o.Primary, true
+}
+
+// HasPrimary returns a boolean if a field has been set.
+func (o *CreateEnvironment) HasPrimary() bool {
+	if o != nil && !IsNil(o.Primary) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrimary gets a reference to the given bool and assigns it to the Primary field.
+func (o *CreateEnvironment) SetPrimary(v bool) {
+	o.Primary = &v
+}
+
 func (o CreateEnvironment) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -103,6 +137,9 @@ func (o CreateEnvironment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
 	toSerialize["title"] = o.Title
+	if !IsNil(o.Primary) {
+		toSerialize["primary"] = o.Primary
+	}
 	return toSerialize, nil
 }
 

@@ -15,11 +15,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the IntegrationConfigurationPropertiesValue type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &IntegrationConfigurationPropertiesValue{}
+// checks if the IntegrationConfigurationSchemaPropertiesValue type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IntegrationConfigurationSchemaPropertiesValue{}
 
-// IntegrationConfigurationPropertiesValue struct for IntegrationConfigurationPropertiesValue
-type IntegrationConfigurationPropertiesValue struct {
+// IntegrationConfigurationSchemaPropertiesValue struct for IntegrationConfigurationSchemaPropertiesValue
+type IntegrationConfigurationSchemaPropertiesValue struct {
 	Title       *string `json:"title,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Type        string  `json:"type"`
@@ -28,28 +28,28 @@ type IntegrationConfigurationPropertiesValue struct {
 	ButtonText  string  `json:"button_text"`
 }
 
-// NewIntegrationConfigurationPropertiesValue instantiates a new IntegrationConfigurationPropertiesValue object
+// NewIntegrationConfigurationSchemaPropertiesValue instantiates a new IntegrationConfigurationSchemaPropertiesValue object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntegrationConfigurationPropertiesValue(type_ string, callbackUrl string, buttonText string) *IntegrationConfigurationPropertiesValue {
-	this := IntegrationConfigurationPropertiesValue{}
+func NewIntegrationConfigurationSchemaPropertiesValue(type_ string, callbackUrl string, buttonText string) *IntegrationConfigurationSchemaPropertiesValue {
+	this := IntegrationConfigurationSchemaPropertiesValue{}
 	this.Type = type_
 	this.CallbackUrl = callbackUrl
 	this.ButtonText = buttonText
 	return &this
 }
 
-// NewIntegrationConfigurationPropertiesValueWithDefaults instantiates a new IntegrationConfigurationPropertiesValue object
+// NewIntegrationConfigurationSchemaPropertiesValueWithDefaults instantiates a new IntegrationConfigurationSchemaPropertiesValue object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewIntegrationConfigurationPropertiesValueWithDefaults() *IntegrationConfigurationPropertiesValue {
-	this := IntegrationConfigurationPropertiesValue{}
+func NewIntegrationConfigurationSchemaPropertiesValueWithDefaults() *IntegrationConfigurationSchemaPropertiesValue {
+	this := IntegrationConfigurationSchemaPropertiesValue{}
 	return &this
 }
 
 // GetTitle returns the Title field value if set, zero value otherwise.
-func (o *IntegrationConfigurationPropertiesValue) GetTitle() string {
+func (o *IntegrationConfigurationSchemaPropertiesValue) GetTitle() string {
 	if o == nil || IsNil(o.Title) {
 		var ret string
 		return ret
@@ -59,7 +59,7 @@ func (o *IntegrationConfigurationPropertiesValue) GetTitle() string {
 
 // GetTitleOk returns a tuple with the Title field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IntegrationConfigurationPropertiesValue) GetTitleOk() (*string, bool) {
+func (o *IntegrationConfigurationSchemaPropertiesValue) GetTitleOk() (*string, bool) {
 	if o == nil || IsNil(o.Title) {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *IntegrationConfigurationPropertiesValue) GetTitleOk() (*string, bool) {
 }
 
 // HasTitle returns a boolean if a field has been set.
-func (o *IntegrationConfigurationPropertiesValue) HasTitle() bool {
+func (o *IntegrationConfigurationSchemaPropertiesValue) HasTitle() bool {
 	if o != nil && !IsNil(o.Title) {
 		return true
 	}
@@ -76,12 +76,12 @@ func (o *IntegrationConfigurationPropertiesValue) HasTitle() bool {
 }
 
 // SetTitle gets a reference to the given string and assigns it to the Title field.
-func (o *IntegrationConfigurationPropertiesValue) SetTitle(v string) {
+func (o *IntegrationConfigurationSchemaPropertiesValue) SetTitle(v string) {
 	o.Title = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
-func (o *IntegrationConfigurationPropertiesValue) GetDescription() string {
+func (o *IntegrationConfigurationSchemaPropertiesValue) GetDescription() string {
 	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
@@ -91,7 +91,7 @@ func (o *IntegrationConfigurationPropertiesValue) GetDescription() string {
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IntegrationConfigurationPropertiesValue) GetDescriptionOk() (*string, bool) {
+func (o *IntegrationConfigurationSchemaPropertiesValue) GetDescriptionOk() (*string, bool) {
 	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
@@ -99,7 +99,7 @@ func (o *IntegrationConfigurationPropertiesValue) GetDescriptionOk() (*string, b
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *IntegrationConfigurationPropertiesValue) HasDescription() bool {
+func (o *IntegrationConfigurationSchemaPropertiesValue) HasDescription() bool {
 	if o != nil && !IsNil(o.Description) {
 		return true
 	}
@@ -108,12 +108,12 @@ func (o *IntegrationConfigurationPropertiesValue) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *IntegrationConfigurationPropertiesValue) SetDescription(v string) {
+func (o *IntegrationConfigurationSchemaPropertiesValue) SetDescription(v string) {
 	o.Description = &v
 }
 
 // GetType returns the Type field value
-func (o *IntegrationConfigurationPropertiesValue) GetType() string {
+func (o *IntegrationConfigurationSchemaPropertiesValue) GetType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -124,7 +124,7 @@ func (o *IntegrationConfigurationPropertiesValue) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *IntegrationConfigurationPropertiesValue) GetTypeOk() (*string, bool) {
+func (o *IntegrationConfigurationSchemaPropertiesValue) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -132,12 +132,12 @@ func (o *IntegrationConfigurationPropertiesValue) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *IntegrationConfigurationPropertiesValue) SetType(v string) {
+func (o *IntegrationConfigurationSchemaPropertiesValue) SetType(v string) {
 	o.Type = v
 }
 
 // GetDefault returns the Default field value if set, zero value otherwise.
-func (o *IntegrationConfigurationPropertiesValue) GetDefault() bool {
+func (o *IntegrationConfigurationSchemaPropertiesValue) GetDefault() bool {
 	if o == nil || IsNil(o.Default) {
 		var ret bool
 		return ret
@@ -147,7 +147,7 @@ func (o *IntegrationConfigurationPropertiesValue) GetDefault() bool {
 
 // GetDefaultOk returns a tuple with the Default field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IntegrationConfigurationPropertiesValue) GetDefaultOk() (*bool, bool) {
+func (o *IntegrationConfigurationSchemaPropertiesValue) GetDefaultOk() (*bool, bool) {
 	if o == nil || IsNil(o.Default) {
 		return nil, false
 	}
@@ -155,7 +155,7 @@ func (o *IntegrationConfigurationPropertiesValue) GetDefaultOk() (*bool, bool) {
 }
 
 // HasDefault returns a boolean if a field has been set.
-func (o *IntegrationConfigurationPropertiesValue) HasDefault() bool {
+func (o *IntegrationConfigurationSchemaPropertiesValue) HasDefault() bool {
 	if o != nil && !IsNil(o.Default) {
 		return true
 	}
@@ -164,12 +164,12 @@ func (o *IntegrationConfigurationPropertiesValue) HasDefault() bool {
 }
 
 // SetDefault gets a reference to the given bool and assigns it to the Default field.
-func (o *IntegrationConfigurationPropertiesValue) SetDefault(v bool) {
+func (o *IntegrationConfigurationSchemaPropertiesValue) SetDefault(v bool) {
 	o.Default = &v
 }
 
 // GetCallbackUrl returns the CallbackUrl field value
-func (o *IntegrationConfigurationPropertiesValue) GetCallbackUrl() string {
+func (o *IntegrationConfigurationSchemaPropertiesValue) GetCallbackUrl() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -180,7 +180,7 @@ func (o *IntegrationConfigurationPropertiesValue) GetCallbackUrl() string {
 
 // GetCallbackUrlOk returns a tuple with the CallbackUrl field value
 // and a boolean to check if the value has been set.
-func (o *IntegrationConfigurationPropertiesValue) GetCallbackUrlOk() (*string, bool) {
+func (o *IntegrationConfigurationSchemaPropertiesValue) GetCallbackUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -188,12 +188,12 @@ func (o *IntegrationConfigurationPropertiesValue) GetCallbackUrlOk() (*string, b
 }
 
 // SetCallbackUrl sets field value
-func (o *IntegrationConfigurationPropertiesValue) SetCallbackUrl(v string) {
+func (o *IntegrationConfigurationSchemaPropertiesValue) SetCallbackUrl(v string) {
 	o.CallbackUrl = v
 }
 
 // GetButtonText returns the ButtonText field value
-func (o *IntegrationConfigurationPropertiesValue) GetButtonText() string {
+func (o *IntegrationConfigurationSchemaPropertiesValue) GetButtonText() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -204,7 +204,7 @@ func (o *IntegrationConfigurationPropertiesValue) GetButtonText() string {
 
 // GetButtonTextOk returns a tuple with the ButtonText field value
 // and a boolean to check if the value has been set.
-func (o *IntegrationConfigurationPropertiesValue) GetButtonTextOk() (*string, bool) {
+func (o *IntegrationConfigurationSchemaPropertiesValue) GetButtonTextOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -212,11 +212,11 @@ func (o *IntegrationConfigurationPropertiesValue) GetButtonTextOk() (*string, bo
 }
 
 // SetButtonText sets field value
-func (o *IntegrationConfigurationPropertiesValue) SetButtonText(v string) {
+func (o *IntegrationConfigurationSchemaPropertiesValue) SetButtonText(v string) {
 	o.ButtonText = v
 }
 
-func (o IntegrationConfigurationPropertiesValue) MarshalJSON() ([]byte, error) {
+func (o IntegrationConfigurationSchemaPropertiesValue) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -224,7 +224,7 @@ func (o IntegrationConfigurationPropertiesValue) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o IntegrationConfigurationPropertiesValue) ToMap() (map[string]interface{}, error) {
+func (o IntegrationConfigurationSchemaPropertiesValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Title) {
 		toSerialize["title"] = o.Title
@@ -241,38 +241,38 @@ func (o IntegrationConfigurationPropertiesValue) ToMap() (map[string]interface{}
 	return toSerialize, nil
 }
 
-type NullableIntegrationConfigurationPropertiesValue struct {
-	value *IntegrationConfigurationPropertiesValue
+type NullableIntegrationConfigurationSchemaPropertiesValue struct {
+	value *IntegrationConfigurationSchemaPropertiesValue
 	isSet bool
 }
 
-func (v NullableIntegrationConfigurationPropertiesValue) Get() *IntegrationConfigurationPropertiesValue {
+func (v NullableIntegrationConfigurationSchemaPropertiesValue) Get() *IntegrationConfigurationSchemaPropertiesValue {
 	return v.value
 }
 
-func (v *NullableIntegrationConfigurationPropertiesValue) Set(val *IntegrationConfigurationPropertiesValue) {
+func (v *NullableIntegrationConfigurationSchemaPropertiesValue) Set(val *IntegrationConfigurationSchemaPropertiesValue) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableIntegrationConfigurationPropertiesValue) IsSet() bool {
+func (v NullableIntegrationConfigurationSchemaPropertiesValue) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableIntegrationConfigurationPropertiesValue) Unset() {
+func (v *NullableIntegrationConfigurationSchemaPropertiesValue) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableIntegrationConfigurationPropertiesValue(val *IntegrationConfigurationPropertiesValue) *NullableIntegrationConfigurationPropertiesValue {
-	return &NullableIntegrationConfigurationPropertiesValue{value: val, isSet: true}
+func NewNullableIntegrationConfigurationSchemaPropertiesValue(val *IntegrationConfigurationSchemaPropertiesValue) *NullableIntegrationConfigurationSchemaPropertiesValue {
+	return &NullableIntegrationConfigurationSchemaPropertiesValue{value: val, isSet: true}
 }
 
-func (v NullableIntegrationConfigurationPropertiesValue) MarshalJSON() ([]byte, error) {
+func (v NullableIntegrationConfigurationSchemaPropertiesValue) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableIntegrationConfigurationPropertiesValue) UnmarshalJSON(src []byte) error {
+func (v *NullableIntegrationConfigurationSchemaPropertiesValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -20,36 +20,37 @@ var _ MappedNullable = &UIRenderEvent{}
 
 // UIRenderEvent struct for UIRenderEvent
 type UIRenderEvent struct {
-	// Unique identifier for the event.
-	EventId string `json:"eventId"`
-	Type    string `json:"type"`
-	// ID of the integration installation
-	InstallationId string `json:"installationId"`
-	// ID of the space
-	SpaceId     string               `json:"spaceId"`
-	Auth        *FetchEventAllOfAuth `json:"auth,omitempty"`
-	ComponentId string               `json:"componentId"`
+	Auth *FetchEventAllOfAuth `json:"auth,omitempty"`
+	// Type of the event.
+	Type        string `json:"type"`
+	ComponentId string `json:"componentId"`
 	// Properties to render the UI.
 	Props map[string]interface{} `json:"props"`
 	// State of the UI.
 	State   map[string]interface{} `json:"state,omitempty"`
 	Context ContentKitContext      `json:"context"`
 	Action  map[string]interface{} `json:"action,omitempty"`
+	// Unique identifier for the event.
+	EventId string `json:"eventId"`
+	// ID of the integration installation
+	InstallationId string `json:"installationId"`
+	// ID of the space
+	SpaceId string `json:"spaceId"`
 }
 
 // NewUIRenderEvent instantiates a new UIRenderEvent object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUIRenderEvent(eventId string, type_ string, installationId string, spaceId string, componentId string, props map[string]interface{}, context ContentKitContext) *UIRenderEvent {
+func NewUIRenderEvent(type_ string, componentId string, props map[string]interface{}, context ContentKitContext, eventId string, installationId string, spaceId string) *UIRenderEvent {
 	this := UIRenderEvent{}
-	this.EventId = eventId
 	this.Type = type_
-	this.InstallationId = installationId
-	this.SpaceId = spaceId
 	this.ComponentId = componentId
 	this.Props = props
 	this.Context = context
+	this.EventId = eventId
+	this.InstallationId = installationId
+	this.SpaceId = spaceId
 	return &this
 }
 
@@ -59,102 +60,6 @@ func NewUIRenderEvent(eventId string, type_ string, installationId string, space
 func NewUIRenderEventWithDefaults() *UIRenderEvent {
 	this := UIRenderEvent{}
 	return &this
-}
-
-// GetEventId returns the EventId field value
-func (o *UIRenderEvent) GetEventId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.EventId
-}
-
-// GetEventIdOk returns a tuple with the EventId field value
-// and a boolean to check if the value has been set.
-func (o *UIRenderEvent) GetEventIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.EventId, true
-}
-
-// SetEventId sets field value
-func (o *UIRenderEvent) SetEventId(v string) {
-	o.EventId = v
-}
-
-// GetType returns the Type field value
-func (o *UIRenderEvent) GetType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value
-// and a boolean to check if the value has been set.
-func (o *UIRenderEvent) GetTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Type, true
-}
-
-// SetType sets field value
-func (o *UIRenderEvent) SetType(v string) {
-	o.Type = v
-}
-
-// GetInstallationId returns the InstallationId field value
-func (o *UIRenderEvent) GetInstallationId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.InstallationId
-}
-
-// GetInstallationIdOk returns a tuple with the InstallationId field value
-// and a boolean to check if the value has been set.
-func (o *UIRenderEvent) GetInstallationIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.InstallationId, true
-}
-
-// SetInstallationId sets field value
-func (o *UIRenderEvent) SetInstallationId(v string) {
-	o.InstallationId = v
-}
-
-// GetSpaceId returns the SpaceId field value
-func (o *UIRenderEvent) GetSpaceId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.SpaceId
-}
-
-// GetSpaceIdOk returns a tuple with the SpaceId field value
-// and a boolean to check if the value has been set.
-func (o *UIRenderEvent) GetSpaceIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.SpaceId, true
-}
-
-// SetSpaceId sets field value
-func (o *UIRenderEvent) SetSpaceId(v string) {
-	o.SpaceId = v
 }
 
 // GetAuth returns the Auth field value if set, zero value otherwise.
@@ -187,6 +92,30 @@ func (o *UIRenderEvent) HasAuth() bool {
 // SetAuth gets a reference to the given FetchEventAllOfAuth and assigns it to the Auth field.
 func (o *UIRenderEvent) SetAuth(v FetchEventAllOfAuth) {
 	o.Auth = &v
+}
+
+// GetType returns the Type field value
+func (o *UIRenderEvent) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *UIRenderEvent) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *UIRenderEvent) SetType(v string) {
+	o.Type = v
 }
 
 // GetComponentId returns the ComponentId field value
@@ -325,6 +254,78 @@ func (o *UIRenderEvent) SetAction(v map[string]interface{}) {
 	o.Action = v
 }
 
+// GetEventId returns the EventId field value
+func (o *UIRenderEvent) GetEventId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.EventId
+}
+
+// GetEventIdOk returns a tuple with the EventId field value
+// and a boolean to check if the value has been set.
+func (o *UIRenderEvent) GetEventIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.EventId, true
+}
+
+// SetEventId sets field value
+func (o *UIRenderEvent) SetEventId(v string) {
+	o.EventId = v
+}
+
+// GetInstallationId returns the InstallationId field value
+func (o *UIRenderEvent) GetInstallationId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.InstallationId
+}
+
+// GetInstallationIdOk returns a tuple with the InstallationId field value
+// and a boolean to check if the value has been set.
+func (o *UIRenderEvent) GetInstallationIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.InstallationId, true
+}
+
+// SetInstallationId sets field value
+func (o *UIRenderEvent) SetInstallationId(v string) {
+	o.InstallationId = v
+}
+
+// GetSpaceId returns the SpaceId field value
+func (o *UIRenderEvent) GetSpaceId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.SpaceId
+}
+
+// GetSpaceIdOk returns a tuple with the SpaceId field value
+// and a boolean to check if the value has been set.
+func (o *UIRenderEvent) GetSpaceIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.SpaceId, true
+}
+
+// SetSpaceId sets field value
+func (o *UIRenderEvent) SetSpaceId(v string) {
+	o.SpaceId = v
+}
+
 func (o UIRenderEvent) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -335,13 +336,10 @@ func (o UIRenderEvent) MarshalJSON() ([]byte, error) {
 
 func (o UIRenderEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["eventId"] = o.EventId
-	toSerialize["type"] = o.Type
-	toSerialize["installationId"] = o.InstallationId
-	toSerialize["spaceId"] = o.SpaceId
 	if !IsNil(o.Auth) {
 		toSerialize["auth"] = o.Auth
 	}
+	toSerialize["type"] = o.Type
 	toSerialize["componentId"] = o.ComponentId
 	toSerialize["props"] = o.Props
 	if !IsNil(o.State) {
@@ -351,6 +349,9 @@ func (o UIRenderEvent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Action) {
 		toSerialize["action"] = o.Action
 	}
+	toSerialize["eventId"] = o.EventId
+	toSerialize["installationId"] = o.InstallationId
+	toSerialize["spaceId"] = o.SpaceId
 	return toSerialize, nil
 }
 

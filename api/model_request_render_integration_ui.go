@@ -22,8 +22,6 @@ var _ MappedNullable = &RequestRenderIntegrationUI{}
 type RequestRenderIntegrationUI struct {
 	// ID of the component to render in the integration.
 	ComponentId string `json:"componentId"`
-	// ID of the space to render.
-	SpaceId string `json:"spaceId"`
 	// Current properties of the UI.
 	Props map[string]interface{} `json:"props"`
 	// Current local state of the UI.
@@ -36,10 +34,9 @@ type RequestRenderIntegrationUI struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRequestRenderIntegrationUI(componentId string, spaceId string, props map[string]interface{}, context ContentKitContext) *RequestRenderIntegrationUI {
+func NewRequestRenderIntegrationUI(componentId string, props map[string]interface{}, context ContentKitContext) *RequestRenderIntegrationUI {
 	this := RequestRenderIntegrationUI{}
 	this.ComponentId = componentId
-	this.SpaceId = spaceId
 	this.Props = props
 	this.Context = context
 	return &this
@@ -75,30 +72,6 @@ func (o *RequestRenderIntegrationUI) GetComponentIdOk() (*string, bool) {
 // SetComponentId sets field value
 func (o *RequestRenderIntegrationUI) SetComponentId(v string) {
 	o.ComponentId = v
-}
-
-// GetSpaceId returns the SpaceId field value
-func (o *RequestRenderIntegrationUI) GetSpaceId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.SpaceId
-}
-
-// GetSpaceIdOk returns a tuple with the SpaceId field value
-// and a boolean to check if the value has been set.
-func (o *RequestRenderIntegrationUI) GetSpaceIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.SpaceId, true
-}
-
-// SetSpaceId sets field value
-func (o *RequestRenderIntegrationUI) SetSpaceId(v string) {
-	o.SpaceId = v
 }
 
 // GetProps returns the Props field value
@@ -224,7 +197,6 @@ func (o RequestRenderIntegrationUI) MarshalJSON() ([]byte, error) {
 func (o RequestRenderIntegrationUI) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["componentId"] = o.ComponentId
-	toSerialize["spaceId"] = o.SpaceId
 	toSerialize["props"] = o.Props
 	if !IsNil(o.State) {
 		toSerialize["state"] = o.State

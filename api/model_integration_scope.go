@@ -21,17 +21,20 @@ type IntegrationScope string
 
 // List of IntegrationScope
 const (
-	INTEGRATIONSCOPE_VIEWSREAD     IntegrationScope = "space:views:read"
-	INTEGRATIONSCOPE_CONTENTREAD   IntegrationScope = "space:content:read"
-	INTEGRATIONSCOPE_CONTENTWRITE  IntegrationScope = "space:content:write"
-	INTEGRATIONSCOPE_METADATAREAD  IntegrationScope = "space:metadata:read"
-	INTEGRATIONSCOPE_METADATAWRITE IntegrationScope = "space:metadata:write"
-	INTEGRATIONSCOPE_SCRIPTINJECT  IntegrationScope = "space:script:inject"
-	INTEGRATIONSCOPE_SCRIPTCOOKIES IntegrationScope = "space:script:cookies"
+	INTEGRATIONSCOPE_ORGANIZATIONENTITIESWRITE IntegrationScope = "organization:entities:write"
+	INTEGRATIONSCOPE_SPACEVIEWSREAD            IntegrationScope = "space:views:read"
+	INTEGRATIONSCOPE_SPACECONTENTREAD          IntegrationScope = "space:content:read"
+	INTEGRATIONSCOPE_SPACECONTENTWRITE         IntegrationScope = "space:content:write"
+	INTEGRATIONSCOPE_SPACEMETADATAREAD         IntegrationScope = "space:metadata:read"
+	INTEGRATIONSCOPE_SPACEMETADATAWRITE        IntegrationScope = "space:metadata:write"
+	INTEGRATIONSCOPE_SPACESCRIPTINJECT         IntegrationScope = "space:script:inject"
+	INTEGRATIONSCOPE_SPACESCRIPTCOOKIES        IntegrationScope = "space:script:cookies"
+	INTEGRATIONSCOPE_SPACEGITSYNC              IntegrationScope = "space:git:sync"
 )
 
 // All allowed values of IntegrationScope enum
 var AllowedIntegrationScopeEnumValues = []IntegrationScope{
+	"organization:entities:write",
 	"space:views:read",
 	"space:content:read",
 	"space:content:write",
@@ -39,6 +42,7 @@ var AllowedIntegrationScopeEnumValues = []IntegrationScope{
 	"space:metadata:write",
 	"space:script:inject",
 	"space:script:cookies",
+	"space:git:sync",
 }
 
 func (v *IntegrationScope) UnmarshalJSON(src []byte) error {

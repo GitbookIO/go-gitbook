@@ -1,3 +1,3 @@
-module github.com/GitbookIO/go-gitbook
+module github.com/GitbookIO/go-gitbook/api
 
 go 1.18
