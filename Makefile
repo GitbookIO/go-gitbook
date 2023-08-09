@@ -1,5 +1,5 @@
 # Filepath or URL:
-SPEC_INPUT = /Users/dstotijn/projects/gitbook-x/packages/api-client/static/openapi.json
+SPEC_INPUT = https://api.gitbook.com/openapi.json
 OUTPUT_DIR = .
 PACKAGE_NAME = gitbook
 GIT_USER_ID = GitbookIO
