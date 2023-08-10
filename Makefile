@@ -12,6 +12,7 @@ generate: clean
 		-o $(OUTPUT_DIR) \
 		--git-user-id=$(GIT_USER_ID) \
 		--git-repo-id=$(GIT_REPO_ID) \
+		--template-dir ./templates \
 		--additional-properties=packageName=$(PACKAGE_NAME) \
 		--additional-properties=structPrefix=true \
 		--additional-properties=enumClassPrefix=true
