@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Object** | **string** |  | 
 **Name** | **string** | Unique named identifier for the integration | 
+**Version** | **float32** | Version of the integration | 
 **Title** | **string** | Title of the integration | 
 **Description** | Pointer to **string** | Description of the integration | [optional] 
 **Summary** | Pointer to **string** | Long form markdown summary of the integration | [optional] 
@@ -23,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewIntegration
 
-`func NewIntegration(object string, name string, title string, previewImages []string, visibility IntegrationVisibility, scopes []IntegrationScope, categories []IntegrationCategory, externalLinks []IntegrationExternalLinksInner, urls IntegrationUrls, ) *Integration`
+`func NewIntegration(object string, name string, version float32, title string, previewImages []string, visibility IntegrationVisibility, scopes []IntegrationScope, categories []IntegrationCategory, externalLinks []IntegrationExternalLinksInner, urls IntegrationUrls, ) *Integration`
 
 NewIntegration instantiates a new Integration object
 This constructor will assign default values to properties that have it defined,
@@ -76,6 +77,26 @@ and a boolean to check if the value has been set.
 `func (o *Integration) SetName(v string)`
 
 SetName sets Name field to given value.
+
+
+### GetVersion
+
+`func (o *Integration) GetVersion() float32`
+
+GetVersion returns the Version field if non-nil, zero value otherwise.
+
+### GetVersionOk
+
+`func (o *Integration) GetVersionOk() (*float32, bool)`
+
+GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVersion
+
+`func (o *Integration) SetVersion(v float32)`
+
+SetVersion sets Version field to given value.
 
 
 ### GetTitle

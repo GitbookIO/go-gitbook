@@ -4,28 +4,36 @@ All URIs are relative to *https://api.gitbook.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**AddEventsToRecording**](OrganizationsApi.md#AddEventsToRecording) | **Post** /orgs/{organizationId}/recordings/{recordingId}/events | Add events to a running recording
 [**AddMemberToOrganizationTeamById**](OrganizationsApi.md#AddMemberToOrganizationTeamById) | **Put** /orgs/{organizationId}/teams/{teamId}/members/{userId} | Add or update a team membership
 [**CreateEnvironment**](OrganizationsApi.md#CreateEnvironment) | **Post** /orgs/{organizationId}/environments | Create a new environment within an organization
 [**CreateOrganization**](OrganizationsApi.md#CreateOrganization) | **Post** /orgs | Create an organization
 [**CreateOrganizationCustomField**](OrganizationsApi.md#CreateOrganizationCustomField) | **Post** /orgs/{organizationId}/custom-fields | Create a new custom field in an orgamization
 [**CreateOrganizationTeam**](OrganizationsApi.md#CreateOrganizationTeam) | **Put** /orgs/{organizationId}/teams | Create organization team
+[**DeleteEntitySchema**](OrganizationsApi.md#DeleteEntitySchema) | **Delete** /orgs/{organizationId}/schemas/{entityType} | Delete an entity schema.
 [**DeleteEnvironment**](OrganizationsApi.md#DeleteEnvironment) | **Delete** /orgs/{organizationId}/environments/{environmentName} | Delete an environment in an organization
 [**DeleteMemberFromOrganizationTeamById**](OrganizationsApi.md#DeleteMemberFromOrganizationTeamById) | **Delete** /orgs/{organizationId}/teams/{teamId}/members/{userId} | Delete members from a team
 [**DeleteOrganizationCustomField**](OrganizationsApi.md#DeleteOrganizationCustomField) | **Delete** /orgs/{organizationId}/custom-fields/{fieldName} | Delete a custom field in an organization
+[**GetEntity**](OrganizationsApi.md#GetEntity) | **Get** /orgs/{organizationId}/schemas/{entityType}/entities/{entityId} | Get an entity using its ID.
+[**GetEntitySchema**](OrganizationsApi.md#GetEntitySchema) | **Get** /orgs/{organizationId}/schemas/{entityType} | Get an entity schema by its type.
 [**GetEnvironmentByName**](OrganizationsApi.md#GetEnvironmentByName) | **Get** /orgs/{organizationId}/environments/{environmentName} | Get an environment by its name
 [**GetMemberInOrganizationById**](OrganizationsApi.md#GetMemberInOrganizationById) | **Get** /orgs/{organizationId}/members/{userId} | Get specified organization member
 [**GetOrganizationBillingPortal**](OrganizationsApi.md#GetOrganizationBillingPortal) | **Get** /orgs/{organizationId}/billing | Get the billing portal for an organization
 [**GetOrganizationById**](OrganizationsApi.md#GetOrganizationById) | **Get** /orgs/{organizationId} | Get an organization by its ID
 [**GetOrganizationCustomFieldByName**](OrganizationsApi.md#GetOrganizationCustomFieldByName) | **Get** /orgs/{organizationId}/custom-fields/{fieldName} | Get a custom field by its name
+[**GetRecording**](OrganizationsApi.md#GetRecording) | **Get** /orgs/{organizationId}/recordings/{recordingId} | Get a recording by its ID
 [**GetTeamInOrganizationById**](OrganizationsApi.md#GetTeamInOrganizationById) | **Get** /orgs/{organizationId}/teams/{teamId} | Get specified organization team
 [**InviteUsersToOrganization**](OrganizationsApi.md#InviteUsersToOrganization) | **Post** /orgs/{organizationId}/invites | Invite users to a given organization based on a list of emails
 [**JoinOrganizationWithInvite**](OrganizationsApi.md#JoinOrganizationWithInvite) | **Post** /orgs/{organizationId}/invites/{inviteId} | Use an invite to join an organization.
 [**ListCollectionsInOrganizationById**](OrganizationsApi.md#ListCollectionsInOrganizationById) | **Get** /orgs/{organizationId}/collections | List organization collections
 [**ListDirectorySyncGroups**](OrganizationsApi.md#ListDirectorySyncGroups) | **Get** /orgs/{organizationId}/dsync/groups | Lists the groups exposed to the synced Directory on an organization.
+[**ListEntitySchemas**](OrganizationsApi.md#ListEntitySchemas) | **Get** /orgs/{organizationId}/schemas | List the entity schemas in an organization.
 [**ListEnvironments**](OrganizationsApi.md#ListEnvironments) | **Get** /orgs/{organizationId}/environments | Get the environments in an organization
 [**ListMembersInOrganizationById**](OrganizationsApi.md#ListMembersInOrganizationById) | **Get** /orgs/{organizationId}/members | List organization members
 [**ListOrganizationCustomFields**](OrganizationsApi.md#ListOrganizationCustomFields) | **Get** /orgs/{organizationId}/custom-fields | Get the custom fields for spaces in an organization
 [**ListOrganizationsForAuthenticatedUser**](OrganizationsApi.md#ListOrganizationsForAuthenticatedUser) | **Get** /orgs | Get the list of organizations for the currently authenticated user
+[**ListRecordings**](OrganizationsApi.md#ListRecordings) | **Get** /orgs/{organizationId}/recordings | List recordings
+[**ListSchemaEntities**](OrganizationsApi.md#ListSchemaEntities) | **Get** /orgs/{organizationId}/schemas/{entityType}/entities | List entities in an organization for a given type.
 [**ListSpacesInOrganizationById**](OrganizationsApi.md#ListSpacesInOrganizationById) | **Get** /orgs/{organizationId}/spaces | List organization spaces
 [**ListSpacesWithGitSyncInOrganizationById**](OrganizationsApi.md#ListSpacesWithGitSyncInOrganizationById) | **Get** /orgs/{organizationId}/spaces/gitsync | List organization spaces including Git sync metadata
 [**ListTeamMembersInOrganizationById**](OrganizationsApi.md#ListTeamMembersInOrganizationById) | **Get** /orgs/{organizationId}/teams/{teamId}/members | List team members
@@ -34,8 +42,11 @@ Method | HTTP request | Description
 [**RemoveTeamFromOrganizationById**](OrganizationsApi.md#RemoveTeamFromOrganizationById) | **Delete** /orgs/{organizationId}/teams/{teamId} | Delete a team in an organization
 [**RequestOrganizationUpgrade**](OrganizationsApi.md#RequestOrganizationUpgrade) | **Post** /orgs/{organizationId}/request_upgrade | Send a request to ask the organization&#39;s admin to upgrade it.
 [**SearchOrganizationContent**](OrganizationsApi.md#SearchOrganizationContent) | **Get** /orgs/{organizationId}/search | Search content in an organization
+[**SetEntitySchema**](OrganizationsApi.md#SetEntitySchema) | **Put** /orgs/{organizationId}/schemas/{entityType} | Create or update an entity schema.
 [**SetUserAsSSOMemberForOrganization**](OrganizationsApi.md#SetUserAsSSOMemberForOrganization) | **Post** /orgs/{organizationId}/members/{userId}/sso | Set a user as an SSO member of an organization
 [**SetupDirectorySync**](OrganizationsApi.md#SetupDirectorySync) | **Post** /orgs/{organizationId}/dsync | Set up Directory Sync in an organization.
+[**StartRecording**](OrganizationsApi.md#StartRecording) | **Post** /orgs/{organizationId}/recordings | Start a recording
+[**StopRecording**](OrganizationsApi.md#StopRecording) | **Post** /orgs/{organizationId}/recordings/{recordingId}/stop | Stop a recording
 [**SyncDirectorySyncGroupsToTeams**](OrganizationsApi.md#SyncDirectorySyncGroupsToTeams) | **Post** /orgs/{organizationId}/dsync/teams | Syncs a list of group/team unique identifiers pairs together.
 [**TransferOrganization**](OrganizationsApi.md#TransferOrganization) | **Post** /orgs/{organizationId}/transfer | Transfer one organization (source) into another organization (target).
 [**UpdateEnvironment**](OrganizationsApi.md#UpdateEnvironment) | **Patch** /orgs/{organizationId}/environments/{environmentName} | Update an existing environment within an organization
@@ -45,7 +56,80 @@ Method | HTTP request | Description
 [**UpdateOrganizationMemberLastSeenAt**](OrganizationsApi.md#UpdateOrganizationMemberLastSeenAt) | **Post** /orgs/{organizationId}/ping | Update organization member&#39;s \&quot;last seen at\&quot; timestamp.
 [**UpdateTeamInOrganizationById**](OrganizationsApi.md#UpdateTeamInOrganizationById) | **Patch** /orgs/{organizationId}/teams/{teamId} | Update specified organization team
 [**UpgradeOrganizationPlan**](OrganizationsApi.md#UpgradeOrganizationPlan) | **Post** /orgs/{organizationId}/billing | Upgrade an organization&#39;s billing plan
+[**UpsertSchemaEntities**](OrganizationsApi.md#UpsertSchemaEntities) | **Put** /orgs/{organizationId}/schemas/{entityType}/entities | Update/Create/Delete entities in a schema.
 
+
+
+## AddEventsToRecording
+
+> AddEventsToRecording(ctx, organizationId, recordingId).AddEventsToRecordingRequest(addEventsToRecordingRequest).Execute()
+
+Add events to a running recording
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    "time"
+    openapiclient "github.com/GitbookIO/go-gitbook"
+)
+
+func main() {
+    organizationId := "organizationId_example" // string | The unique id of the organization
+    recordingId := "recordingId_example" // string | The unique id of a recording
+    addEventsToRecordingRequest := *openapiclient.NewAddEventsToRecordingRequest([]openapiclient.RecordingEvent{openapiclient.RecordingEvent{RecordingFileAddedEvent: openapiclient.NewRecordingFileAddedEvent("Type_example", time.Now(), "Filename_example", "FileSnapshot_example")}}) // AddEventsToRecordingRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.OrganizationsApi.AddEventsToRecording(context.Background(), organizationId, recordingId).AddEventsToRecordingRequest(addEventsToRecordingRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsApi.AddEventsToRecording``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organizationId** | **string** | The unique id of the organization | 
+**recordingId** | **string** | The unique id of a recording | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAddEventsToRecordingRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **addEventsToRecordingRequest** | [**AddEventsToRecordingRequest**](AddEventsToRecordingRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[user](../README.md#user)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## AddMemberToOrganizationTeamById
@@ -400,6 +484,75 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## DeleteEntitySchema
+
+> DeleteEntitySchema(ctx, organizationId, entityType).Execute()
+
+Delete an entity schema.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GitbookIO/go-gitbook"
+)
+
+func main() {
+    organizationId := "organizationId_example" // string | The unique id of the organization
+    entityType := "entityType_example" // string | Type of the entity
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.OrganizationsApi.DeleteEntitySchema(context.Background(), organizationId, entityType).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsApi.DeleteEntitySchema``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organizationId** | **string** | The unique id of the organization | 
+**entityType** | **string** | Type of the entity | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteEntitySchemaRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[user](../README.md#user)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteEnvironment
 
 > DeleteEnvironment(ctx, organizationId, environmentName).Execute()
@@ -597,6 +750,151 @@ Name | Type | Description  | Notes
 ### Return type
 
  (empty response body)
+
+### Authorization
+
+[user](../README.md#user)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetEntity
+
+> Entity GetEntity(ctx, organizationId, entityType, entityId).Execute()
+
+Get an entity using its ID.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GitbookIO/go-gitbook"
+)
+
+func main() {
+    organizationId := "organizationId_example" // string | The unique id of the organization
+    entityType := "entityType_example" // string | Type of the entity
+    entityId := "entityId_example" // string | ID of the entity in the space
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrganizationsApi.GetEntity(context.Background(), organizationId, entityType, entityId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsApi.GetEntity``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetEntity`: Entity
+    fmt.Fprintf(os.Stdout, "Response from `OrganizationsApi.GetEntity`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organizationId** | **string** | The unique id of the organization | 
+**entityType** | **string** | Type of the entity | 
+**entityId** | **string** | ID of the entity in the space | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetEntityRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**Entity**](Entity.md)
+
+### Authorization
+
+[user](../README.md#user)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetEntitySchema
+
+> EntitySchema GetEntitySchema(ctx, organizationId, entityType).Execute()
+
+Get an entity schema by its type.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GitbookIO/go-gitbook"
+)
+
+func main() {
+    organizationId := "organizationId_example" // string | The unique id of the organization
+    entityType := "entityType_example" // string | Type of the entity
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrganizationsApi.GetEntitySchema(context.Background(), organizationId, entityType).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsApi.GetEntitySchema``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetEntitySchema`: EntitySchema
+    fmt.Fprintf(os.Stdout, "Response from `OrganizationsApi.GetEntitySchema`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organizationId** | **string** | The unique id of the organization | 
+**entityType** | **string** | Type of the entity | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetEntitySchemaRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**EntitySchema**](EntitySchema.md)
 
 ### Authorization
 
@@ -948,6 +1246,77 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CustomField**](CustomField.md)
+
+### Authorization
+
+[user](../README.md#user)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetRecording
+
+> Recording GetRecording(ctx, organizationId, recordingId).Execute()
+
+Get a recording by its ID
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GitbookIO/go-gitbook"
+)
+
+func main() {
+    organizationId := "organizationId_example" // string | The unique id of the organization
+    recordingId := "recordingId_example" // string | The unique id of a recording
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrganizationsApi.GetRecording(context.Background(), organizationId, recordingId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsApi.GetRecording``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetRecording`: Recording
+    fmt.Fprintf(os.Stdout, "Response from `OrganizationsApi.GetRecording`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organizationId** | **string** | The unique id of the organization | 
+**recordingId** | **string** | The unique id of a recording | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetRecordingRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**Recording**](Recording.md)
 
 ### Authorization
 
@@ -1321,6 +1690,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## ListEntitySchemas
+
+> ListEntitySchemas200Response ListEntitySchemas(ctx, organizationId).Page(page).Limit(limit).Execute()
+
+List the entity schemas in an organization.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GitbookIO/go-gitbook"
+)
+
+func main() {
+    organizationId := "organizationId_example" // string | The unique id of the organization
+    page := "page_example" // string | Identifier of the page results to fetch. (optional)
+    limit := float32(8.14) // float32 | The number of results per page (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrganizationsApi.ListEntitySchemas(context.Background(), organizationId).Page(page).Limit(limit).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsApi.ListEntitySchemas``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListEntitySchemas`: ListEntitySchemas200Response
+    fmt.Fprintf(os.Stdout, "Response from `OrganizationsApi.ListEntitySchemas`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organizationId** | **string** | The unique id of the organization | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListEntitySchemasRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **string** | Identifier of the page results to fetch. | 
+ **limit** | **float32** | The number of results per page | 
+
+### Return type
+
+[**ListEntitySchemas200Response**](ListEntitySchemas200Response.md)
+
+### Authorization
+
+[user](../README.md#user)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ListEnvironments
 
 > ListEnvironments200Response ListEnvironments(ctx, organizationId).Page(page).Limit(limit).Execute()
@@ -1594,6 +2035,157 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ListOrganizationsForAuthenticatedUser200Response**](ListOrganizationsForAuthenticatedUser200Response.md)
+
+### Authorization
+
+[user](../README.md#user)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListRecordings
+
+> ListRecordings200Response ListRecordings(ctx, organizationId).Page(page).Limit(limit).Execute()
+
+List recordings
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GitbookIO/go-gitbook"
+)
+
+func main() {
+    organizationId := "organizationId_example" // string | The unique id of the organization
+    page := "page_example" // string | Identifier of the page results to fetch. (optional)
+    limit := float32(8.14) // float32 | The number of results per page (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrganizationsApi.ListRecordings(context.Background(), organizationId).Page(page).Limit(limit).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsApi.ListRecordings``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListRecordings`: ListRecordings200Response
+    fmt.Fprintf(os.Stdout, "Response from `OrganizationsApi.ListRecordings`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organizationId** | **string** | The unique id of the organization | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListRecordingsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **string** | Identifier of the page results to fetch. | 
+ **limit** | **float32** | The number of results per page | 
+
+### Return type
+
+[**ListRecordings200Response**](ListRecordings200Response.md)
+
+### Authorization
+
+[user](../README.md#user)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListSchemaEntities
+
+> ListSchemaEntities200Response ListSchemaEntities(ctx, organizationId, entityType).Page(page).Limit(limit).Query(query).Execute()
+
+List entities in an organization for a given type.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GitbookIO/go-gitbook"
+)
+
+func main() {
+    organizationId := "organizationId_example" // string | The unique id of the organization
+    entityType := "entityType_example" // string | Type of the entity
+    page := "page_example" // string | Identifier of the page results to fetch. (optional)
+    limit := float32(8.14) // float32 | The number of results per page (optional)
+    query := "query_example" // string | Query to filter entities with, ex: a == 'something' && b >= 10 (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrganizationsApi.ListSchemaEntities(context.Background(), organizationId, entityType).Page(page).Limit(limit).Query(query).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsApi.ListSchemaEntities``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListSchemaEntities`: ListSchemaEntities200Response
+    fmt.Fprintf(os.Stdout, "Response from `OrganizationsApi.ListSchemaEntities`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organizationId** | **string** | The unique id of the organization | 
+**entityType** | **string** | Type of the entity | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListSchemaEntitiesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **string** | Identifier of the page results to fetch. | 
+ **limit** | **float32** | The number of results per page | 
+ **query** | **string** | Query to filter entities with, ex: a &#x3D;&#x3D; &#39;something&#39; &amp;&amp; b &gt;&#x3D; 10 | 
+
+### Return type
+
+[**ListSchemaEntities200Response**](ListSchemaEntities200Response.md)
 
 ### Authorization
 
@@ -2198,6 +2790,77 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## SetEntitySchema
+
+> SetEntitySchema(ctx, organizationId, entityType).EntityRawSchema(entityRawSchema).Execute()
+
+Create or update an entity schema.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GitbookIO/go-gitbook"
+)
+
+func main() {
+    organizationId := "organizationId_example" // string | The unique id of the organization
+    entityType := "entityType_example" // string | Type of the entity
+    entityRawSchema := *openapiclient.NewEntityRawSchema("Type_example", *openapiclient.NewEntityRawSchemaTitle("Singular_example", "Plural_example"), []openapiclient.EntityPropertySchema{*openapiclient.NewEntityPropertySchema("Name_example", "Title_example", "Type_example", []map[string]interface{}{map[string]interface{}{ ... }}, map[string]interface{}{ ... })}) // EntityRawSchema | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.OrganizationsApi.SetEntitySchema(context.Background(), organizationId, entityType).EntityRawSchema(entityRawSchema).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsApi.SetEntitySchema``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organizationId** | **string** | The unique id of the organization | 
+**entityType** | **string** | Type of the entity | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSetEntitySchemaRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **entityRawSchema** | [**EntityRawSchema**](EntityRawSchema.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[user](../README.md#user)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## SetUserAsSSOMemberForOrganization
 
 > OrganizationMember SetUserAsSSOMemberForOrganization(ctx, organizationId, userId).Execute()
@@ -2330,6 +2993,149 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## StartRecording
+
+> Recording StartRecording(ctx, organizationId).StartRecordingRequest(startRecordingRequest).Execute()
+
+Start a recording
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GitbookIO/go-gitbook"
+)
+
+func main() {
+    organizationId := "organizationId_example" // string | The unique id of the organization
+    startRecordingRequest := *openapiclient.NewStartRecordingRequest(openapiclient.RecordingContext{String: new(string)}) // StartRecordingRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrganizationsApi.StartRecording(context.Background(), organizationId).StartRecordingRequest(startRecordingRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsApi.StartRecording``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `StartRecording`: Recording
+    fmt.Fprintf(os.Stdout, "Response from `OrganizationsApi.StartRecording`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organizationId** | **string** | The unique id of the organization | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiStartRecordingRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **startRecordingRequest** | [**StartRecordingRequest**](StartRecordingRequest.md) |  | 
+
+### Return type
+
+[**Recording**](Recording.md)
+
+### Authorization
+
+[user](../README.md#user)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## StopRecording
+
+> StopRecording200Response StopRecording(ctx, organizationId, recordingId).StopRecordingRequest(stopRecordingRequest).Execute()
+
+Stop a recording
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GitbookIO/go-gitbook"
+)
+
+func main() {
+    organizationId := "organizationId_example" // string | The unique id of the organization
+    recordingId := "recordingId_example" // string | The unique id of a recording
+    stopRecordingRequest := *openapiclient.NewStopRecordingRequest("Space_example") // StopRecordingRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrganizationsApi.StopRecording(context.Background(), organizationId, recordingId).StopRecordingRequest(stopRecordingRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsApi.StopRecording``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `StopRecording`: StopRecording200Response
+    fmt.Fprintf(os.Stdout, "Response from `OrganizationsApi.StopRecording`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organizationId** | **string** | The unique id of the organization | 
+**recordingId** | **string** | The unique id of a recording | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiStopRecordingRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **stopRecordingRequest** | [**StopRecordingRequest**](StopRecordingRequest.md) |  | 
+
+### Return type
+
+[**StopRecording200Response**](StopRecording200Response.md)
+
+### Authorization
+
+[user](../README.md#user)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -2975,6 +3781,77 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [user-internal](../README.md#user-internal)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpsertSchemaEntities
+
+> UpsertSchemaEntities(ctx, organizationId, entityType).UpsertSchemaEntitiesRequest(upsertSchemaEntitiesRequest).Execute()
+
+Update/Create/Delete entities in a schema.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GitbookIO/go-gitbook"
+)
+
+func main() {
+    organizationId := "organizationId_example" // string | The unique id of the organization
+    entityType := "entityType_example" // string | Type of the entity
+    upsertSchemaEntitiesRequest := *openapiclient.NewUpsertSchemaEntitiesRequest([]openapiclient.UpsertEntity{*openapiclient.NewUpsertEntity("EntityId_example", map[string]UpsertEntityPropertiesValue{"key": openapiclient.UpsertEntity_properties_value{UpsertEntityPropertiesValueOneOf: openapiclient.NewUpsertEntityPropertiesValueOneOf("EntityId_example")}})}) // UpsertSchemaEntitiesRequest | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.OrganizationsApi.UpsertSchemaEntities(context.Background(), organizationId, entityType).UpsertSchemaEntitiesRequest(upsertSchemaEntitiesRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsApi.UpsertSchemaEntities``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organizationId** | **string** | The unique id of the organization | 
+**entityType** | **string** | Type of the entity | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpsertSchemaEntitiesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **upsertSchemaEntitiesRequest** | [**UpsertSchemaEntitiesRequest**](UpsertSchemaEntitiesRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[user](../README.md#user)
 
 ### HTTP request headers
 

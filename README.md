@@ -120,9 +120,9 @@ Class | Method | HTTP request | Description
 *HiveApi* | [**GenerateSpaceHiveReadAccessToken**](docs/HiveApi.md#generatespacehivereadaccesstoken) | **Post** /spaces/{spaceId}/hive/token | Returns a token to authenticate with Hive to read content from a given space.
 *IntegrationsApi* | [**CreateIntegrationInstallationToken**](docs/IntegrationsApi.md#createintegrationinstallationtoken) | **Post** /integrations/{integrationName}/installations/{installationId}/tokens | Create an integration installation API token
 *IntegrationsApi* | [**GetIntegrationByName**](docs/IntegrationsApi.md#getintegrationbyname) | **Get** /integrations/{integrationName} | Get a specific integration by its name
-*IntegrationsApi* | [**GetIntegrationEntities**](docs/IntegrationsApi.md#getintegrationentities) | **Get** /integrations/{integrationName}/installations/{installationId}/entities | List entities managed by an integration in an installation.
 *IntegrationsApi* | [**GetIntegrationEvent**](docs/IntegrationsApi.md#getintegrationevent) | **Get** /integrations/{integrationName}/events/{eventId} | Get a specific integration event by its id
 *IntegrationsApi* | [**GetIntegrationInstallationById**](docs/IntegrationsApi.md#getintegrationinstallationbyid) | **Get** /integrations/{integrationName}/installations/{installationId} | Get a specific integration&#39;s installation by its ID
+*IntegrationsApi* | [**GetIntegrationSpaceInstallation**](docs/IntegrationsApi.md#getintegrationspaceinstallation) | **Get** /integrations/{integrationName}/installations/{installationId}/spaces/{spaceId} | Get a specific integration&#39;s space installation
 *IntegrationsApi* | [**InstallIntegration**](docs/IntegrationsApi.md#installintegration) | **Post** /integrations/{integrationName}/installations | Install integration on a target organization
 *IntegrationsApi* | [**ListIntegrationEvents**](docs/IntegrationsApi.md#listintegrationevents) | **Get** /integrations/{integrationName}/events | List all integration events
 *IntegrationsApi* | [**ListIntegrationInstallations**](docs/IntegrationsApi.md#listintegrationinstallations) | **Get** /integrations/{integrationName}/installations | Fetch a list of installations of an integration
@@ -131,33 +131,40 @@ Class | Method | HTTP request | Description
 *IntegrationsApi* | [**ListSpaceIntegrationsBlocks**](docs/IntegrationsApi.md#listspaceintegrationsblocks) | **Get** /spaces/{spaceId}/integration-blocks | List integrations blocks for a space
 *IntegrationsApi* | [**PublishIntegration**](docs/IntegrationsApi.md#publishintegration) | **Post** /integrations/{integrationName} | Publish an integration
 *IntegrationsApi* | [**RemoveIntegrationDevSpace**](docs/IntegrationsApi.md#removeintegrationdevspace) | **Delete** /integrations/{integrationName}/spaces/{spaceId}/dev | Remove the development space for an integration
-*IntegrationsApi* | [**SyncIntegrationEntities**](docs/IntegrationsApi.md#syncintegrationentities) | **Post** /integrations/{integrationName}/installations/{installationId}/entities | Update all entities for an integration installation. Entities will be created and updated, missing entities will be deleted.
 *IntegrationsApi* | [**UninstallIntegration**](docs/IntegrationsApi.md#uninstallintegration) | **Delete** /integrations/{integrationName}/installations/{installationId} | Uninstall the integration from a target organization
 *IntegrationsApi* | [**UnpublishIntegration**](docs/IntegrationsApi.md#unpublishintegration) | **Delete** /integrations/{integrationName} | Unpublish an integration
 *IntegrationsApi* | [**UpdateIntegrationDevSpace**](docs/IntegrationsApi.md#updateintegrationdevspace) | **Put** /integrations/{integrationName}/spaces/{spaceId}/dev | Update the development space for an integration
 *IntegrationsApi* | [**UpdateIntegrationInstallation**](docs/IntegrationsApi.md#updateintegrationinstallation) | **Patch** /integrations/{integrationName}/installations/{installationId} | Update external IDs and configurations of an integration&#39;s installation
+*OrganizationsApi* | [**AddEventsToRecording**](docs/OrganizationsApi.md#addeventstorecording) | **Post** /orgs/{organizationId}/recordings/{recordingId}/events | Add events to a running recording
 *OrganizationsApi* | [**AddMemberToOrganizationTeamById**](docs/OrganizationsApi.md#addmembertoorganizationteambyid) | **Put** /orgs/{organizationId}/teams/{teamId}/members/{userId} | Add or update a team membership
 *OrganizationsApi* | [**CreateEnvironment**](docs/OrganizationsApi.md#createenvironment) | **Post** /orgs/{organizationId}/environments | Create a new environment within an organization
 *OrganizationsApi* | [**CreateOrganization**](docs/OrganizationsApi.md#createorganization) | **Post** /orgs | Create an organization
 *OrganizationsApi* | [**CreateOrganizationCustomField**](docs/OrganizationsApi.md#createorganizationcustomfield) | **Post** /orgs/{organizationId}/custom-fields | Create a new custom field in an orgamization
 *OrganizationsApi* | [**CreateOrganizationTeam**](docs/OrganizationsApi.md#createorganizationteam) | **Put** /orgs/{organizationId}/teams | Create organization team
+*OrganizationsApi* | [**DeleteEntitySchema**](docs/OrganizationsApi.md#deleteentityschema) | **Delete** /orgs/{organizationId}/schemas/{entityType} | Delete an entity schema.
 *OrganizationsApi* | [**DeleteEnvironment**](docs/OrganizationsApi.md#deleteenvironment) | **Delete** /orgs/{organizationId}/environments/{environmentName} | Delete an environment in an organization
 *OrganizationsApi* | [**DeleteMemberFromOrganizationTeamById**](docs/OrganizationsApi.md#deletememberfromorganizationteambyid) | **Delete** /orgs/{organizationId}/teams/{teamId}/members/{userId} | Delete members from a team
 *OrganizationsApi* | [**DeleteOrganizationCustomField**](docs/OrganizationsApi.md#deleteorganizationcustomfield) | **Delete** /orgs/{organizationId}/custom-fields/{fieldName} | Delete a custom field in an organization
+*OrganizationsApi* | [**GetEntity**](docs/OrganizationsApi.md#getentity) | **Get** /orgs/{organizationId}/schemas/{entityType}/entities/{entityId} | Get an entity using its ID.
+*OrganizationsApi* | [**GetEntitySchema**](docs/OrganizationsApi.md#getentityschema) | **Get** /orgs/{organizationId}/schemas/{entityType} | Get an entity schema by its type.
 *OrganizationsApi* | [**GetEnvironmentByName**](docs/OrganizationsApi.md#getenvironmentbyname) | **Get** /orgs/{organizationId}/environments/{environmentName} | Get an environment by its name
 *OrganizationsApi* | [**GetMemberInOrganizationById**](docs/OrganizationsApi.md#getmemberinorganizationbyid) | **Get** /orgs/{organizationId}/members/{userId} | Get specified organization member
 *OrganizationsApi* | [**GetOrganizationBillingPortal**](docs/OrganizationsApi.md#getorganizationbillingportal) | **Get** /orgs/{organizationId}/billing | Get the billing portal for an organization
 *OrganizationsApi* | [**GetOrganizationById**](docs/OrganizationsApi.md#getorganizationbyid) | **Get** /orgs/{organizationId} | Get an organization by its ID
 *OrganizationsApi* | [**GetOrganizationCustomFieldByName**](docs/OrganizationsApi.md#getorganizationcustomfieldbyname) | **Get** /orgs/{organizationId}/custom-fields/{fieldName} | Get a custom field by its name
+*OrganizationsApi* | [**GetRecording**](docs/OrganizationsApi.md#getrecording) | **Get** /orgs/{organizationId}/recordings/{recordingId} | Get a recording by its ID
 *OrganizationsApi* | [**GetTeamInOrganizationById**](docs/OrganizationsApi.md#getteaminorganizationbyid) | **Get** /orgs/{organizationId}/teams/{teamId} | Get specified organization team
 *OrganizationsApi* | [**InviteUsersToOrganization**](docs/OrganizationsApi.md#inviteuserstoorganization) | **Post** /orgs/{organizationId}/invites | Invite users to a given organization based on a list of emails
 *OrganizationsApi* | [**JoinOrganizationWithInvite**](docs/OrganizationsApi.md#joinorganizationwithinvite) | **Post** /orgs/{organizationId}/invites/{inviteId} | Use an invite to join an organization.
 *OrganizationsApi* | [**ListCollectionsInOrganizationById**](docs/OrganizationsApi.md#listcollectionsinorganizationbyid) | **Get** /orgs/{organizationId}/collections | List organization collections
 *OrganizationsApi* | [**ListDirectorySyncGroups**](docs/OrganizationsApi.md#listdirectorysyncgroups) | **Get** /orgs/{organizationId}/dsync/groups | Lists the groups exposed to the synced Directory on an organization.
+*OrganizationsApi* | [**ListEntitySchemas**](docs/OrganizationsApi.md#listentityschemas) | **Get** /orgs/{organizationId}/schemas | List the entity schemas in an organization.
 *OrganizationsApi* | [**ListEnvironments**](docs/OrganizationsApi.md#listenvironments) | **Get** /orgs/{organizationId}/environments | Get the environments in an organization
 *OrganizationsApi* | [**ListMembersInOrganizationById**](docs/OrganizationsApi.md#listmembersinorganizationbyid) | **Get** /orgs/{organizationId}/members | List organization members
 *OrganizationsApi* | [**ListOrganizationCustomFields**](docs/OrganizationsApi.md#listorganizationcustomfields) | **Get** /orgs/{organizationId}/custom-fields | Get the custom fields for spaces in an organization
 *OrganizationsApi* | [**ListOrganizationsForAuthenticatedUser**](docs/OrganizationsApi.md#listorganizationsforauthenticateduser) | **Get** /orgs | Get the list of organizations for the currently authenticated user
+*OrganizationsApi* | [**ListRecordings**](docs/OrganizationsApi.md#listrecordings) | **Get** /orgs/{organizationId}/recordings | List recordings
+*OrganizationsApi* | [**ListSchemaEntities**](docs/OrganizationsApi.md#listschemaentities) | **Get** /orgs/{organizationId}/schemas/{entityType}/entities | List entities in an organization for a given type.
 *OrganizationsApi* | [**ListSpacesInOrganizationById**](docs/OrganizationsApi.md#listspacesinorganizationbyid) | **Get** /orgs/{organizationId}/spaces | List organization spaces
 *OrganizationsApi* | [**ListSpacesWithGitSyncInOrganizationById**](docs/OrganizationsApi.md#listspaceswithgitsyncinorganizationbyid) | **Get** /orgs/{organizationId}/spaces/gitsync | List organization spaces including Git sync metadata
 *OrganizationsApi* | [**ListTeamMembersInOrganizationById**](docs/OrganizationsApi.md#listteammembersinorganizationbyid) | **Get** /orgs/{organizationId}/teams/{teamId}/members | List team members
@@ -166,8 +173,11 @@ Class | Method | HTTP request | Description
 *OrganizationsApi* | [**RemoveTeamFromOrganizationById**](docs/OrganizationsApi.md#removeteamfromorganizationbyid) | **Delete** /orgs/{organizationId}/teams/{teamId} | Delete a team in an organization
 *OrganizationsApi* | [**RequestOrganizationUpgrade**](docs/OrganizationsApi.md#requestorganizationupgrade) | **Post** /orgs/{organizationId}/request_upgrade | Send a request to ask the organization&#39;s admin to upgrade it.
 *OrganizationsApi* | [**SearchOrganizationContent**](docs/OrganizationsApi.md#searchorganizationcontent) | **Get** /orgs/{organizationId}/search | Search content in an organization
+*OrganizationsApi* | [**SetEntitySchema**](docs/OrganizationsApi.md#setentityschema) | **Put** /orgs/{organizationId}/schemas/{entityType} | Create or update an entity schema.
 *OrganizationsApi* | [**SetUserAsSSOMemberForOrganization**](docs/OrganizationsApi.md#setuserasssomemberfororganization) | **Post** /orgs/{organizationId}/members/{userId}/sso | Set a user as an SSO member of an organization
 *OrganizationsApi* | [**SetupDirectorySync**](docs/OrganizationsApi.md#setupdirectorysync) | **Post** /orgs/{organizationId}/dsync | Set up Directory Sync in an organization.
+*OrganizationsApi* | [**StartRecording**](docs/OrganizationsApi.md#startrecording) | **Post** /orgs/{organizationId}/recordings | Start a recording
+*OrganizationsApi* | [**StopRecording**](docs/OrganizationsApi.md#stoprecording) | **Post** /orgs/{organizationId}/recordings/{recordingId}/stop | Stop a recording
 *OrganizationsApi* | [**SyncDirectorySyncGroupsToTeams**](docs/OrganizationsApi.md#syncdirectorysyncgroupstoteams) | **Post** /orgs/{organizationId}/dsync/teams | Syncs a list of group/team unique identifiers pairs together.
 *OrganizationsApi* | [**TransferOrganization**](docs/OrganizationsApi.md#transferorganization) | **Post** /orgs/{organizationId}/transfer | Transfer one organization (source) into another organization (target).
 *OrganizationsApi* | [**UpdateEnvironment**](docs/OrganizationsApi.md#updateenvironment) | **Patch** /orgs/{organizationId}/environments/{environmentName} | Update an existing environment within an organization
@@ -177,11 +187,11 @@ Class | Method | HTTP request | Description
 *OrganizationsApi* | [**UpdateOrganizationMemberLastSeenAt**](docs/OrganizationsApi.md#updateorganizationmemberlastseenat) | **Post** /orgs/{organizationId}/ping | Update organization member&#39;s \&quot;last seen at\&quot; timestamp.
 *OrganizationsApi* | [**UpdateTeamInOrganizationById**](docs/OrganizationsApi.md#updateteaminorganizationbyid) | **Patch** /orgs/{organizationId}/teams/{teamId} | Update specified organization team
 *OrganizationsApi* | [**UpgradeOrganizationPlan**](docs/OrganizationsApi.md#upgradeorganizationplan) | **Post** /orgs/{organizationId}/billing | Upgrade an organization&#39;s billing plan
+*OrganizationsApi* | [**UpsertSchemaEntities**](docs/OrganizationsApi.md#upsertschemaentities) | **Put** /orgs/{organizationId}/schemas/{entityType}/entities | Update/Create/Delete entities in a schema.
 *PermissionsApi* | [**ListPermissionsAggregateInCollection**](docs/PermissionsApi.md#listpermissionsaggregateincollection) | **Get** /collections/{collectionId}/permissions/aggregate | List permissions for all users in a collection.
 *PermissionsApi* | [**ListPermissionsAggregateInSpace**](docs/PermissionsApi.md#listpermissionsaggregateinspace) | **Get** /spaces/{spaceId}/permissions/aggregate | List permissions for all users in a space.
 *PermissionsApi* | [**ListSpacesForOrganizationMember**](docs/PermissionsApi.md#listspacesfororganizationmember) | **Get** /orgs/{organizationId}/members/{userId}/spaces | List permissions accross all spaces for a member of an organization
 *SearchApi* | [**SearchContent**](docs/SearchApi.md#searchcontent) | **Get** /search | Search content across spaces that is accessible by the currently authenticated target
-*SpacesApi* | [**AddSpaceEntities**](docs/SpacesApi.md#addspaceentities) | **Post** /spaces/{spaceId}/entities | Link the space to entities
 *SpacesApi* | [**CreateChangeRequest**](docs/SpacesApi.md#createchangerequest) | **Post** /spaces/{spaceId}/change-requests | Create a new change request for a space.
 *SpacesApi* | [**CreateSpace**](docs/SpacesApi.md#createspace) | **Post** /orgs/{organizationId}/spaces | Create an organization space
 *SpacesApi* | [**CreateSpaceRelation**](docs/SpacesApi.md#createspacerelation) | **Post** /spaces/{spaceId}/relations | Create a new relation between a source space and a target space
@@ -189,7 +199,6 @@ Class | Method | HTTP request | Description
 *SpacesApi* | [**DeleteCommentInSpace**](docs/SpacesApi.md#deletecommentinspace) | **Delete** /spaces/{spaceId}/comments/{commentId} | Delete a comment in a space.
 *SpacesApi* | [**DeleteCommentReplyInChangeRequest**](docs/SpacesApi.md#deletecommentreplyinchangerequest) | **Delete** /spaces/{spaceId}/change-requests/{changeRequestId}/comments/{commentId}/replies/{commentReplyId} | Delete a comment reply in a change request.
 *SpacesApi* | [**DeleteCommentReplyInSpace**](docs/SpacesApi.md#deletecommentreplyinspace) | **Delete** /spaces/{spaceId}/comments/{commentId}/replies/{commentReplyId} | Delete a comment reply in a space.
-*SpacesApi* | [**DeleteSpaceEntity**](docs/SpacesApi.md#deletespaceentity) | **Delete** /spaces/{spaceId}/entities/{integrationName}/{entityId} | Delete a space entity
 *SpacesApi* | [**DeleteSpaceRelation**](docs/SpacesApi.md#deletespacerelation) | **Delete** /spaces/{spaceId}/relations/{targetSpaceId} | Delete a relation between spaces
 *SpacesApi* | [**DuplicateSpace**](docs/SpacesApi.md#duplicatespace) | **Post** /spaces/{spaceId}/duplicate | Create a duplicate of the space.
 *SpacesApi* | [**ExportToGitRepository**](docs/SpacesApi.md#exporttogitrepository) | **Post** /spaces/{spaceId}/git/export | Export the space content to a Git repository.
@@ -205,7 +214,6 @@ Class | Method | HTTP request | Description
 *SpacesApi* | [**GetSearchAnalyticsForSpaceById**](docs/SpacesApi.md#getsearchanalyticsforspacebyid) | **Get** /spaces/{spaceId}/insights/search | Get an overview of the top search queries in a space.
 *SpacesApi* | [**GetSpaceById**](docs/SpacesApi.md#getspacebyid) | **Get** /spaces/{spaceId} | Get the details about a space.
 *SpacesApi* | [**GetSpaceCustomFields**](docs/SpacesApi.md#getspacecustomfields) | **Get** /spaces/{spaceId}/custom-fields | Get the values of the custom fields set on a space
-*SpacesApi* | [**GetSpaceEntity**](docs/SpacesApi.md#getspaceentity) | **Get** /spaces/{spaceId}/entities/{integrationName}/{entityId} | Get a space entity
 *SpacesApi* | [**GetSpaceGitInfo**](docs/SpacesApi.md#getspacegitinfo) | **Get** /spaces/{spaceId}/git/info | Get metadata about the Git Sync provider currently set up on the space
 *SpacesApi* | [**GetSpacePublishingAuthById**](docs/SpacesApi.md#getspacepublishingauthbyid) | **Get** /spaces/{spaceId}/publishing/auth | Get the publishing authentication configuration for a space.
 *SpacesApi* | [**GetSpaceRelation**](docs/SpacesApi.md#getspacerelation) | **Get** /spaces/{spaceId}/relations/{targetSpaceId} | Get the relation between 2 spaces.
@@ -216,10 +224,8 @@ Class | Method | HTTP request | Description
 *SpacesApi* | [**ListCommentRepliesInSpace**](docs/SpacesApi.md#listcommentrepliesinspace) | **Get** /spaces/{spaceId}/comments/{commentId}/replies | List all the replies to a comment in a space.
 *SpacesApi* | [**ListCommentsInChangeRequest**](docs/SpacesApi.md#listcommentsinchangerequest) | **Get** /spaces/{spaceId}/change-requests/{changeRequestId}/comments | List all the comments in a change request.
 *SpacesApi* | [**ListCommentsInSpace**](docs/SpacesApi.md#listcommentsinspace) | **Get** /spaces/{spaceId}/comments | List all the comments in a space.
-*SpacesApi* | [**ListEntitiesInOrganization**](docs/SpacesApi.md#listentitiesinorganization) | **Get** /orgs/{organizationId}/entities | List all entities in an organization.
 *SpacesApi* | [**ListPermissionsAggregateInCollection**](docs/SpacesApi.md#listpermissionsaggregateincollection) | **Get** /collections/{collectionId}/permissions/aggregate | List permissions for all users in a collection.
 *SpacesApi* | [**ListPermissionsAggregateInSpace**](docs/SpacesApi.md#listpermissionsaggregateinspace) | **Get** /spaces/{spaceId}/permissions/aggregate | List permissions for all users in a space.
-*SpacesApi* | [**ListSpaceEntities**](docs/SpacesApi.md#listspaceentities) | **Get** /spaces/{spaceId}/entities | List all entities linked to a space
 *SpacesApi* | [**ListSpaceRelations**](docs/SpacesApi.md#listspacerelations) | **Get** /spaces/{spaceId}/relations | List all relations for a space
 *SpacesApi* | [**ListSpaceRelationsInOrganization**](docs/SpacesApi.md#listspacerelationsinorganization) | **Get** /orgs/{organizationId}/space-relations | List all relations between spaces in an organization
 *SpacesApi* | [**ListSpacesForOrganizationMember**](docs/SpacesApi.md#listspacesfororganizationmember) | **Get** /orgs/{organizationId}/members/{userId}/spaces | List permissions accross all spaces for a member of an organization
@@ -238,7 +244,6 @@ Class | Method | HTTP request | Description
 *SpacesApi* | [**UpdateCommentReplyInSpace**](docs/SpacesApi.md#updatecommentreplyinspace) | **Put** /spaces/{spaceId}/comments/{commentId}/replies/{commentReplyId} | Update a comment reply in a space.
 *SpacesApi* | [**UpdateSpaceById**](docs/SpacesApi.md#updatespacebyid) | **Patch** /spaces/{spaceId} | Update the details of a space
 *SpacesApi* | [**UpdateSpaceCustomFields**](docs/SpacesApi.md#updatespacecustomfields) | **Patch** /spaces/{spaceId}/custom-fields | Update the custom fields in a space
-*SpacesApi* | [**UpdateSpaceEntity**](docs/SpacesApi.md#updatespaceentity) | **Patch** /spaces/{spaceId}/entities/{integrationName}/{entityId} | Update a space entity
 *SpacesApi* | [**UpdateSpacePublishingAuthById**](docs/SpacesApi.md#updatespacepublishingauthbyid) | **Post** /spaces/{spaceId}/publishing/auth | Update the publishing authentication configuration for a space.
 *TeamsApi* | [**ListTeamsForOrganizationMember**](docs/TeamsApi.md#listteamsfororganizationmember) | **Get** /orgs/{organizationId}/members/{userId}/teams | List all teams an organization member is part of
 *UrlsApi* | [**GetContentByUrl**](docs/UrlsApi.md#getcontentbyurl) | **Get** /urls/content | Resolve a URL to a content (space, collection, page)
@@ -252,9 +257,8 @@ Class | Method | HTTP request | Description
  - [APIIntegrationScope](docs/APIIntegrationScope.md)
  - [APIScope](docs/APIScope.md)
  - [APITemporaryToken](docs/APITemporaryToken.md)
+ - [AddEventsToRecordingRequest](docs/AddEventsToRecordingRequest.md)
  - [AddMemberToOrganizationTeamByIdRequest](docs/AddMemberToOrganizationTeamByIdRequest.md)
- - [AddSpaceEntitiesRequest](docs/AddSpaceEntitiesRequest.md)
- - [AddSpaceEntitiesRequestEntitiesInner](docs/AddSpaceEntitiesRequestEntitiesInner.md)
  - [AnalyticsContentPage](docs/AnalyticsContentPage.md)
  - [AnalyticsContentPageFeedbacks](docs/AnalyticsContentPageFeedbacks.md)
  - [AnalyticsContentPages](docs/AnalyticsContentPages.md)
@@ -268,6 +272,8 @@ Class | Method | HTTP request | Description
  - [AskQueryWithGet200Response](docs/AskQueryWithGet200Response.md)
  - [BackofficeUserInfoChannel](docs/BackofficeUserInfoChannel.md)
  - [BaseEvent](docs/BaseEvent.md)
+ - [BaseRecordingEvent](docs/BaseRecordingEvent.md)
+ - [BaseRecordingEventActor](docs/BaseRecordingEventActor.md)
  - [BillingInterval](docs/BillingInterval.md)
  - [BillingInvoicePreview](docs/BillingInvoicePreview.md)
  - [BillingInvoicePreviewLinesInner](docs/BillingInvoicePreviewLinesInner.md)
@@ -334,6 +340,7 @@ Class | Method | HTTP request | Description
  - [ContentKitDivider](docs/ContentKitDivider.md)
  - [ContentKitDynamicBinding](docs/ContentKitDynamicBinding.md)
  - [ContentKitHStack](docs/ContentKitHStack.md)
+ - [ContentKitHint](docs/ContentKitHint.md)
  - [ContentKitIcon](docs/ContentKitIcon.md)
  - [ContentKitImage](docs/ContentKitImage.md)
  - [ContentKitImageSource](docs/ContentKitImageSource.md)
@@ -341,6 +348,10 @@ Class | Method | HTTP request | Description
  - [ContentKitInput](docs/ContentKitInput.md)
  - [ContentKitInputElement](docs/ContentKitInputElement.md)
  - [ContentKitInputHint](docs/ContentKitInputHint.md)
+ - [ContentKitLink](docs/ContentKitLink.md)
+ - [ContentKitLinkChildren](docs/ContentKitLinkChildren.md)
+ - [ContentKitLinkTarget](docs/ContentKitLinkTarget.md)
+ - [ContentKitLinkTargetUrl](docs/ContentKitLinkTargetUrl.md)
  - [ContentKitMarkdown](docs/ContentKitMarkdown.md)
  - [ContentKitMarkdownContent](docs/ContentKitMarkdownContent.md)
  - [ContentKitModal](docs/ContentKitModal.md)
@@ -353,10 +364,13 @@ Class | Method | HTTP request | Description
  - [ContentKitSelectOption](docs/ContentKitSelectOption.md)
  - [ContentKitSelectOptions](docs/ContentKitSelectOptions.md)
  - [ContentKitSelectOptionsOneOf](docs/ContentKitSelectOptionsOneOf.md)
+ - [ContentKitSelectOptionsOneOfUrl](docs/ContentKitSelectOptionsOneOfUrl.md)
  - [ContentKitSwitch](docs/ContentKitSwitch.md)
  - [ContentKitText](docs/ContentKitText.md)
- - [ContentKitTextChildrenInner](docs/ContentKitTextChildrenInner.md)
+ - [ContentKitTextChildren](docs/ContentKitTextChildren.md)
+ - [ContentKitTextChildrenOneOfInner](docs/ContentKitTextChildrenOneOfInner.md)
  - [ContentKitTextInput](docs/ContentKitTextInput.md)
+ - [ContentKitURL](docs/ContentKitURL.md)
  - [ContentKitVStack](docs/ContentKitVStack.md)
  - [ContentKitWebFrame](docs/ContentKitWebFrame.md)
  - [ContentKitWebFrameDataValue](docs/ContentKitWebFrameDataValue.md)
@@ -378,6 +392,16 @@ Class | Method | HTTP request | Description
  - [Document](docs/Document.md)
  - [EmojiReaction](docs/EmojiReaction.md)
  - [EmojiReactionUsersInner](docs/EmojiReactionUsersInner.md)
+ - [Entity](docs/Entity.md)
+ - [EntityAllOf](docs/EntityAllOf.md)
+ - [EntityAllOfUrls](docs/EntityAllOfUrls.md)
+ - [EntityPropertySchema](docs/EntityPropertySchema.md)
+ - [EntityPropertySchemaAllOf](docs/EntityPropertySchemaAllOf.md)
+ - [EntityRawSchema](docs/EntityRawSchema.md)
+ - [EntityRawSchemaTitle](docs/EntityRawSchemaTitle.md)
+ - [EntitySchema](docs/EntitySchema.md)
+ - [EntitySchemaAllOf](docs/EntitySchemaAllOf.md)
+ - [EntitySchemaAllOfUrls](docs/EntitySchemaAllOfUrls.md)
  - [Environment](docs/Environment.md)
  - [EnvironmentUrls](docs/EnvironmentUrls.md)
  - [Error](docs/Error.md)
@@ -397,8 +421,6 @@ Class | Method | HTTP request | Description
  - [GetContentByUrl200ResponseOneOf1](docs/GetContentByUrl200ResponseOneOf1.md)
  - [GetContributorsByChangeRequestId200Response](docs/GetContributorsByChangeRequestId200Response.md)
  - [GetContributorsByChangeRequestId200ResponseAllOf](docs/GetContributorsByChangeRequestId200ResponseAllOf.md)
- - [GetIntegrationEntities200Response](docs/GetIntegrationEntities200Response.md)
- - [GetIntegrationEntities200ResponseAllOf](docs/GetIntegrationEntities200ResponseAllOf.md)
  - [GetIntegrationEvent200Response](docs/GetIntegrationEvent200Response.md)
  - [GetPageByPath200Response](docs/GetPageByPath200Response.md)
  - [GetRecommendedQuestionsRequest](docs/GetRecommendedQuestionsRequest.md)
@@ -440,9 +462,8 @@ Class | Method | HTTP request | Description
  - [IntegrationConfigurations](docs/IntegrationConfigurations.md)
  - [IntegrationContentSecurityPolicy](docs/IntegrationContentSecurityPolicy.md)
  - [IntegrationContentSecurityPolicyOneOf](docs/IntegrationContentSecurityPolicyOneOf.md)
- - [IntegrationEntity](docs/IntegrationEntity.md)
- - [IntegrationEntityAllOf](docs/IntegrationEntityAllOf.md)
  - [IntegrationEnvironment](docs/IntegrationEnvironment.md)
+ - [IntegrationEnvironmentApiTokens](docs/IntegrationEnvironmentApiTokens.md)
  - [IntegrationEvent](docs/IntegrationEvent.md)
  - [IntegrationEventLog](docs/IntegrationEventLog.md)
  - [IntegrationEventTrace](docs/IntegrationEventTrace.md)
@@ -470,6 +491,8 @@ Class | Method | HTTP request | Description
  - [ListCommentsInChangeRequest200Response](docs/ListCommentsInChangeRequest200Response.md)
  - [ListCommentsInChangeRequest200ResponseAllOf](docs/ListCommentsInChangeRequest200ResponseAllOf.md)
  - [ListDirectorySyncGroups200Response](docs/ListDirectorySyncGroups200Response.md)
+ - [ListEntitySchemas200Response](docs/ListEntitySchemas200Response.md)
+ - [ListEntitySchemas200ResponseAllOf](docs/ListEntitySchemas200ResponseAllOf.md)
  - [ListEnvironments200Response](docs/ListEnvironments200Response.md)
  - [ListEnvironments200ResponseAllOf](docs/ListEnvironments200ResponseAllOf.md)
  - [ListFiles200Response](docs/ListFiles200Response.md)
@@ -492,8 +515,10 @@ Class | Method | HTTP request | Description
  - [ListOrganizationsForAuthenticatedUser200ResponseAllOf](docs/ListOrganizationsForAuthenticatedUser200ResponseAllOf.md)
  - [ListPermissionsAggregateInSpace200Response](docs/ListPermissionsAggregateInSpace200Response.md)
  - [ListPermissionsAggregateInSpace200ResponseAllOf](docs/ListPermissionsAggregateInSpace200ResponseAllOf.md)
- - [ListSpaceEntities200Response](docs/ListSpaceEntities200Response.md)
- - [ListSpaceEntities200ResponseAllOf](docs/ListSpaceEntities200ResponseAllOf.md)
+ - [ListRecordings200Response](docs/ListRecordings200Response.md)
+ - [ListRecordings200ResponseAllOf](docs/ListRecordings200ResponseAllOf.md)
+ - [ListSchemaEntities200Response](docs/ListSchemaEntities200Response.md)
+ - [ListSchemaEntities200ResponseAllOf](docs/ListSchemaEntities200ResponseAllOf.md)
  - [ListSpaceRelations200Response](docs/ListSpaceRelations200Response.md)
  - [ListSpaceRelations200ResponseAllOf](docs/ListSpaceRelations200ResponseAllOf.md)
  - [ListSpaceRelationsInOrganization200Response](docs/ListSpaceRelationsInOrganization200Response.md)
@@ -527,6 +552,8 @@ Class | Method | HTTP request | Description
  - [OrganizationMember](docs/OrganizationMember.md)
  - [OrganizationMemberChannel](docs/OrganizationMemberChannel.md)
  - [OrganizationMembersChannel](docs/OrganizationMembersChannel.md)
+ - [OrganizationRecordingsChannel](docs/OrganizationRecordingsChannel.md)
+ - [OrganizationSchemasChannel](docs/OrganizationSchemasChannel.md)
  - [OrganizationSpaceRelationsChannel](docs/OrganizationSpaceRelationsChannel.md)
  - [OrganizationSpacesChannel](docs/OrganizationSpacesChannel.md)
  - [OrganizationTarget](docs/OrganizationTarget.md)
@@ -542,6 +569,25 @@ Class | Method | HTTP request | Description
  - [PostCommentReplySchema](docs/PostCommentReplySchema.md)
  - [PostCommentSchema](docs/PostCommentSchema.md)
  - [PurgeCDNCacheContextType](docs/PurgeCDNCacheContextType.md)
+ - [Recording](docs/Recording.md)
+ - [RecordingContext](docs/RecordingContext.md)
+ - [RecordingContributorsInner](docs/RecordingContributorsInner.md)
+ - [RecordingEvent](docs/RecordingEvent.md)
+ - [RecordingEvents](docs/RecordingEvents.md)
+ - [RecordingFileAddedEvent](docs/RecordingFileAddedEvent.md)
+ - [RecordingFileAddedEventAllOf](docs/RecordingFileAddedEventAllOf.md)
+ - [RecordingFileChangedEvent](docs/RecordingFileChangedEvent.md)
+ - [RecordingFileChangedEventAllOf](docs/RecordingFileChangedEventAllOf.md)
+ - [RecordingFileRemovedEvent](docs/RecordingFileRemovedEvent.md)
+ - [RecordingFileRemovedEventAllOf](docs/RecordingFileRemovedEventAllOf.md)
+ - [RecordingOutput](docs/RecordingOutput.md)
+ - [RecordingSpeechEvent](docs/RecordingSpeechEvent.md)
+ - [RecordingSpeechEventAllOf](docs/RecordingSpeechEventAllOf.md)
+ - [RecordingTerminalCommandEvent](docs/RecordingTerminalCommandEvent.md)
+ - [RecordingTerminalCommandEventAllOf](docs/RecordingTerminalCommandEventAllOf.md)
+ - [RecordingThreadMessageEvent](docs/RecordingThreadMessageEvent.md)
+ - [RecordingThreadMessageEventAllOf](docs/RecordingThreadMessageEventAllOf.md)
+ - [RecordingUrls](docs/RecordingUrls.md)
  - [RequestBlockUserContext](docs/RequestBlockUserContext.md)
  - [RequestCreateChangeRequest](docs/RequestCreateChangeRequest.md)
  - [RequestCreateOrganization](docs/RequestCreateOrganization.md)
@@ -564,8 +610,10 @@ Class | Method | HTTP request | Description
  - [RequestUpdateSpaceGitInfo](docs/RequestUpdateSpaceGitInfo.md)
  - [RequestUpgradeOrganizationBilling](docs/RequestUpgradeOrganizationBilling.md)
  - [Revision](docs/Revision.md)
+ - [RevisionBase](docs/RevisionBase.md)
+ - [RevisionBaseGit](docs/RevisionBaseGit.md)
+ - [RevisionBaseUrls](docs/RevisionBaseUrls.md)
  - [RevisionFile](docs/RevisionFile.md)
- - [RevisionGit](docs/RevisionGit.md)
  - [RevisionPage](docs/RevisionPage.md)
  - [RevisionPageBase](docs/RevisionPageBase.md)
  - [RevisionPageDocument](docs/RevisionPageDocument.md)
@@ -575,7 +623,14 @@ Class | Method | HTTP request | Description
  - [RevisionPageGroupAllOf](docs/RevisionPageGroupAllOf.md)
  - [RevisionPageLink](docs/RevisionPageLink.md)
  - [RevisionPageLinkAllOf](docs/RevisionPageLinkAllOf.md)
- - [RevisionUrls](docs/RevisionUrls.md)
+ - [RevisionTypeEdits](docs/RevisionTypeEdits.md)
+ - [RevisionTypeEditsAllOf](docs/RevisionTypeEditsAllOf.md)
+ - [RevisionTypeMerge](docs/RevisionTypeMerge.md)
+ - [RevisionTypeMergeAllOf](docs/RevisionTypeMergeAllOf.md)
+ - [RevisionTypeRollback](docs/RevisionTypeRollback.md)
+ - [RevisionTypeRollbackAllOf](docs/RevisionTypeRollbackAllOf.md)
+ - [RevisionTypeUpdate](docs/RevisionTypeUpdate.md)
+ - [RevisionTypeUpdateAllOf](docs/RevisionTypeUpdateAllOf.md)
  - [SearchAIAnswer](docs/SearchAIAnswer.md)
  - [SearchAIAnswerPagesInner](docs/SearchAIAnswerPagesInner.md)
  - [SearchAIQuery](docs/SearchAIQuery.md)
@@ -595,8 +650,6 @@ Class | Method | HTTP request | Description
  - [SpaceContentUpdatedEventAllOf](docs/SpaceContentUpdatedEventAllOf.md)
  - [SpaceCustomFieldsChannel](docs/SpaceCustomFieldsChannel.md)
  - [SpaceEntitiesChannel](docs/SpaceEntitiesChannel.md)
- - [SpaceEntity](docs/SpaceEntity.md)
- - [SpaceEntityUrls](docs/SpaceEntityUrls.md)
  - [SpaceEvent](docs/SpaceEvent.md)
  - [SpaceEventAllOf](docs/SpaceEventAllOf.md)
  - [SpaceGitInfoChannel](docs/SpaceGitInfoChannel.md)
@@ -605,6 +658,9 @@ Class | Method | HTTP request | Description
  - [SpaceGitSyncStartedEvent](docs/SpaceGitSyncStartedEvent.md)
  - [SpaceGitSyncStartedEventAllOf](docs/SpaceGitSyncStartedEventAllOf.md)
  - [SpaceInfoChannel](docs/SpaceInfoChannel.md)
+ - [SpaceInstallationDeletedEvent](docs/SpaceInstallationDeletedEvent.md)
+ - [SpaceInstallationDeletedEventAllOf](docs/SpaceInstallationDeletedEventAllOf.md)
+ - [SpaceInstallationDeletedEventAllOfPrevious](docs/SpaceInstallationDeletedEventAllOfPrevious.md)
  - [SpaceInstallationSetupEvent](docs/SpaceInstallationSetupEvent.md)
  - [SpaceInstallationSetupEventAllOf](docs/SpaceInstallationSetupEventAllOf.md)
  - [SpaceInstallationSetupEventAllOfPrevious](docs/SpaceInstallationSetupEventAllOfPrevious.md)
@@ -627,6 +683,9 @@ Class | Method | HTTP request | Description
  - [SpaceVisibilityUpdatedEvent](docs/SpaceVisibilityUpdatedEvent.md)
  - [SpaceVisibilityUpdatedEventAllOf](docs/SpaceVisibilityUpdatedEventAllOf.md)
  - [StaffUserInfo](docs/StaffUserInfo.md)
+ - [StartRecordingRequest](docs/StartRecordingRequest.md)
+ - [StopRecording200Response](docs/StopRecording200Response.md)
+ - [StopRecordingRequest](docs/StopRecordingRequest.md)
  - [SubmitChangeRequestReviewRequest](docs/SubmitChangeRequestReviewRequest.md)
  - [SubscriptionChannel](docs/SubscriptionChannel.md)
  - [SubscriptionChannelOneOf](docs/SubscriptionChannelOneOf.md)
@@ -636,7 +695,6 @@ Class | Method | HTTP request | Description
  - [SyncDirectorySyncGroupsToTeams200Response](docs/SyncDirectorySyncGroupsToTeams200Response.md)
  - [SyncDirectorySyncGroupsToTeamsRequest](docs/SyncDirectorySyncGroupsToTeamsRequest.md)
  - [SyncDirectorySyncGroupsToTeamsRequestToSyncInner](docs/SyncDirectorySyncGroupsToTeamsRequestToSyncInner.md)
- - [SyncIntegrationEntitiesRequest](docs/SyncIntegrationEntitiesRequest.md)
  - [Team](docs/Team.md)
  - [TeamMember](docs/TeamMember.md)
  - [TeamMemberRole](docs/TeamMemberRole.md)
@@ -661,10 +719,12 @@ Class | Method | HTTP request | Description
  - [UpdateMembersInOrganizationTeamRequest](docs/UpdateMembersInOrganizationTeamRequest.md)
  - [UpdateOrganizationCustomFieldRequest](docs/UpdateOrganizationCustomFieldRequest.md)
  - [UpdateSpaceByIdRequest](docs/UpdateSpaceByIdRequest.md)
- - [UpdateSpaceEntityRequest](docs/UpdateSpaceEntityRequest.md)
  - [UpdateTeamInOrganizationByIdRequest](docs/UpdateTeamInOrganizationByIdRequest.md)
- - [UpsertIntegrationEntity](docs/UpsertIntegrationEntity.md)
- - [UpsertIntegrationEntityMetadataValue](docs/UpsertIntegrationEntityMetadataValue.md)
+ - [UpsertEntity](docs/UpsertEntity.md)
+ - [UpsertEntityPropertiesValue](docs/UpsertEntityPropertiesValue.md)
+ - [UpsertEntityPropertiesValueOneOf](docs/UpsertEntityPropertiesValueOneOf.md)
+ - [UpsertSchemaEntitiesRequest](docs/UpsertSchemaEntitiesRequest.md)
+ - [UpsertSchemaEntitiesRequestDelete](docs/UpsertSchemaEntitiesRequestDelete.md)
  - [User](docs/User.md)
  - [UserAPIToken](docs/UserAPIToken.md)
  - [UserAPITokenExtended](docs/UserAPITokenExtended.md)
@@ -718,6 +778,17 @@ r, err := client.Service.Operation(auth, args)
 ```
 
 ### integration
+
+- **Type**: HTTP Bearer token authentication
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextAccessToken, "BEARER_TOKEN_STRING")
+r, err := client.Service.Operation(auth, args)
+```
+
+### integration-installation
 
 - **Type**: HTTP Bearer token authentication
 

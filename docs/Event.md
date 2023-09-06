@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Type** | **string** |  | 
 **InstallationId** | **string** | ID of the integration installation | 
 **Status** | [**IntegrationInstallationStatus**](IntegrationInstallationStatus.md) |  | 
-**Previous** | Pointer to [**SpaceInstallationSetupEventAllOfPrevious**](SpaceInstallationSetupEventAllOfPrevious.md) |  | [optional] 
+**Previous** | [**SpaceInstallationDeletedEventAllOfPrevious**](SpaceInstallationDeletedEventAllOfPrevious.md) |  | 
 **SpaceId** | **string** | ID of the space | 
 **PageId** | Pointer to **string** | Unique identifier of the visited page. | [optional] 
 **Visitor** | [**SpaceViewEventAllOfVisitor**](SpaceViewEventAllOfVisitor.md) |  | 
@@ -30,7 +30,7 @@ Name | Type | Description | Notes
 
 ### NewEvent
 
-`func NewEvent(eventId string, type_ string, installationId string, status IntegrationInstallationStatus, spaceId string, visitor SpaceViewEventAllOfVisitor, url string, referrer string, revisionId string, state map[string]interface{}, commitId string, previousVisibility ContentVisibility, visibility ContentVisibility, request FetchRequest, componentId string, props map[string]interface{}, context ContentKitContext, ) *Event`
+`func NewEvent(eventId string, type_ string, installationId string, status IntegrationInstallationStatus, previous SpaceInstallationDeletedEventAllOfPrevious, spaceId string, visitor SpaceViewEventAllOfVisitor, url string, referrer string, revisionId string, state map[string]interface{}, commitId string, previousVisibility ContentVisibility, visibility ContentVisibility, request FetchRequest, componentId string, props map[string]interface{}, context ContentKitContext, ) *Event`
 
 NewEvent instantiates a new Event object
 This constructor will assign default values to properties that have it defined,
@@ -127,28 +127,23 @@ SetStatus sets Status field to given value.
 
 ### GetPrevious
 
-`func (o *Event) GetPrevious() SpaceInstallationSetupEventAllOfPrevious`
+`func (o *Event) GetPrevious() SpaceInstallationDeletedEventAllOfPrevious`
 
 GetPrevious returns the Previous field if non-nil, zero value otherwise.
 
 ### GetPreviousOk
 
-`func (o *Event) GetPreviousOk() (*SpaceInstallationSetupEventAllOfPrevious, bool)`
+`func (o *Event) GetPreviousOk() (*SpaceInstallationDeletedEventAllOfPrevious, bool)`
 
 GetPreviousOk returns a tuple with the Previous field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrevious
 
-`func (o *Event) SetPrevious(v SpaceInstallationSetupEventAllOfPrevious)`
+`func (o *Event) SetPrevious(v SpaceInstallationDeletedEventAllOfPrevious)`
 
 SetPrevious sets Previous field to given value.
 
-### HasPrevious
-
-`func (o *Event) HasPrevious() bool`
-
-HasPrevious returns a boolean if a field has been set.
 
 ### GetSpaceId
 

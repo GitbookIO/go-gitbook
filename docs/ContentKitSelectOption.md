@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | 
 **Label** | **string** |  | 
+**Icon** | Pointer to [**ContentKitCardIcon**](ContentKitCardIcon.md) |  | [optional] 
 
 ## Methods
 
@@ -65,6 +66,31 @@ and a boolean to check if the value has been set.
 
 SetLabel sets Label field to given value.
 
+
+### GetIcon
+
+`func (o *ContentKitSelectOption) GetIcon() ContentKitCardIcon`
+
+GetIcon returns the Icon field if non-nil, zero value otherwise.
+
+### GetIconOk
+
+`func (o *ContentKitSelectOption) GetIconOk() (*ContentKitCardIcon, bool)`
+
+GetIconOk returns a tuple with the Icon field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIcon
+
+`func (o *ContentKitSelectOption) SetIcon(v ContentKitCardIcon)`
+
+SetIcon sets Icon field to given value.
+
+### HasIcon
+
+`func (o *ContentKitSelectOption) HasIcon() bool`
+
+HasIcon returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

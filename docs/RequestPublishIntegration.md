@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **Organization** | Pointer to **string** | The ID or subdomain of the organization under which the integration should be published | [optional] 
 **Secrets** | Pointer to **map[string]string** | Secrets stored on the integration and passed at runtime. | [optional] 
 **ContentSecurityPolicy** | Pointer to [**IntegrationContentSecurityPolicy**](IntegrationContentSecurityPolicy.md) |  | [optional] 
+**Entities** | Pointer to [**[]EntityRawSchema**](EntityRawSchema.md) |  | [optional] 
 
 ## Methods
 
@@ -393,6 +394,31 @@ SetContentSecurityPolicy sets ContentSecurityPolicy field to given value.
 `func (o *RequestPublishIntegration) HasContentSecurityPolicy() bool`
 
 HasContentSecurityPolicy returns a boolean if a field has been set.
+
+### GetEntities
+
+`func (o *RequestPublishIntegration) GetEntities() []EntityRawSchema`
+
+GetEntities returns the Entities field if non-nil, zero value otherwise.
+
+### GetEntitiesOk
+
+`func (o *RequestPublishIntegration) GetEntitiesOk() (*[]EntityRawSchema, bool)`
+
+GetEntitiesOk returns a tuple with the Entities field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEntities
+
+`func (o *RequestPublishIntegration) SetEntities(v []EntityRawSchema)`
+
+SetEntities sets Entities field to given value.
+
+### HasEntities
+
+`func (o *RequestPublishIntegration) HasEntities() bool`
+
+HasEntities returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

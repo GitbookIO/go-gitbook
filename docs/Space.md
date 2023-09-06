@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Visibility** | [**ContentVisibility**](ContentVisibility.md) |  | 
 **CreatedAt** | **string** |  | 
 **UpdatedAt** | **string** |  | 
+**DeletedAt** | Pointer to **string** |  | [optional] 
 **Urls** | [**SpaceUrls**](SpaceUrls.md) |  | 
 **Organization** | Pointer to **string** | ID of the organization owning this space | [optional] 
 **User** | Pointer to **string** | ID of the user owning this space | [optional] 
@@ -175,6 +176,31 @@ and a boolean to check if the value has been set.
 
 SetUpdatedAt sets UpdatedAt field to given value.
 
+
+### GetDeletedAt
+
+`func (o *Space) GetDeletedAt() string`
+
+GetDeletedAt returns the DeletedAt field if non-nil, zero value otherwise.
+
+### GetDeletedAtOk
+
+`func (o *Space) GetDeletedAtOk() (*string, bool)`
+
+GetDeletedAtOk returns a tuple with the DeletedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeletedAt
+
+`func (o *Space) SetDeletedAt(v string)`
+
+SetDeletedAt sets DeletedAt field to given value.
+
+### HasDeletedAt
+
+`func (o *Space) HasDeletedAt() bool`
+
+HasDeletedAt returns a boolean if a field has been set.
 
 ### GetUrls
 

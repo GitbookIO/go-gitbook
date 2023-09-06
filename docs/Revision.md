@@ -9,14 +9,16 @@ Name | Type | Description | Notes
 **Parents** | **[]string** | IDs of the parent revisions | 
 **Pages** | [**[]RevisionPage**](RevisionPage.md) |  | 
 **Files** | [**[]RevisionFile**](RevisionFile.md) |  | 
-**Git** | Pointer to [**RevisionGit**](RevisionGit.md) |  | [optional] 
-**Urls** | [**RevisionUrls**](RevisionUrls.md) |  | 
+**Git** | Pointer to [**RevisionBaseGit**](RevisionBaseGit.md) |  | [optional] 
+**Urls** | [**RevisionBaseUrls**](RevisionBaseUrls.md) |  | 
+**Type** | **string** | Revision created when updating a change request with changes from primary. | 
+**MergedFrom** | [**ChangeRequest**](ChangeRequest.md) |  | 
 
 ## Methods
 
 ### NewRevision
 
-`func NewRevision(object string, id string, parents []string, pages []RevisionPage, files []RevisionFile, urls RevisionUrls, ) *Revision`
+`func NewRevision(object string, id string, parents []string, pages []RevisionPage, files []RevisionFile, urls RevisionBaseUrls, type_ string, mergedFrom ChangeRequest, ) *Revision`
 
 NewRevision instantiates a new Revision object
 This constructor will assign default values to properties that have it defined,
@@ -133,20 +135,20 @@ SetFiles sets Files field to given value.
 
 ### GetGit
 
-`func (o *Revision) GetGit() RevisionGit`
+`func (o *Revision) GetGit() RevisionBaseGit`
 
 GetGit returns the Git field if non-nil, zero value otherwise.
 
 ### GetGitOk
 
-`func (o *Revision) GetGitOk() (*RevisionGit, bool)`
+`func (o *Revision) GetGitOk() (*RevisionBaseGit, bool)`
 
 GetGitOk returns a tuple with the Git field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGit
 
-`func (o *Revision) SetGit(v RevisionGit)`
+`func (o *Revision) SetGit(v RevisionBaseGit)`
 
 SetGit sets Git field to given value.
 
@@ -158,22 +160,62 @@ HasGit returns a boolean if a field has been set.
 
 ### GetUrls
 
-`func (o *Revision) GetUrls() RevisionUrls`
+`func (o *Revision) GetUrls() RevisionBaseUrls`
 
 GetUrls returns the Urls field if non-nil, zero value otherwise.
 
 ### GetUrlsOk
 
-`func (o *Revision) GetUrlsOk() (*RevisionUrls, bool)`
+`func (o *Revision) GetUrlsOk() (*RevisionBaseUrls, bool)`
 
 GetUrlsOk returns a tuple with the Urls field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUrls
 
-`func (o *Revision) SetUrls(v RevisionUrls)`
+`func (o *Revision) SetUrls(v RevisionBaseUrls)`
 
 SetUrls sets Urls field to given value.
+
+
+### GetType
+
+`func (o *Revision) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *Revision) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *Revision) SetType(v string)`
+
+SetType sets Type field to given value.
+
+
+### GetMergedFrom
+
+`func (o *Revision) GetMergedFrom() ChangeRequest`
+
+GetMergedFrom returns the MergedFrom field if non-nil, zero value otherwise.
+
+### GetMergedFromOk
+
+`func (o *Revision) GetMergedFromOk() (*ChangeRequest, bool)`
+
+GetMergedFromOk returns a tuple with the MergedFrom field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMergedFrom
+
+`func (o *Revision) SetMergedFrom(v ChangeRequest)`
+
+SetMergedFrom sets MergedFrom field to given value.
 
 
 

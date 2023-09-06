@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Style** | Pointer to **string** |  | [optional] 
 **OnPress** | [**ContentKitAction**](ContentKitAction.md) |  | 
 **Icon** | Pointer to [**ContentKitIcon**](ContentKitIcon.md) |  | [optional] 
+**TrailingIcon** | Pointer to [**ContentKitIcon**](ContentKitIcon.md) |  | [optional] 
 **Label** | Pointer to **string** |  | [optional] 
 **Tooltip** | Pointer to **string** |  | [optional] 
 **Confirm** | Pointer to [**ContentKitConfirm**](ContentKitConfirm.md) |  | [optional] 
@@ -121,6 +122,31 @@ SetIcon sets Icon field to given value.
 `func (o *ContentKitButton) HasIcon() bool`
 
 HasIcon returns a boolean if a field has been set.
+
+### GetTrailingIcon
+
+`func (o *ContentKitButton) GetTrailingIcon() ContentKitIcon`
+
+GetTrailingIcon returns the TrailingIcon field if non-nil, zero value otherwise.
+
+### GetTrailingIconOk
+
+`func (o *ContentKitButton) GetTrailingIconOk() (*ContentKitIcon, bool)`
+
+GetTrailingIconOk returns a tuple with the TrailingIcon field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrailingIcon
+
+`func (o *ContentKitButton) SetTrailingIcon(v ContentKitIcon)`
+
+SetTrailingIcon sets TrailingIcon field to given value.
+
+### HasTrailingIcon
+
+`func (o *ContentKitButton) HasTrailingIcon() bool`
+
+HasTrailingIcon returns a boolean if a field has been set.
 
 ### GetLabel
 

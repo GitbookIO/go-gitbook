@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **Title** | **string** |  | 
 **Description** | **string** |  | 
 **Type** | [**CustomFieldType**](CustomFieldType.md) |  | 
+**Placeholder** | **string** |  | 
+**Options** | Pointer to **[]string** |  | [optional] 
 **CreatedAt** | **string** |  | 
 **UpdatedAt** | **string** |  | 
 **Urls** | [**CustomFieldUrls**](CustomFieldUrls.md) |  | 
@@ -17,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewCustomField
 
-`func NewCustomField(id string, name string, title string, description string, type_ CustomFieldType, createdAt string, updatedAt string, urls CustomFieldUrls, ) *CustomField`
+`func NewCustomField(id string, name string, title string, description string, type_ CustomFieldType, placeholder string, createdAt string, updatedAt string, urls CustomFieldUrls, ) *CustomField`
 
 NewCustomField instantiates a new CustomField object
 This constructor will assign default values to properties that have it defined,
@@ -131,6 +133,51 @@ and a boolean to check if the value has been set.
 
 SetType sets Type field to given value.
 
+
+### GetPlaceholder
+
+`func (o *CustomField) GetPlaceholder() string`
+
+GetPlaceholder returns the Placeholder field if non-nil, zero value otherwise.
+
+### GetPlaceholderOk
+
+`func (o *CustomField) GetPlaceholderOk() (*string, bool)`
+
+GetPlaceholderOk returns a tuple with the Placeholder field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlaceholder
+
+`func (o *CustomField) SetPlaceholder(v string)`
+
+SetPlaceholder sets Placeholder field to given value.
+
+
+### GetOptions
+
+`func (o *CustomField) GetOptions() []string`
+
+GetOptions returns the Options field if non-nil, zero value otherwise.
+
+### GetOptionsOk
+
+`func (o *CustomField) GetOptionsOk() (*[]string, bool)`
+
+GetOptionsOk returns a tuple with the Options field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOptions
+
+`func (o *CustomField) SetOptions(v []string)`
+
+SetOptions sets Options field to given value.
+
+### HasOptions
+
+`func (o *CustomField) HasOptions() bool`
+
+HasOptions returns a boolean if a field has been set.
 
 ### GetCreatedAt
 

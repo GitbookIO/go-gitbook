@@ -6,9 +6,9 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateIntegrationInstallationToken**](IntegrationsApi.md#CreateIntegrationInstallationToken) | **Post** /integrations/{integrationName}/installations/{installationId}/tokens | Create an integration installation API token
 [**GetIntegrationByName**](IntegrationsApi.md#GetIntegrationByName) | **Get** /integrations/{integrationName} | Get a specific integration by its name
-[**GetIntegrationEntities**](IntegrationsApi.md#GetIntegrationEntities) | **Get** /integrations/{integrationName}/installations/{installationId}/entities | List entities managed by an integration in an installation.
 [**GetIntegrationEvent**](IntegrationsApi.md#GetIntegrationEvent) | **Get** /integrations/{integrationName}/events/{eventId} | Get a specific integration event by its id
 [**GetIntegrationInstallationById**](IntegrationsApi.md#GetIntegrationInstallationById) | **Get** /integrations/{integrationName}/installations/{installationId} | Get a specific integration&#39;s installation by its ID
+[**GetIntegrationSpaceInstallation**](IntegrationsApi.md#GetIntegrationSpaceInstallation) | **Get** /integrations/{integrationName}/installations/{installationId}/spaces/{spaceId} | Get a specific integration&#39;s space installation
 [**InstallIntegration**](IntegrationsApi.md#InstallIntegration) | **Post** /integrations/{integrationName}/installations | Install integration on a target organization
 [**ListIntegrationEvents**](IntegrationsApi.md#ListIntegrationEvents) | **Get** /integrations/{integrationName}/events | List all integration events
 [**ListIntegrationInstallations**](IntegrationsApi.md#ListIntegrationInstallations) | **Get** /integrations/{integrationName}/installations | Fetch a list of installations of an integration
@@ -17,7 +17,6 @@ Method | HTTP request | Description
 [**ListSpaceIntegrationsBlocks**](IntegrationsApi.md#ListSpaceIntegrationsBlocks) | **Get** /spaces/{spaceId}/integration-blocks | List integrations blocks for a space
 [**PublishIntegration**](IntegrationsApi.md#PublishIntegration) | **Post** /integrations/{integrationName} | Publish an integration
 [**RemoveIntegrationDevSpace**](IntegrationsApi.md#RemoveIntegrationDevSpace) | **Delete** /integrations/{integrationName}/spaces/{spaceId}/dev | Remove the development space for an integration
-[**SyncIntegrationEntities**](IntegrationsApi.md#SyncIntegrationEntities) | **Post** /integrations/{integrationName}/installations/{installationId}/entities | Update all entities for an integration installation. Entities will be created and updated, missing entities will be deleted.
 [**UninstallIntegration**](IntegrationsApi.md#UninstallIntegration) | **Delete** /integrations/{integrationName}/installations/{installationId} | Uninstall the integration from a target organization
 [**UnpublishIntegration**](IntegrationsApi.md#UnpublishIntegration) | **Delete** /integrations/{integrationName} | Unpublish an integration
 [**UpdateIntegrationDevSpace**](IntegrationsApi.md#UpdateIntegrationDevSpace) | **Put** /integrations/{integrationName}/spaces/{spaceId}/dev | Update the development space for an integration
@@ -154,78 +153,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[integration](../README.md#integration), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetIntegrationEntities
-
-> GetIntegrationEntities200Response GetIntegrationEntities(ctx, integrationName, installationId).Execute()
-
-List entities managed by an integration in an installation.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GitbookIO/go-gitbook"
-)
-
-func main() {
-    integrationName := "integrationName_example" // string | Name of the integration
-    installationId := "installationId_example" // string | Identifier of the installation
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.IntegrationsApi.GetIntegrationEntities(context.Background(), integrationName, installationId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IntegrationsApi.GetIntegrationEntities``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetIntegrationEntities`: GetIntegrationEntities200Response
-    fmt.Fprintf(os.Stdout, "Response from `IntegrationsApi.GetIntegrationEntities`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**integrationName** | **string** | Name of the integration | 
-**installationId** | **string** | Identifier of the installation | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetIntegrationEntitiesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-[**GetIntegrationEntities200Response**](GetIntegrationEntities200Response.md)
-
-### Authorization
-
-[integration](../README.md#integration)
+[integration](../README.md#integration), [integration-installation](../README.md#integration-installation), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
 
 ### HTTP request headers
 
@@ -296,7 +224,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[integration](../README.md#integration), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
+[integration](../README.md#integration), [integration-installation](../README.md#integration-installation), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
 
 ### HTTP request headers
 
@@ -368,6 +296,80 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [user](../README.md#user)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetIntegrationSpaceInstallation
+
+> IntegrationSpaceInstallation GetIntegrationSpaceInstallation(ctx, integrationName, installationId, spaceId).Execute()
+
+Get a specific integration's space installation
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GitbookIO/go-gitbook"
+)
+
+func main() {
+    integrationName := "integrationName_example" // string | Name of the integration
+    installationId := "installationId_example" // string | Identifier of the installation
+    spaceId := "spaceId_example" // string | The unique id of the space
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.IntegrationsApi.GetIntegrationSpaceInstallation(context.Background(), integrationName, installationId, spaceId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `IntegrationsApi.GetIntegrationSpaceInstallation``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetIntegrationSpaceInstallation`: IntegrationSpaceInstallation
+    fmt.Fprintf(os.Stdout, "Response from `IntegrationsApi.GetIntegrationSpaceInstallation`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**integrationName** | **string** | Name of the integration | 
+**installationId** | **string** | Identifier of the installation | 
+**spaceId** | **string** | The unique id of the space | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetIntegrationSpaceInstallationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**IntegrationSpaceInstallation**](IntegrationSpaceInstallation.md)
+
+### Authorization
+
+[integration](../README.md#integration), [integration-installation](../README.md#integration-installation), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
 
 ### HTTP request headers
 
@@ -509,7 +511,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[integration](../README.md#integration), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
+[integration](../README.md#integration), [integration-installation](../README.md#integration-installation), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
 
 ### HTTP request headers
 
@@ -723,7 +725,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[integration](../README.md#integration), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
+[integration](../README.md#integration), [integration-installation](../README.md#integration-installation), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
 
 ### HTTP request headers
 
@@ -791,7 +793,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[integration](../README.md#integration), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
+[integration](../README.md#integration), [integration-installation](../README.md#integration-installation), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
 
 ### HTTP request headers
 
@@ -823,7 +825,7 @@ import (
 
 func main() {
     integrationName := "integrationName_example" // string | Name of the integration
-    requestPublishIntegration := *openapiclient.NewRequestPublishIntegration("Title_example", "Description_example", []openapiclient.IntegrationScope{openapiclient.IntegrationScope("organization:entities:write")}, "Script_example") // RequestPublishIntegration | 
+    requestPublishIntegration := *openapiclient.NewRequestPublishIntegration("Title_example", "Description_example", []openapiclient.IntegrationScope{openapiclient.IntegrationScope("entities:write")}, "Script_example") // RequestPublishIntegration | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -935,77 +937,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## SyncIntegrationEntities
-
-> SyncIntegrationEntities(ctx, integrationName, installationId).SyncIntegrationEntitiesRequest(syncIntegrationEntitiesRequest).Execute()
-
-Update all entities for an integration installation. Entities will be created and updated, missing entities will be deleted.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GitbookIO/go-gitbook"
-)
-
-func main() {
-    integrationName := "integrationName_example" // string | Name of the integration
-    installationId := "installationId_example" // string | Identifier of the installation
-    syncIntegrationEntitiesRequest := *openapiclient.NewSyncIntegrationEntitiesRequest([]openapiclient.UpsertIntegrationEntity{*openapiclient.NewUpsertIntegrationEntity("EntityId_example", "Title_example", "Description_example", "Target_example", map[string]UpsertIntegrationEntityMetadataValue{"key": openapiclient.UpsertIntegrationEntity_metadata_value{Bool: new(bool)}})}) // SyncIntegrationEntitiesRequest | 
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.IntegrationsApi.SyncIntegrationEntities(context.Background(), integrationName, installationId).SyncIntegrationEntitiesRequest(syncIntegrationEntitiesRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IntegrationsApi.SyncIntegrationEntities``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**integrationName** | **string** | Name of the integration | 
-**installationId** | **string** | Identifier of the installation | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSyncIntegrationEntitiesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **syncIntegrationEntitiesRequest** | [**SyncIntegrationEntitiesRequest**](SyncIntegrationEntitiesRequest.md) |  | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[integration](../README.md#integration)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

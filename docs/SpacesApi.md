@@ -4,7 +4,6 @@ All URIs are relative to *https://api.gitbook.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddSpaceEntities**](SpacesApi.md#AddSpaceEntities) | **Post** /spaces/{spaceId}/entities | Link the space to entities
 [**CreateChangeRequest**](SpacesApi.md#CreateChangeRequest) | **Post** /spaces/{spaceId}/change-requests | Create a new change request for a space.
 [**CreateSpace**](SpacesApi.md#CreateSpace) | **Post** /orgs/{organizationId}/spaces | Create an organization space
 [**CreateSpaceRelation**](SpacesApi.md#CreateSpaceRelation) | **Post** /spaces/{spaceId}/relations | Create a new relation between a source space and a target space
@@ -12,7 +11,6 @@ Method | HTTP request | Description
 [**DeleteCommentInSpace**](SpacesApi.md#DeleteCommentInSpace) | **Delete** /spaces/{spaceId}/comments/{commentId} | Delete a comment in a space.
 [**DeleteCommentReplyInChangeRequest**](SpacesApi.md#DeleteCommentReplyInChangeRequest) | **Delete** /spaces/{spaceId}/change-requests/{changeRequestId}/comments/{commentId}/replies/{commentReplyId} | Delete a comment reply in a change request.
 [**DeleteCommentReplyInSpace**](SpacesApi.md#DeleteCommentReplyInSpace) | **Delete** /spaces/{spaceId}/comments/{commentId}/replies/{commentReplyId} | Delete a comment reply in a space.
-[**DeleteSpaceEntity**](SpacesApi.md#DeleteSpaceEntity) | **Delete** /spaces/{spaceId}/entities/{integrationName}/{entityId} | Delete a space entity
 [**DeleteSpaceRelation**](SpacesApi.md#DeleteSpaceRelation) | **Delete** /spaces/{spaceId}/relations/{targetSpaceId} | Delete a relation between spaces
 [**DuplicateSpace**](SpacesApi.md#DuplicateSpace) | **Post** /spaces/{spaceId}/duplicate | Create a duplicate of the space.
 [**ExportToGitRepository**](SpacesApi.md#ExportToGitRepository) | **Post** /spaces/{spaceId}/git/export | Export the space content to a Git repository.
@@ -28,7 +26,6 @@ Method | HTTP request | Description
 [**GetSearchAnalyticsForSpaceById**](SpacesApi.md#GetSearchAnalyticsForSpaceById) | **Get** /spaces/{spaceId}/insights/search | Get an overview of the top search queries in a space.
 [**GetSpaceById**](SpacesApi.md#GetSpaceById) | **Get** /spaces/{spaceId} | Get the details about a space.
 [**GetSpaceCustomFields**](SpacesApi.md#GetSpaceCustomFields) | **Get** /spaces/{spaceId}/custom-fields | Get the values of the custom fields set on a space
-[**GetSpaceEntity**](SpacesApi.md#GetSpaceEntity) | **Get** /spaces/{spaceId}/entities/{integrationName}/{entityId} | Get a space entity
 [**GetSpaceGitInfo**](SpacesApi.md#GetSpaceGitInfo) | **Get** /spaces/{spaceId}/git/info | Get metadata about the Git Sync provider currently set up on the space
 [**GetSpacePublishingAuthById**](SpacesApi.md#GetSpacePublishingAuthById) | **Get** /spaces/{spaceId}/publishing/auth | Get the publishing authentication configuration for a space.
 [**GetSpaceRelation**](SpacesApi.md#GetSpaceRelation) | **Get** /spaces/{spaceId}/relations/{targetSpaceId} | Get the relation between 2 spaces.
@@ -39,10 +36,8 @@ Method | HTTP request | Description
 [**ListCommentRepliesInSpace**](SpacesApi.md#ListCommentRepliesInSpace) | **Get** /spaces/{spaceId}/comments/{commentId}/replies | List all the replies to a comment in a space.
 [**ListCommentsInChangeRequest**](SpacesApi.md#ListCommentsInChangeRequest) | **Get** /spaces/{spaceId}/change-requests/{changeRequestId}/comments | List all the comments in a change request.
 [**ListCommentsInSpace**](SpacesApi.md#ListCommentsInSpace) | **Get** /spaces/{spaceId}/comments | List all the comments in a space.
-[**ListEntitiesInOrganization**](SpacesApi.md#ListEntitiesInOrganization) | **Get** /orgs/{organizationId}/entities | List all entities in an organization.
 [**ListPermissionsAggregateInCollection**](SpacesApi.md#ListPermissionsAggregateInCollection) | **Get** /collections/{collectionId}/permissions/aggregate | List permissions for all users in a collection.
 [**ListPermissionsAggregateInSpace**](SpacesApi.md#ListPermissionsAggregateInSpace) | **Get** /spaces/{spaceId}/permissions/aggregate | List permissions for all users in a space.
-[**ListSpaceEntities**](SpacesApi.md#ListSpaceEntities) | **Get** /spaces/{spaceId}/entities | List all entities linked to a space
 [**ListSpaceRelations**](SpacesApi.md#ListSpaceRelations) | **Get** /spaces/{spaceId}/relations | List all relations for a space
 [**ListSpaceRelationsInOrganization**](SpacesApi.md#ListSpaceRelationsInOrganization) | **Get** /orgs/{organizationId}/space-relations | List all relations between spaces in an organization
 [**ListSpacesForOrganizationMember**](SpacesApi.md#ListSpacesForOrganizationMember) | **Get** /orgs/{organizationId}/members/{userId}/spaces | List permissions accross all spaces for a member of an organization
@@ -61,77 +56,8 @@ Method | HTTP request | Description
 [**UpdateCommentReplyInSpace**](SpacesApi.md#UpdateCommentReplyInSpace) | **Put** /spaces/{spaceId}/comments/{commentId}/replies/{commentReplyId} | Update a comment reply in a space.
 [**UpdateSpaceById**](SpacesApi.md#UpdateSpaceById) | **Patch** /spaces/{spaceId} | Update the details of a space
 [**UpdateSpaceCustomFields**](SpacesApi.md#UpdateSpaceCustomFields) | **Patch** /spaces/{spaceId}/custom-fields | Update the custom fields in a space
-[**UpdateSpaceEntity**](SpacesApi.md#UpdateSpaceEntity) | **Patch** /spaces/{spaceId}/entities/{integrationName}/{entityId} | Update a space entity
 [**UpdateSpacePublishingAuthById**](SpacesApi.md#UpdateSpacePublishingAuthById) | **Post** /spaces/{spaceId}/publishing/auth | Update the publishing authentication configuration for a space.
 
-
-
-## AddSpaceEntities
-
-> AddSpaceEntities(ctx, spaceId).AddSpaceEntitiesRequest(addSpaceEntitiesRequest).Execute()
-
-Link the space to entities
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GitbookIO/go-gitbook"
-)
-
-func main() {
-    spaceId := "spaceId_example" // string | The unique id of the space
-    addSpaceEntitiesRequest := *openapiclient.NewAddSpaceEntitiesRequest([]openapiclient.AddSpaceEntitiesRequestEntitiesInner{*openapiclient.NewAddSpaceEntitiesRequestEntitiesInner("Integration_example", "EntityId_example", []string{"Environments_example"})}) // AddSpaceEntitiesRequest | 
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.SpacesApi.AddSpaceEntities(context.Background(), spaceId).AddSpaceEntitiesRequest(addSpaceEntitiesRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SpacesApi.AddSpaceEntities``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**spaceId** | **string** | The unique id of the space | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAddSpaceEntitiesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **addSpaceEntitiesRequest** | [**AddSpaceEntitiesRequest**](AddSpaceEntitiesRequest.md) |  | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[integration](../README.md#integration), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## CreateChangeRequest
@@ -621,78 +547,6 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [user](../README.md#user)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteSpaceEntity
-
-> DeleteSpaceEntity(ctx, spaceId, integrationName, entityId).Execute()
-
-Delete a space entity
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GitbookIO/go-gitbook"
-)
-
-func main() {
-    spaceId := "spaceId_example" // string | The unique id of the space
-    integrationName := "integrationName_example" // string | Name of the integration
-    entityId := "entityId_example" // string | ID of the entity in the space
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.SpacesApi.DeleteSpaceEntity(context.Background(), spaceId, integrationName, entityId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SpacesApi.DeleteSpaceEntity``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**spaceId** | **string** | The unique id of the space | 
-**integrationName** | **string** | Name of the integration | 
-**entityId** | **string** | ID of the entity in the space | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteSpaceEntityRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[integration](../README.md#integration), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
 
 ### HTTP request headers
 
@@ -1781,80 +1635,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetSpaceEntity
-
-> SpaceEntity GetSpaceEntity(ctx, spaceId, integrationName, entityId).Execute()
-
-Get a space entity
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GitbookIO/go-gitbook"
-)
-
-func main() {
-    spaceId := "spaceId_example" // string | The unique id of the space
-    integrationName := "integrationName_example" // string | Name of the integration
-    entityId := "entityId_example" // string | ID of the entity in the space
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SpacesApi.GetSpaceEntity(context.Background(), spaceId, integrationName, entityId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SpacesApi.GetSpaceEntity``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetSpaceEntity`: SpaceEntity
-    fmt.Fprintf(os.Stdout, "Response from `SpacesApi.GetSpaceEntity`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**spaceId** | **string** | The unique id of the space | 
-**integrationName** | **string** | Name of the integration | 
-**entityId** | **string** | ID of the entity in the space | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetSpaceEntityRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
-### Return type
-
-[**SpaceEntity**](SpaceEntity.md)
-
-### Authorization
-
-[integration](../README.md#integration), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## GetSpaceGitInfo
 
 > GitSyncState GetSpaceGitInfo(ctx, spaceId).Execute()
@@ -2588,78 +2368,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListEntitiesInOrganization
-
-> GetIntegrationEntities200Response ListEntitiesInOrganization(ctx, organizationId).Page(page).Limit(limit).Execute()
-
-List all entities in an organization.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GitbookIO/go-gitbook"
-)
-
-func main() {
-    organizationId := "organizationId_example" // string | The unique id of the organization
-    page := "page_example" // string | Identifier of the page results to fetch. (optional)
-    limit := float32(8.14) // float32 | The number of results per page (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SpacesApi.ListEntitiesInOrganization(context.Background(), organizationId).Page(page).Limit(limit).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SpacesApi.ListEntitiesInOrganization``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListEntitiesInOrganization`: GetIntegrationEntities200Response
-    fmt.Fprintf(os.Stdout, "Response from `SpacesApi.ListEntitiesInOrganization`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organizationId** | **string** | The unique id of the organization | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiListEntitiesInOrganizationRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **page** | **string** | Identifier of the page results to fetch. | 
- **limit** | **float32** | The number of results per page | 
-
-### Return type
-
-[**GetIntegrationEntities200Response**](GetIntegrationEntities200Response.md)
-
-### Authorization
-
-[integration](../README.md#integration), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## ListPermissionsAggregateInCollection
 
 > ListPermissionsAggregateInSpace200Response ListPermissionsAggregateInCollection(ctx, collectionId).Page(page).Limit(limit).Role(role).Execute()
@@ -2808,78 +2516,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListSpaceEntities
-
-> ListSpaceEntities200Response ListSpaceEntities(ctx, spaceId).Page(page).Limit(limit).Execute()
-
-List all entities linked to a space
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GitbookIO/go-gitbook"
-)
-
-func main() {
-    spaceId := "spaceId_example" // string | The unique id of the space
-    page := "page_example" // string | Identifier of the page results to fetch. (optional)
-    limit := float32(8.14) // float32 | The number of results per page (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SpacesApi.ListSpaceEntities(context.Background(), spaceId).Page(page).Limit(limit).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SpacesApi.ListSpaceEntities``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListSpaceEntities`: ListSpaceEntities200Response
-    fmt.Fprintf(os.Stdout, "Response from `SpacesApi.ListSpaceEntities`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**spaceId** | **string** | The unique id of the space | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiListSpaceEntitiesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **page** | **string** | Identifier of the page results to fetch. | 
- **limit** | **float32** | The number of results per page | 
-
-### Return type
-
-[**ListSpaceEntities200Response**](ListSpaceEntities200Response.md)
-
-### Authorization
-
-[integration](../README.md#integration), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## ListSpaceRelations
 
 > ListSpaceRelations200Response ListSpaceRelations(ctx, spaceId).Page(page).Limit(limit).Execute()
@@ -2940,7 +2576,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[integration](../README.md#integration), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
+[integration](../README.md#integration), [integration-installation](../README.md#integration-installation), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
 
 ### HTTP request headers
 
@@ -3012,7 +2648,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[integration](../README.md#integration), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
+[integration](../README.md#integration), [integration-installation](../README.md#integration-installation), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
 
 ### HTTP request headers
 
@@ -3668,7 +3304,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[integration](../README.md#integration), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
+[integration](../README.md#integration), [integration-installation](../README.md#integration-installation), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
 
 ### HTTP request headers
 
@@ -4145,7 +3781,7 @@ import (
 
 func main() {
     spaceId := "spaceId_example" // string | The unique id of the space
-    updateCustomFieldValues := *openapiclient.NewUpdateCustomFieldValues(map[string]UpdateCustomFieldValuesValuesValue{"key": *openapiclient.NewUpdateCustomFieldValuesValuesValue(openapiclient.CustomFieldValue{Bool: new(bool)})}) // UpdateCustomFieldValues | 
+    updateCustomFieldValues := *openapiclient.NewUpdateCustomFieldValues(map[string]UpdateCustomFieldValuesValuesValue{"key": *openapiclient.NewUpdateCustomFieldValuesValuesValue(openapiclient.CustomFieldValue{ArrayOfString: new([]string)})}) // UpdateCustomFieldValues | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -4182,80 +3818,6 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [user](../README.md#user)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateSpaceEntity
-
-> UpdateSpaceEntity(ctx, spaceId, integrationName, entityId).UpdateSpaceEntityRequest(updateSpaceEntityRequest).Execute()
-
-Update a space entity
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GitbookIO/go-gitbook"
-)
-
-func main() {
-    spaceId := "spaceId_example" // string | The unique id of the space
-    integrationName := "integrationName_example" // string | Name of the integration
-    entityId := "entityId_example" // string | ID of the entity in the space
-    updateSpaceEntityRequest := *openapiclient.NewUpdateSpaceEntityRequest([]string{"Environments_example"}) // UpdateSpaceEntityRequest | 
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.SpacesApi.UpdateSpaceEntity(context.Background(), spaceId, integrationName, entityId).UpdateSpaceEntityRequest(updateSpaceEntityRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SpacesApi.UpdateSpaceEntity``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**spaceId** | **string** | The unique id of the space | 
-**integrationName** | **string** | Name of the integration | 
-**entityId** | **string** | ID of the entity in the space | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateSpaceEntityRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
- **updateSpaceEntityRequest** | [**UpdateSpaceEntityRequest**](UpdateSpaceEntityRequest.md) |  | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[integration](../README.md#integration), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
 
 ### HTTP request headers
 

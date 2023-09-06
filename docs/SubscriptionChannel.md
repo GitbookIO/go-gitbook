@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **ChangeRequest** | **string** |  | 
 **Team** | **string** |  | 
 **Member** | **string** |  | 
+**EntityType** | **string** |  | 
 **Comment** | **string** |  | 
 **CommentReply** | **string** |  | 
 
@@ -18,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewSubscriptionChannel
 
-`func NewSubscriptionChannel(channel string, space string, user string, organization string, changeRequest string, team string, member string, comment string, commentReply string, ) *SubscriptionChannel`
+`func NewSubscriptionChannel(channel string, space string, user string, organization string, changeRequest string, team string, member string, entityType string, comment string, commentReply string, ) *SubscriptionChannel`
 
 NewSubscriptionChannel instantiates a new SubscriptionChannel object
 This constructor will assign default values to properties that have it defined,
@@ -171,6 +172,26 @@ and a boolean to check if the value has been set.
 `func (o *SubscriptionChannel) SetMember(v string)`
 
 SetMember sets Member field to given value.
+
+
+### GetEntityType
+
+`func (o *SubscriptionChannel) GetEntityType() string`
+
+GetEntityType returns the EntityType field if non-nil, zero value otherwise.
+
+### GetEntityTypeOk
+
+`func (o *SubscriptionChannel) GetEntityTypeOk() (*string, bool)`
+
+GetEntityTypeOk returns a tuple with the EntityType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEntityType
+
+`func (o *SubscriptionChannel) SetEntityType(v string)`
+
+SetEntityType sets EntityType field to given value.
 
 
 ### GetComment

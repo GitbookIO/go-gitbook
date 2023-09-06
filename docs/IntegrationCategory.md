@@ -11,6 +11,8 @@
 
 * `CONTENT` (value: `"content"`)
 
+* `GITSYNC` (value: `"gitsync"`)
+
 * `OTHER` (value: `"other"`)
 
 

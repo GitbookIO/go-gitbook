@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** |  | 
 **Style** | Pointer to **string** |  | [optional] 
-**Children** | [**[]ContentKitTextChildrenInner**](ContentKitTextChildrenInner.md) |  | 
+**Children** | [**ContentKitTextChildren**](ContentKitTextChildren.md) |  | 
 
 ## Methods
 
 ### NewContentKitText
 
-`func NewContentKitText(type_ string, children []ContentKitTextChildrenInner, ) *ContentKitText`
+`func NewContentKitText(type_ string, children ContentKitTextChildren, ) *ContentKitText`
 
 NewContentKitText instantiates a new ContentKitText object
 This constructor will assign default values to properties that have it defined,
@@ -74,20 +74,20 @@ HasStyle returns a boolean if a field has been set.
 
 ### GetChildren
 
-`func (o *ContentKitText) GetChildren() []ContentKitTextChildrenInner`
+`func (o *ContentKitText) GetChildren() ContentKitTextChildren`
 
 GetChildren returns the Children field if non-nil, zero value otherwise.
 
 ### GetChildrenOk
 
-`func (o *ContentKitText) GetChildrenOk() (*[]ContentKitTextChildrenInner, bool)`
+`func (o *ContentKitText) GetChildrenOk() (*ContentKitTextChildren, bool)`
 
 GetChildrenOk returns a tuple with the Children field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetChildren
 
-`func (o *ContentKitText) SetChildren(v []ContentKitTextChildrenInner)`
+`func (o *ContentKitText) SetChildren(v ContentKitTextChildren)`
 
 SetChildren sets Children field to given value.
 

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Type** | **string** |  | 
 **State** | **string** | State binding. The value of the input will be stored as a property in the state named after this ID. | 
 **InitialValue** | Pointer to **bool** | Value to initialize the switch with. | [optional] 
+**OnValueChange** | Pointer to [**ContentKitAction**](ContentKitAction.md) |  | [optional] 
 **Confirm** | Pointer to [**ContentKitConfirm**](ContentKitConfirm.md) |  | [optional] 
 
 ## Methods
@@ -92,6 +93,31 @@ SetInitialValue sets InitialValue field to given value.
 `func (o *ContentKitSwitch) HasInitialValue() bool`
 
 HasInitialValue returns a boolean if a field has been set.
+
+### GetOnValueChange
+
+`func (o *ContentKitSwitch) GetOnValueChange() ContentKitAction`
+
+GetOnValueChange returns the OnValueChange field if non-nil, zero value otherwise.
+
+### GetOnValueChangeOk
+
+`func (o *ContentKitSwitch) GetOnValueChangeOk() (*ContentKitAction, bool)`
+
+GetOnValueChangeOk returns a tuple with the OnValueChange field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOnValueChange
+
+`func (o *ContentKitSwitch) SetOnValueChange(v ContentKitAction)`
+
+SetOnValueChange sets OnValueChange field to given value.
+
+### HasOnValueChange
+
+`func (o *ContentKitSwitch) HasOnValueChange() bool`
+
+HasOnValueChange returns a boolean if a field has been set.
 
 ### GetConfirm
 

@@ -6,12 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Channel** | **string** |  | 
 **Organization** | **string** |  | 
+**EntityType** | **string** |  | 
 
 ## Methods
 
 ### NewOrganizationEntitiesChannel
 
-`func NewOrganizationEntitiesChannel(channel string, organization string, ) *OrganizationEntitiesChannel`
+`func NewOrganizationEntitiesChannel(channel string, organization string, entityType string, ) *OrganizationEntitiesChannel`
 
 NewOrganizationEntitiesChannel instantiates a new OrganizationEntitiesChannel object
 This constructor will assign default values to properties that have it defined,
@@ -64,6 +65,26 @@ and a boolean to check if the value has been set.
 `func (o *OrganizationEntitiesChannel) SetOrganization(v string)`
 
 SetOrganization sets Organization field to given value.
+
+
+### GetEntityType
+
+`func (o *OrganizationEntitiesChannel) GetEntityType() string`
+
+GetEntityType returns the EntityType field if non-nil, zero value otherwise.
+
+### GetEntityTypeOk
+
+`func (o *OrganizationEntitiesChannel) GetEntityTypeOk() (*string, bool)`
+
+GetEntityTypeOk returns a tuple with the EntityType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEntityType
+
+`func (o *OrganizationEntitiesChannel) SetEntityType(v string)`
+
+SetEntityType sets EntityType field to given value.
 
 
 

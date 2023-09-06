@@ -8,13 +8,14 @@ Name | Type | Description | Notes
 **Id** | **string** | Unique identifier for the team. | 
 **Title** | **string** | Title of the team. | 
 **Members** | **int32** | Count of members in this team. | 
+**Spaces** | **float32** | Count of spaces this team has access to. | 
 **CreatedAt** | **string** |  | 
 
 ## Methods
 
 ### NewOrganizationTeam
 
-`func NewOrganizationTeam(object string, id string, title string, members int32, createdAt string, ) *OrganizationTeam`
+`func NewOrganizationTeam(object string, id string, title string, members int32, spaces float32, createdAt string, ) *OrganizationTeam`
 
 NewOrganizationTeam instantiates a new OrganizationTeam object
 This constructor will assign default values to properties that have it defined,
@@ -107,6 +108,26 @@ and a boolean to check if the value has been set.
 `func (o *OrganizationTeam) SetMembers(v int32)`
 
 SetMembers sets Members field to given value.
+
+
+### GetSpaces
+
+`func (o *OrganizationTeam) GetSpaces() float32`
+
+GetSpaces returns the Spaces field if non-nil, zero value otherwise.
+
+### GetSpacesOk
+
+`func (o *OrganizationTeam) GetSpacesOk() (*float32, bool)`
+
+GetSpacesOk returns a tuple with the Spaces field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpaces
+
+`func (o *OrganizationTeam) SetSpaces(v float32)`
+
+SetSpaces sets Spaces field to given value.
 
 
 ### GetCreatedAt

@@ -57,7 +57,7 @@ Other parameters are passed through a pointer to a apiGetApiInformationRequest s
 
 ### Authorization
 
-[integration](../README.md#integration), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
+[integration](../README.md#integration), [integration-installation](../README.md#integration-installation), [user-internal](../README.md#user-internal), [user](../README.md#user), [user-staff](../README.md#user-staff)
 
 ### HTTP request headers
 

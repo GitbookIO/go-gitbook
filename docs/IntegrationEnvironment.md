@@ -4,18 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ApiEndpoint** | **string** | URL of the HTTP API | 
-**AuthToken** | Pointer to **string** | Authentication token to use with the HTTP API | [optional] 
+**AuthToken** | Pointer to **string** | Authentication token to use with the HTTP API. Depending on the context, the token might be representing the installation or the integration. | [optional] 
 **Integration** | [**Integration**](Integration.md) |  | 
 **Installation** | Pointer to [**IntegrationInstallation**](IntegrationInstallation.md) |  | [optional] 
 **SpaceInstallation** | Pointer to [**IntegrationSpaceInstallation**](IntegrationSpaceInstallation.md) |  | [optional] 
 **Secrets** | **map[string]string** | Secrets stored on the integration and passed at runtime. | 
+**ApiEndpoint** | **string** | URL of the HTTP API | 
+**ApiTokens** | [**IntegrationEnvironmentApiTokens**](IntegrationEnvironmentApiTokens.md) |  | 
 
 ## Methods
 
 ### NewIntegrationEnvironment
 
-`func NewIntegrationEnvironment(apiEndpoint string, integration Integration, secrets map[string]string, ) *IntegrationEnvironment`
+`func NewIntegrationEnvironment(integration Integration, secrets map[string]string, apiEndpoint string, apiTokens IntegrationEnvironmentApiTokens, ) *IntegrationEnvironment`
 
 NewIntegrationEnvironment instantiates a new IntegrationEnvironment object
 This constructor will assign default values to properties that have it defined,
@@ -29,26 +30,6 @@ will change when the set of required properties is changed
 NewIntegrationEnvironmentWithDefaults instantiates a new IntegrationEnvironment object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetApiEndpoint
-
-`func (o *IntegrationEnvironment) GetApiEndpoint() string`
-
-GetApiEndpoint returns the ApiEndpoint field if non-nil, zero value otherwise.
-
-### GetApiEndpointOk
-
-`func (o *IntegrationEnvironment) GetApiEndpointOk() (*string, bool)`
-
-GetApiEndpointOk returns a tuple with the ApiEndpoint field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetApiEndpoint
-
-`func (o *IntegrationEnvironment) SetApiEndpoint(v string)`
-
-SetApiEndpoint sets ApiEndpoint field to given value.
-
 
 ### GetAuthToken
 
@@ -163,6 +144,46 @@ and a boolean to check if the value has been set.
 `func (o *IntegrationEnvironment) SetSecrets(v map[string]string)`
 
 SetSecrets sets Secrets field to given value.
+
+
+### GetApiEndpoint
+
+`func (o *IntegrationEnvironment) GetApiEndpoint() string`
+
+GetApiEndpoint returns the ApiEndpoint field if non-nil, zero value otherwise.
+
+### GetApiEndpointOk
+
+`func (o *IntegrationEnvironment) GetApiEndpointOk() (*string, bool)`
+
+GetApiEndpointOk returns a tuple with the ApiEndpoint field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApiEndpoint
+
+`func (o *IntegrationEnvironment) SetApiEndpoint(v string)`
+
+SetApiEndpoint sets ApiEndpoint field to given value.
+
+
+### GetApiTokens
+
+`func (o *IntegrationEnvironment) GetApiTokens() IntegrationEnvironmentApiTokens`
+
+GetApiTokens returns the ApiTokens field if non-nil, zero value otherwise.
+
+### GetApiTokensOk
+
+`func (o *IntegrationEnvironment) GetApiTokensOk() (*IntegrationEnvironmentApiTokens, bool)`
+
+GetApiTokensOk returns a tuple with the ApiTokens field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApiTokens
+
+`func (o *IntegrationEnvironment) SetApiTokens(v IntegrationEnvironmentApiTokens)`
+
+SetApiTokens sets ApiTokens field to given value.
 
 
 

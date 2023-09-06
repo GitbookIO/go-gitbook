@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Url** | **string** |  | 
+**Url** | [**ContentKitSelectOptionsOneOfUrl**](ContentKitSelectOptionsOneOfUrl.md) |  | 
 
 ## Methods
 
 ### NewContentKitSelectOptionsOneOf
 
-`func NewContentKitSelectOptionsOneOf(url string, ) *ContentKitSelectOptionsOneOf`
+`func NewContentKitSelectOptionsOneOf(url ContentKitSelectOptionsOneOfUrl, ) *ContentKitSelectOptionsOneOf`
 
 NewContentKitSelectOptionsOneOf instantiates a new ContentKitSelectOptionsOneOf object
 This constructor will assign default values to properties that have it defined,
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetUrl
 
-`func (o *ContentKitSelectOptionsOneOf) GetUrl() string`
+`func (o *ContentKitSelectOptionsOneOf) GetUrl() ContentKitSelectOptionsOneOfUrl`
 
 GetUrl returns the Url field if non-nil, zero value otherwise.
 
 ### GetUrlOk
 
-`func (o *ContentKitSelectOptionsOneOf) GetUrlOk() (*string, bool)`
+`func (o *ContentKitSelectOptionsOneOf) GetUrlOk() (*ContentKitSelectOptionsOneOfUrl, bool)`
 
 GetUrlOk returns a tuple with the Url field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUrl
 
-`func (o *ContentKitSelectOptionsOneOf) SetUrl(v string)`
+`func (o *ContentKitSelectOptionsOneOf) SetUrl(v ContentKitSelectOptionsOneOfUrl)`
 
 SetUrl sets Url field to given value.
 

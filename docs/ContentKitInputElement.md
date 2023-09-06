@@ -9,13 +9,16 @@ Name | Type | Description | Notes
 **InitialValue** | Pointer to **bool** | Value to initialize the switch with. | [optional] 
 **Placeholder** | Pointer to **string** | Text that appears in the form control when it has no value set | [optional] 
 **Multiline** | Pointer to **bool** |  | [optional] 
+**OnValueChange** | Pointer to [**ContentKitAction**](ContentKitAction.md) |  | [optional] 
 **Multiple** | Pointer to **bool** | Should the select accept the selection of multiple options. If true, the state will be an array. | [optional] 
+**AcceptInput** | Pointer to **bool** | Should the filter input be allowed to be selected as an option. | [optional] 
 **Options** | [**ContentKitSelectOptions**](ContentKitSelectOptions.md) |  | 
 **Confirm** | Pointer to [**ContentKitConfirm**](ContentKitConfirm.md) |  | [optional] 
 **Value** | [**ContentKitCheckboxValue**](ContentKitCheckboxValue.md) |  | 
 **Style** | Pointer to **string** |  | [optional] 
 **OnPress** | [**ContentKitAction**](ContentKitAction.md) |  | 
 **Icon** | Pointer to [**ContentKitIcon**](ContentKitIcon.md) |  | [optional] 
+**TrailingIcon** | Pointer to [**ContentKitIcon**](ContentKitIcon.md) |  | [optional] 
 **Label** | Pointer to **string** |  | [optional] 
 **Tooltip** | Pointer to **string** |  | [optional] 
 **Disabled** | Pointer to **bool** |  | [optional] 
@@ -154,6 +157,31 @@ SetMultiline sets Multiline field to given value.
 
 HasMultiline returns a boolean if a field has been set.
 
+### GetOnValueChange
+
+`func (o *ContentKitInputElement) GetOnValueChange() ContentKitAction`
+
+GetOnValueChange returns the OnValueChange field if non-nil, zero value otherwise.
+
+### GetOnValueChangeOk
+
+`func (o *ContentKitInputElement) GetOnValueChangeOk() (*ContentKitAction, bool)`
+
+GetOnValueChangeOk returns a tuple with the OnValueChange field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOnValueChange
+
+`func (o *ContentKitInputElement) SetOnValueChange(v ContentKitAction)`
+
+SetOnValueChange sets OnValueChange field to given value.
+
+### HasOnValueChange
+
+`func (o *ContentKitInputElement) HasOnValueChange() bool`
+
+HasOnValueChange returns a boolean if a field has been set.
+
 ### GetMultiple
 
 `func (o *ContentKitInputElement) GetMultiple() bool`
@@ -178,6 +206,31 @@ SetMultiple sets Multiple field to given value.
 `func (o *ContentKitInputElement) HasMultiple() bool`
 
 HasMultiple returns a boolean if a field has been set.
+
+### GetAcceptInput
+
+`func (o *ContentKitInputElement) GetAcceptInput() bool`
+
+GetAcceptInput returns the AcceptInput field if non-nil, zero value otherwise.
+
+### GetAcceptInputOk
+
+`func (o *ContentKitInputElement) GetAcceptInputOk() (*bool, bool)`
+
+GetAcceptInputOk returns a tuple with the AcceptInput field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAcceptInput
+
+`func (o *ContentKitInputElement) SetAcceptInput(v bool)`
+
+SetAcceptInput sets AcceptInput field to given value.
+
+### HasAcceptInput
+
+`func (o *ContentKitInputElement) HasAcceptInput() bool`
+
+HasAcceptInput returns a boolean if a field has been set.
 
 ### GetOptions
 
@@ -313,6 +366,31 @@ SetIcon sets Icon field to given value.
 `func (o *ContentKitInputElement) HasIcon() bool`
 
 HasIcon returns a boolean if a field has been set.
+
+### GetTrailingIcon
+
+`func (o *ContentKitInputElement) GetTrailingIcon() ContentKitIcon`
+
+GetTrailingIcon returns the TrailingIcon field if non-nil, zero value otherwise.
+
+### GetTrailingIconOk
+
+`func (o *ContentKitInputElement) GetTrailingIconOk() (*ContentKitIcon, bool)`
+
+GetTrailingIconOk returns a tuple with the TrailingIcon field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrailingIcon
+
+`func (o *ContentKitInputElement) SetTrailingIcon(v ContentKitIcon)`
+
+SetTrailingIcon sets TrailingIcon field to given value.
+
+### HasTrailingIcon
+
+`func (o *ContentKitInputElement) HasTrailingIcon() bool`
+
+HasTrailingIcon returns a boolean if a field has been set.
 
 ### GetLabel
 

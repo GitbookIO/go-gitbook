@@ -3,7 +3,9 @@
 ## Enum
 
 
-* `ORGANIZATIONENTITIESWRITE` (value: `"organization:entities:write"`)
+* `ENTITIESWRITE` (value: `"entities:write"`)
+
+* `RECORDINGWRITE` (value: `"recording:write"`)
 
 * `SPACEVIEWSREAD` (value: `"space:views:read"`)
 

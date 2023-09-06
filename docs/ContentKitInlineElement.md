@@ -6,15 +6,16 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** |  | 
 **Style** | Pointer to **string** |  | [optional] 
-**Children** | [**[]ContentKitTextChildrenInner**](ContentKitTextChildrenInner.md) |  | 
+**Children** | [**ContentKitLinkChildren**](ContentKitLinkChildren.md) |  | 
 **Source** | [**ContentKitImageSource**](ContentKitImageSource.md) |  | 
 **AspectRatio** | **float32** |  | 
+**Target** | [**ContentKitLinkTarget**](ContentKitLinkTarget.md) |  | 
 
 ## Methods
 
 ### NewContentKitInlineElement
 
-`func NewContentKitInlineElement(type_ string, children []ContentKitTextChildrenInner, source ContentKitImageSource, aspectRatio float32, ) *ContentKitInlineElement`
+`func NewContentKitInlineElement(type_ string, children ContentKitLinkChildren, source ContentKitImageSource, aspectRatio float32, target ContentKitLinkTarget, ) *ContentKitInlineElement`
 
 NewContentKitInlineElement instantiates a new ContentKitInlineElement object
 This constructor will assign default values to properties that have it defined,
@@ -76,20 +77,20 @@ HasStyle returns a boolean if a field has been set.
 
 ### GetChildren
 
-`func (o *ContentKitInlineElement) GetChildren() []ContentKitTextChildrenInner`
+`func (o *ContentKitInlineElement) GetChildren() ContentKitLinkChildren`
 
 GetChildren returns the Children field if non-nil, zero value otherwise.
 
 ### GetChildrenOk
 
-`func (o *ContentKitInlineElement) GetChildrenOk() (*[]ContentKitTextChildrenInner, bool)`
+`func (o *ContentKitInlineElement) GetChildrenOk() (*ContentKitLinkChildren, bool)`
 
 GetChildrenOk returns a tuple with the Children field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetChildren
 
-`func (o *ContentKitInlineElement) SetChildren(v []ContentKitTextChildrenInner)`
+`func (o *ContentKitInlineElement) SetChildren(v ContentKitLinkChildren)`
 
 SetChildren sets Children field to given value.
 
@@ -132,6 +133,26 @@ and a boolean to check if the value has been set.
 `func (o *ContentKitInlineElement) SetAspectRatio(v float32)`
 
 SetAspectRatio sets AspectRatio field to given value.
+
+
+### GetTarget
+
+`func (o *ContentKitInlineElement) GetTarget() ContentKitLinkTarget`
+
+GetTarget returns the Target field if non-nil, zero value otherwise.
+
+### GetTargetOk
+
+`func (o *ContentKitInlineElement) GetTargetOk() (*ContentKitLinkTarget, bool)`
+
+GetTargetOk returns a tuple with the Target field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTarget
+
+`func (o *ContentKitInlineElement) SetTarget(v ContentKitLinkTarget)`
+
+SetTarget sets Target field to given value.
 
 
 

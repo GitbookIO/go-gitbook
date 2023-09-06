@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Style** | Pointer to **string** |  | [optional] 
 **OnPress** | [**ContentKitAction**](ContentKitAction.md) |  | 
 **Icon** | Pointer to [**ContentKitCardIcon**](ContentKitCardIcon.md) |  | [optional] 
+**TrailingIcon** | Pointer to [**ContentKitIcon**](ContentKitIcon.md) |  | [optional] 
 **Label** | **string** | Text label displayed next to the input. | 
 **Tooltip** | Pointer to **string** |  | [optional] 
 **Confirm** | Pointer to [**ContentKitConfirm**](ContentKitConfirm.md) |  | [optional] 
@@ -17,7 +18,7 @@ Name | Type | Description | Notes
 **Placeholder** | Pointer to **string** | Text that appears in the form control when it has no value set | [optional] 
 **Multiline** | Pointer to **bool** |  | [optional] 
 **Align** | Pointer to **string** |  | [optional] [default to "start"]
-**Children** | [**[]ContentKitTextChildrenInner**](ContentKitTextChildrenInner.md) |  | 
+**Children** | [**ContentKitLinkChildren**](ContentKitLinkChildren.md) |  | 
 **Grow** | Pointer to **float32** | specifies how much of the remaining space in the container should be assigned to the element | [optional] 
 **Size** | Pointer to **string** |  | [optional] 
 **AspectRatio** | **float32** |  | 
@@ -33,15 +34,18 @@ Name | Type | Description | Notes
 **Title** | Pointer to **string** |  | [optional] 
 **Hint** | Pointer to [**ContentKitInputHint**](ContentKitInputHint.md) |  | [optional] 
 **Element** | [**ContentKitInputElement**](ContentKitInputElement.md) |  | 
+**OnValueChange** | Pointer to [**ContentKitAction**](ContentKitAction.md) |  | [optional] 
 **Multiple** | Pointer to **bool** | Should the select accept the selection of multiple options. If true, the state will be an array. | [optional] 
+**AcceptInput** | Pointer to **bool** | Should the filter input be allowed to be selected as an option. | [optional] 
 **Options** | [**ContentKitSelectOptions**](ContentKitSelectOptions.md) |  | 
 **Value** | [**ContentKitRadioValue**](ContentKitRadioValue.md) |  | 
+**Target** | [**ContentKitLinkTarget**](ContentKitLinkTarget.md) |  | 
 
 ## Methods
 
 ### NewContentKitDescendantElement
 
-`func NewContentKitDescendantElement(type_ string, onPress ContentKitAction, label string, state string, children []ContentKitTextChildrenInner, aspectRatio float32, source ContentKitImageSource, content ContentKitMarkdownContent, element ContentKitInputElement, options ContentKitSelectOptions, value ContentKitRadioValue, ) *ContentKitDescendantElement`
+`func NewContentKitDescendantElement(type_ string, onPress ContentKitAction, label string, state string, children ContentKitLinkChildren, aspectRatio float32, source ContentKitImageSource, content ContentKitMarkdownContent, element ContentKitInputElement, options ContentKitSelectOptions, value ContentKitRadioValue, target ContentKitLinkTarget, ) *ContentKitDescendantElement`
 
 NewContentKitDescendantElement instantiates a new ContentKitDescendantElement object
 This constructor will assign default values to properties that have it defined,
@@ -145,6 +149,31 @@ SetIcon sets Icon field to given value.
 `func (o *ContentKitDescendantElement) HasIcon() bool`
 
 HasIcon returns a boolean if a field has been set.
+
+### GetTrailingIcon
+
+`func (o *ContentKitDescendantElement) GetTrailingIcon() ContentKitIcon`
+
+GetTrailingIcon returns the TrailingIcon field if non-nil, zero value otherwise.
+
+### GetTrailingIconOk
+
+`func (o *ContentKitDescendantElement) GetTrailingIconOk() (*ContentKitIcon, bool)`
+
+GetTrailingIconOk returns a tuple with the TrailingIcon field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrailingIcon
+
+`func (o *ContentKitDescendantElement) SetTrailingIcon(v ContentKitIcon)`
+
+SetTrailingIcon sets TrailingIcon field to given value.
+
+### HasTrailingIcon
+
+`func (o *ContentKitDescendantElement) HasTrailingIcon() bool`
+
+HasTrailingIcon returns a boolean if a field has been set.
 
 ### GetLabel
 
@@ -363,20 +392,20 @@ HasAlign returns a boolean if a field has been set.
 
 ### GetChildren
 
-`func (o *ContentKitDescendantElement) GetChildren() []ContentKitTextChildrenInner`
+`func (o *ContentKitDescendantElement) GetChildren() ContentKitLinkChildren`
 
 GetChildren returns the Children field if non-nil, zero value otherwise.
 
 ### GetChildrenOk
 
-`func (o *ContentKitDescendantElement) GetChildrenOk() (*[]ContentKitTextChildrenInner, bool)`
+`func (o *ContentKitDescendantElement) GetChildrenOk() (*ContentKitLinkChildren, bool)`
 
 GetChildrenOk returns a tuple with the Children field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetChildren
 
-`func (o *ContentKitDescendantElement) SetChildren(v []ContentKitTextChildrenInner)`
+`func (o *ContentKitDescendantElement) SetChildren(v ContentKitLinkChildren)`
 
 SetChildren sets Children field to given value.
 
@@ -736,6 +765,31 @@ and a boolean to check if the value has been set.
 SetElement sets Element field to given value.
 
 
+### GetOnValueChange
+
+`func (o *ContentKitDescendantElement) GetOnValueChange() ContentKitAction`
+
+GetOnValueChange returns the OnValueChange field if non-nil, zero value otherwise.
+
+### GetOnValueChangeOk
+
+`func (o *ContentKitDescendantElement) GetOnValueChangeOk() (*ContentKitAction, bool)`
+
+GetOnValueChangeOk returns a tuple with the OnValueChange field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOnValueChange
+
+`func (o *ContentKitDescendantElement) SetOnValueChange(v ContentKitAction)`
+
+SetOnValueChange sets OnValueChange field to given value.
+
+### HasOnValueChange
+
+`func (o *ContentKitDescendantElement) HasOnValueChange() bool`
+
+HasOnValueChange returns a boolean if a field has been set.
+
 ### GetMultiple
 
 `func (o *ContentKitDescendantElement) GetMultiple() bool`
@@ -760,6 +814,31 @@ SetMultiple sets Multiple field to given value.
 `func (o *ContentKitDescendantElement) HasMultiple() bool`
 
 HasMultiple returns a boolean if a field has been set.
+
+### GetAcceptInput
+
+`func (o *ContentKitDescendantElement) GetAcceptInput() bool`
+
+GetAcceptInput returns the AcceptInput field if non-nil, zero value otherwise.
+
+### GetAcceptInputOk
+
+`func (o *ContentKitDescendantElement) GetAcceptInputOk() (*bool, bool)`
+
+GetAcceptInputOk returns a tuple with the AcceptInput field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAcceptInput
+
+`func (o *ContentKitDescendantElement) SetAcceptInput(v bool)`
+
+SetAcceptInput sets AcceptInput field to given value.
+
+### HasAcceptInput
+
+`func (o *ContentKitDescendantElement) HasAcceptInput() bool`
+
+HasAcceptInput returns a boolean if a field has been set.
 
 ### GetOptions
 
@@ -799,6 +878,26 @@ and a boolean to check if the value has been set.
 `func (o *ContentKitDescendantElement) SetValue(v ContentKitRadioValue)`
 
 SetValue sets Value field to given value.
+
+
+### GetTarget
+
+`func (o *ContentKitDescendantElement) GetTarget() ContentKitLinkTarget`
+
+GetTarget returns the Target field if non-nil, zero value otherwise.
+
+### GetTargetOk
+
+`func (o *ContentKitDescendantElement) GetTargetOk() (*ContentKitLinkTarget, bool)`
+
+GetTargetOk returns a tuple with the Target field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTarget
+
+`func (o *ContentKitDescendantElement) SetTarget(v ContentKitLinkTarget)`
+
+SetTarget sets Target field to given value.
 
 
 

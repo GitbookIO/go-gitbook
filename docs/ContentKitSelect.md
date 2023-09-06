@@ -7,8 +7,10 @@ Name | Type | Description | Notes
 **Type** | **string** |  | 
 **State** | **string** | State binding. The value of the input will be stored as a property in the state named after this ID. | 
 **InitialValue** | Pointer to [**ContentKitSelectInitialValue**](ContentKitSelectInitialValue.md) |  | [optional] 
+**OnValueChange** | Pointer to [**ContentKitAction**](ContentKitAction.md) |  | [optional] 
 **Placeholder** | Pointer to **string** | Text that appears in the form control when it has no value set | [optional] 
 **Multiple** | Pointer to **bool** | Should the select accept the selection of multiple options. If true, the state will be an array. | [optional] 
+**AcceptInput** | Pointer to **bool** | Should the filter input be allowed to be selected as an option. | [optional] 
 **Options** | [**ContentKitSelectOptions**](ContentKitSelectOptions.md) |  | 
 
 ## Methods
@@ -95,6 +97,31 @@ SetInitialValue sets InitialValue field to given value.
 
 HasInitialValue returns a boolean if a field has been set.
 
+### GetOnValueChange
+
+`func (o *ContentKitSelect) GetOnValueChange() ContentKitAction`
+
+GetOnValueChange returns the OnValueChange field if non-nil, zero value otherwise.
+
+### GetOnValueChangeOk
+
+`func (o *ContentKitSelect) GetOnValueChangeOk() (*ContentKitAction, bool)`
+
+GetOnValueChangeOk returns a tuple with the OnValueChange field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOnValueChange
+
+`func (o *ContentKitSelect) SetOnValueChange(v ContentKitAction)`
+
+SetOnValueChange sets OnValueChange field to given value.
+
+### HasOnValueChange
+
+`func (o *ContentKitSelect) HasOnValueChange() bool`
+
+HasOnValueChange returns a boolean if a field has been set.
+
 ### GetPlaceholder
 
 `func (o *ContentKitSelect) GetPlaceholder() string`
@@ -144,6 +171,31 @@ SetMultiple sets Multiple field to given value.
 `func (o *ContentKitSelect) HasMultiple() bool`
 
 HasMultiple returns a boolean if a field has been set.
+
+### GetAcceptInput
+
+`func (o *ContentKitSelect) GetAcceptInput() bool`
+
+GetAcceptInput returns the AcceptInput field if non-nil, zero value otherwise.
+
+### GetAcceptInputOk
+
+`func (o *ContentKitSelect) GetAcceptInputOk() (*bool, bool)`
+
+GetAcceptInputOk returns a tuple with the AcceptInput field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAcceptInput
+
+`func (o *ContentKitSelect) SetAcceptInput(v bool)`
+
+SetAcceptInput sets AcceptInput field to given value.
+
+### HasAcceptInput
+
+`func (o *ContentKitSelect) HasAcceptInput() bool`
+
+HasAcceptInput returns a boolean if a field has been set.
 
 ### GetOptions
 

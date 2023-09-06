@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **Type** | [**CustomFieldType**](CustomFieldType.md) |  | 
 **Title** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
+**Placeholder** | Pointer to **string** |  | [optional] 
+**Options** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
 
@@ -117,6 +119,56 @@ SetDescription sets Description field to given value.
 `func (o *CreateOrganizationCustomFieldRequest) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetPlaceholder
+
+`func (o *CreateOrganizationCustomFieldRequest) GetPlaceholder() string`
+
+GetPlaceholder returns the Placeholder field if non-nil, zero value otherwise.
+
+### GetPlaceholderOk
+
+`func (o *CreateOrganizationCustomFieldRequest) GetPlaceholderOk() (*string, bool)`
+
+GetPlaceholderOk returns a tuple with the Placeholder field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlaceholder
+
+`func (o *CreateOrganizationCustomFieldRequest) SetPlaceholder(v string)`
+
+SetPlaceholder sets Placeholder field to given value.
+
+### HasPlaceholder
+
+`func (o *CreateOrganizationCustomFieldRequest) HasPlaceholder() bool`
+
+HasPlaceholder returns a boolean if a field has been set.
+
+### GetOptions
+
+`func (o *CreateOrganizationCustomFieldRequest) GetOptions() []string`
+
+GetOptions returns the Options field if non-nil, zero value otherwise.
+
+### GetOptionsOk
+
+`func (o *CreateOrganizationCustomFieldRequest) GetOptionsOk() (*[]string, bool)`
+
+GetOptionsOk returns a tuple with the Options field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOptions
+
+`func (o *CreateOrganizationCustomFieldRequest) SetOptions(v []string)`
+
+SetOptions sets Options field to given value.
+
+### HasOptions
+
+`func (o *CreateOrganizationCustomFieldRequest) HasOptions() bool`
+
+HasOptions returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
