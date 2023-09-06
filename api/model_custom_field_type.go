@@ -28,9 +28,12 @@ type CustomFieldType string
 
 // List of CustomFieldType
 const (
-	CUSTOMFIELDTYPE_TEXT    CustomFieldType = "text"
-	CUSTOMFIELDTYPE_NUMBER  CustomFieldType = "number"
-	CUSTOMFIELDTYPE_BOOLEAN CustomFieldType = "boolean"
+	CUSTOMFIELDTYPE_TEXT         CustomFieldType = "text"
+	CUSTOMFIELDTYPE_NUMBER       CustomFieldType = "number"
+	CUSTOMFIELDTYPE_BOOLEAN      CustomFieldType = "boolean"
+	CUSTOMFIELDTYPE_TAGS         CustomFieldType = "tags"
+	CUSTOMFIELDTYPE_SELECTMULTI  CustomFieldType = "select:multi"
+	CUSTOMFIELDTYPE_SELECTSINGLE CustomFieldType = "select:single"
 )
 
 // All allowed values of CustomFieldType enum
@@ -38,6 +41,9 @@ var AllowedCustomFieldTypeEnumValues = []CustomFieldType{
 	"text",
 	"number",
 	"boolean",
+	"tags",
+	"select:multi",
+	"select:single",
 }
 
 func (v *CustomFieldType) UnmarshalJSON(src []byte) error {

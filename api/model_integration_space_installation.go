@@ -27,6 +27,10 @@ var _ MappedNullable = &IntegrationSpaceInstallation{}
 
 // IntegrationSpaceInstallation Installation of an integration at a space level
 type IntegrationSpaceInstallation struct {
+	// Unique name identifier of the integration
+	Integration string `json:"integration"`
+	// ID of the integration installation
+	Installation string `json:"installation"`
 	// ID of the space the integration is installed on.
 	Space  string                        `json:"space"`
 	Status IntegrationInstallationStatus `json:"status"`
@@ -41,8 +45,10 @@ type IntegrationSpaceInstallation struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntegrationSpaceInstallation(space string, status IntegrationInstallationStatus, configuration map[string]interface{}, externalIds []string, urls IntegrationSpaceInstallationUrls) *IntegrationSpaceInstallation {
+func NewIntegrationSpaceInstallation(integration string, installation string, space string, status IntegrationInstallationStatus, configuration map[string]interface{}, externalIds []string, urls IntegrationSpaceInstallationUrls) *IntegrationSpaceInstallation {
 	this := IntegrationSpaceInstallation{}
+	this.Integration = integration
+	this.Installation = installation
 	this.Space = space
 	this.Status = status
 	this.Configuration = configuration
@@ -57,6 +63,54 @@ func NewIntegrationSpaceInstallation(space string, status IntegrationInstallatio
 func NewIntegrationSpaceInstallationWithDefaults() *IntegrationSpaceInstallation {
 	this := IntegrationSpaceInstallation{}
 	return &this
+}
+
+// GetIntegration returns the Integration field value
+func (o *IntegrationSpaceInstallation) GetIntegration() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Integration
+}
+
+// GetIntegrationOk returns a tuple with the Integration field value
+// and a boolean to check if the value has been set.
+func (o *IntegrationSpaceInstallation) GetIntegrationOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Integration, true
+}
+
+// SetIntegration sets field value
+func (o *IntegrationSpaceInstallation) SetIntegration(v string) {
+	o.Integration = v
+}
+
+// GetInstallation returns the Installation field value
+func (o *IntegrationSpaceInstallation) GetInstallation() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Installation
+}
+
+// GetInstallationOk returns a tuple with the Installation field value
+// and a boolean to check if the value has been set.
+func (o *IntegrationSpaceInstallation) GetInstallationOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Installation, true
+}
+
+// SetInstallation sets field value
+func (o *IntegrationSpaceInstallation) SetInstallation(v string) {
+	o.Installation = v
 }
 
 // GetSpace returns the Space field value
@@ -189,6 +243,8 @@ func (o IntegrationSpaceInstallation) MarshalJSON() ([]byte, error) {
 
 func (o IntegrationSpaceInstallation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["integration"] = o.Integration
+	toSerialize["installation"] = o.Installation
 	toSerialize["space"] = o.Space
 	toSerialize["status"] = o.Status
 	toSerialize["configuration"] = o.Configuration

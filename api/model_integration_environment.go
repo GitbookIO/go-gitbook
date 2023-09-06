@@ -27,26 +27,29 @@ var _ MappedNullable = &IntegrationEnvironment{}
 
 // IntegrationEnvironment Runtime environment provided during the execution of integration's code.
 type IntegrationEnvironment struct {
-	// URL of the HTTP API
-	ApiEndpoint string `json:"apiEndpoint"`
-	// Authentication token to use with the HTTP API
+	// Authentication token to use with the HTTP API. Depending on the context, the token might be representing the installation or the integration.
+	// Deprecated
 	AuthToken         *string                       `json:"authToken,omitempty"`
 	Integration       Integration                   `json:"integration"`
 	Installation      *IntegrationInstallation      `json:"installation,omitempty"`
 	SpaceInstallation *IntegrationSpaceInstallation `json:"spaceInstallation,omitempty"`
 	// Secrets stored on the integration and passed at runtime.
 	Secrets map[string]string `json:"secrets"`
+	// URL of the HTTP API
+	ApiEndpoint string                          `json:"apiEndpoint"`
+	ApiTokens   IntegrationEnvironmentApiTokens `json:"apiTokens"`
 }
 
 // NewIntegrationEnvironment instantiates a new IntegrationEnvironment object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntegrationEnvironment(apiEndpoint string, integration Integration, secrets map[string]string) *IntegrationEnvironment {
+func NewIntegrationEnvironment(integration Integration, secrets map[string]string, apiEndpoint string, apiTokens IntegrationEnvironmentApiTokens) *IntegrationEnvironment {
 	this := IntegrationEnvironment{}
-	this.ApiEndpoint = apiEndpoint
 	this.Integration = integration
 	this.Secrets = secrets
+	this.ApiEndpoint = apiEndpoint
+	this.ApiTokens = apiTokens
 	return &this
 }
 
@@ -58,31 +61,8 @@ func NewIntegrationEnvironmentWithDefaults() *IntegrationEnvironment {
 	return &this
 }
 
-// GetApiEndpoint returns the ApiEndpoint field value
-func (o *IntegrationEnvironment) GetApiEndpoint() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ApiEndpoint
-}
-
-// GetApiEndpointOk returns a tuple with the ApiEndpoint field value
-// and a boolean to check if the value has been set.
-func (o *IntegrationEnvironment) GetApiEndpointOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ApiEndpoint, true
-}
-
-// SetApiEndpoint sets field value
-func (o *IntegrationEnvironment) SetApiEndpoint(v string) {
-	o.ApiEndpoint = v
-}
-
 // GetAuthToken returns the AuthToken field value if set, zero value otherwise.
+// Deprecated
 func (o *IntegrationEnvironment) GetAuthToken() string {
 	if o == nil || IsNil(o.AuthToken) {
 		var ret string
@@ -93,6 +73,7 @@ func (o *IntegrationEnvironment) GetAuthToken() string {
 
 // GetAuthTokenOk returns a tuple with the AuthToken field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *IntegrationEnvironment) GetAuthTokenOk() (*string, bool) {
 	if o == nil || IsNil(o.AuthToken) {
 		return nil, false
@@ -110,6 +91,7 @@ func (o *IntegrationEnvironment) HasAuthToken() bool {
 }
 
 // SetAuthToken gets a reference to the given string and assigns it to the AuthToken field.
+// Deprecated
 func (o *IntegrationEnvironment) SetAuthToken(v string) {
 	o.AuthToken = &v
 }
@@ -226,6 +208,54 @@ func (o *IntegrationEnvironment) SetSecrets(v map[string]string) {
 	o.Secrets = v
 }
 
+// GetApiEndpoint returns the ApiEndpoint field value
+func (o *IntegrationEnvironment) GetApiEndpoint() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ApiEndpoint
+}
+
+// GetApiEndpointOk returns a tuple with the ApiEndpoint field value
+// and a boolean to check if the value has been set.
+func (o *IntegrationEnvironment) GetApiEndpointOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ApiEndpoint, true
+}
+
+// SetApiEndpoint sets field value
+func (o *IntegrationEnvironment) SetApiEndpoint(v string) {
+	o.ApiEndpoint = v
+}
+
+// GetApiTokens returns the ApiTokens field value
+func (o *IntegrationEnvironment) GetApiTokens() IntegrationEnvironmentApiTokens {
+	if o == nil {
+		var ret IntegrationEnvironmentApiTokens
+		return ret
+	}
+
+	return o.ApiTokens
+}
+
+// GetApiTokensOk returns a tuple with the ApiTokens field value
+// and a boolean to check if the value has been set.
+func (o *IntegrationEnvironment) GetApiTokensOk() (*IntegrationEnvironmentApiTokens, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ApiTokens, true
+}
+
+// SetApiTokens sets field value
+func (o *IntegrationEnvironment) SetApiTokens(v IntegrationEnvironmentApiTokens) {
+	o.ApiTokens = v
+}
+
 func (o IntegrationEnvironment) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -236,7 +266,6 @@ func (o IntegrationEnvironment) MarshalJSON() ([]byte, error) {
 
 func (o IntegrationEnvironment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["apiEndpoint"] = o.ApiEndpoint
 	if !IsNil(o.AuthToken) {
 		toSerialize["authToken"] = o.AuthToken
 	}
@@ -248,6 +277,8 @@ func (o IntegrationEnvironment) ToMap() (map[string]interface{}, error) {
 		toSerialize["spaceInstallation"] = o.SpaceInstallation
 	}
 	toSerialize["secrets"] = o.Secrets
+	toSerialize["apiEndpoint"] = o.ApiEndpoint
+	toSerialize["apiTokens"] = o.ApiTokens
 	return toSerialize, nil
 }
 

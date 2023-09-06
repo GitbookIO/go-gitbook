@@ -27,16 +27,16 @@ var _ MappedNullable = &ContentKitText{}
 
 // ContentKitText Low level text element.
 type ContentKitText struct {
-	Type     string                        `json:"type"`
-	Style    *string                       `json:"style,omitempty"`
-	Children []ContentKitTextChildrenInner `json:"children"`
+	Type     string                 `json:"type"`
+	Style    *string                `json:"style,omitempty"`
+	Children ContentKitTextChildren `json:"children"`
 }
 
 // NewContentKitText instantiates a new ContentKitText object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContentKitText(type_ string, children []ContentKitTextChildrenInner) *ContentKitText {
+func NewContentKitText(type_ string, children ContentKitTextChildren) *ContentKitText {
 	this := ContentKitText{}
 	this.Type = type_
 	this.Children = children
@@ -108,9 +108,9 @@ func (o *ContentKitText) SetStyle(v string) {
 }
 
 // GetChildren returns the Children field value
-func (o *ContentKitText) GetChildren() []ContentKitTextChildrenInner {
+func (o *ContentKitText) GetChildren() ContentKitTextChildren {
 	if o == nil {
-		var ret []ContentKitTextChildrenInner
+		var ret ContentKitTextChildren
 		return ret
 	}
 
@@ -119,15 +119,15 @@ func (o *ContentKitText) GetChildren() []ContentKitTextChildrenInner {
 
 // GetChildrenOk returns a tuple with the Children field value
 // and a boolean to check if the value has been set.
-func (o *ContentKitText) GetChildrenOk() ([]ContentKitTextChildrenInner, bool) {
+func (o *ContentKitText) GetChildrenOk() (*ContentKitTextChildren, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Children, true
+	return &o.Children, true
 }
 
 // SetChildren sets field value
-func (o *ContentKitText) SetChildren(v []ContentKitTextChildrenInner) {
+func (o *ContentKitText) SetChildren(v ContentKitTextChildren) {
 	o.Children = v
 }
 

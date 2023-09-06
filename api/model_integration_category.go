@@ -32,6 +32,7 @@ const (
 	INTEGRATIONCATEGORY_COLLABORATION IntegrationCategory = "collaboration"
 	INTEGRATIONCATEGORY_MARKETING     IntegrationCategory = "marketing"
 	INTEGRATIONCATEGORY_CONTENT       IntegrationCategory = "content"
+	INTEGRATIONCATEGORY_GITSYNC       IntegrationCategory = "gitsync"
 	INTEGRATIONCATEGORY_OTHER         IntegrationCategory = "other"
 )
 
@@ -41,6 +42,7 @@ var AllowedIntegrationCategoryEnumValues = []IntegrationCategory{
 	"collaboration",
 	"marketing",
 	"content",
+	"gitsync",
 	"other",
 }
 

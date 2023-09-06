@@ -53,6 +53,7 @@ type RequestPublishIntegration struct {
 	// Secrets stored on the integration and passed at runtime.
 	Secrets               *map[string]string                `json:"secrets,omitempty"`
 	ContentSecurityPolicy *IntegrationContentSecurityPolicy `json:"contentSecurityPolicy,omitempty"`
+	Entities              []EntityRawSchema                 `json:"entities,omitempty"`
 }
 
 // NewRequestPublishIntegration instantiates a new RequestPublishIntegration object
@@ -524,6 +525,38 @@ func (o *RequestPublishIntegration) SetContentSecurityPolicy(v IntegrationConten
 	o.ContentSecurityPolicy = &v
 }
 
+// GetEntities returns the Entities field value if set, zero value otherwise.
+func (o *RequestPublishIntegration) GetEntities() []EntityRawSchema {
+	if o == nil || IsNil(o.Entities) {
+		var ret []EntityRawSchema
+		return ret
+	}
+	return o.Entities
+}
+
+// GetEntitiesOk returns a tuple with the Entities field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RequestPublishIntegration) GetEntitiesOk() ([]EntityRawSchema, bool) {
+	if o == nil || IsNil(o.Entities) {
+		return nil, false
+	}
+	return o.Entities, true
+}
+
+// HasEntities returns a boolean if a field has been set.
+func (o *RequestPublishIntegration) HasEntities() bool {
+	if o != nil && !IsNil(o.Entities) {
+		return true
+	}
+
+	return false
+}
+
+// SetEntities gets a reference to the given []EntityRawSchema and assigns it to the Entities field.
+func (o *RequestPublishIntegration) SetEntities(v []EntityRawSchema) {
+	o.Entities = v
+}
+
 func (o RequestPublishIntegration) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -570,6 +603,9 @@ func (o RequestPublishIntegration) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ContentSecurityPolicy) {
 		toSerialize["contentSecurityPolicy"] = o.ContentSecurityPolicy
+	}
+	if !IsNil(o.Entities) {
+		toSerialize["entities"] = o.Entities
 	}
 	return toSerialize, nil
 }

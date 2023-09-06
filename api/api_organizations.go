@@ -30,6 +30,116 @@ import (
 // OrganizationsApiService OrganizationsApi service
 type OrganizationsApiService service
 
+type OrganizationsApiAddEventsToRecordingRequest struct {
+	ctx                         context.Context
+	ApiService                  *OrganizationsApiService
+	organizationId              string
+	recordingId                 string
+	addEventsToRecordingRequest *AddEventsToRecordingRequest
+}
+
+func (r OrganizationsApiAddEventsToRecordingRequest) AddEventsToRecordingRequest(addEventsToRecordingRequest AddEventsToRecordingRequest) OrganizationsApiAddEventsToRecordingRequest {
+	r.addEventsToRecordingRequest = &addEventsToRecordingRequest
+	return r
+}
+
+func (r OrganizationsApiAddEventsToRecordingRequest) Execute() (*http.Response, error) {
+	return r.ApiService.AddEventsToRecordingExecute(r)
+}
+
+/*
+AddEventsToRecording Add events to a running recording
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique id of the organization
+	@param recordingId The unique id of a recording
+	@return OrganizationsApiAddEventsToRecordingRequest
+*/
+func (a *OrganizationsApiService) AddEventsToRecording(ctx context.Context, organizationId string, recordingId string) OrganizationsApiAddEventsToRecordingRequest {
+	return OrganizationsApiAddEventsToRecordingRequest{
+		ApiService:     a,
+		ctx:            ctx,
+		organizationId: organizationId,
+		recordingId:    recordingId,
+	}
+}
+
+// Execute executes the request
+func (a *OrganizationsApiService) AddEventsToRecordingExecute(r OrganizationsApiAddEventsToRecordingRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod = http.MethodPost
+		localVarPostBody   interface{}
+		formFiles          []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsApiService.AddEventsToRecording")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/orgs/{organizationId}/recordings/{recordingId}/events"
+	localVarPath = strings.Replace(localVarPath, "{"+"organizationId"+"}", url.PathEscape(parameterValueToString(r.organizationId, "organizationId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"recordingId"+"}", url.PathEscape(parameterValueToString(r.recordingId, "recordingId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.addEventsToRecordingRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type OrganizationsApiAddMemberToOrganizationTeamByIdRequest struct {
 	ctx                                    context.Context
 	ApiService                             *OrganizationsApiService
@@ -625,6 +735,114 @@ func (a *OrganizationsApiService) CreateOrganizationTeamExecute(r OrganizationsA
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type OrganizationsApiDeleteEntitySchemaRequest struct {
+	ctx            context.Context
+	ApiService     *OrganizationsApiService
+	organizationId string
+	entityType     string
+}
+
+func (r OrganizationsApiDeleteEntitySchemaRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteEntitySchemaExecute(r)
+}
+
+/*
+DeleteEntitySchema Delete an entity schema.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique id of the organization
+	@param entityType Type of the entity
+	@return OrganizationsApiDeleteEntitySchemaRequest
+*/
+func (a *OrganizationsApiService) DeleteEntitySchema(ctx context.Context, organizationId string, entityType string) OrganizationsApiDeleteEntitySchemaRequest {
+	return OrganizationsApiDeleteEntitySchemaRequest{
+		ApiService:     a,
+		ctx:            ctx,
+		organizationId: organizationId,
+		entityType:     entityType,
+	}
+}
+
+// Execute executes the request
+func (a *OrganizationsApiService) DeleteEntitySchemaExecute(r OrganizationsApiDeleteEntitySchemaRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsApiService.DeleteEntitySchema")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/orgs/{organizationId}/schemas/{entityType}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organizationId"+"}", url.PathEscape(parameterValueToString(r.organizationId, "organizationId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"entityType"+"}", url.PathEscape(parameterValueToString(r.entityType, "entityType")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if strlen(r.entityType) < 1 {
+		return nil, reportError("entityType must have at least 1 elements")
+	}
+	if strlen(r.entityType) > 64 {
+		return nil, reportError("entityType must have less than 64 elements")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type OrganizationsApiDeleteEnvironmentRequest struct {
 	ctx             context.Context
 	ApiService      *OrganizationsApiService
@@ -935,6 +1153,256 @@ func (a *OrganizationsApiService) DeleteOrganizationCustomFieldExecute(r Organiz
 	}
 
 	return localVarHTTPResponse, nil
+}
+
+type OrganizationsApiGetEntityRequest struct {
+	ctx            context.Context
+	ApiService     *OrganizationsApiService
+	organizationId string
+	entityType     string
+	entityId       string
+}
+
+func (r OrganizationsApiGetEntityRequest) Execute() (*Entity, *http.Response, error) {
+	return r.ApiService.GetEntityExecute(r)
+}
+
+/*
+GetEntity Get an entity using its ID.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique id of the organization
+	@param entityType Type of the entity
+	@param entityId ID of the entity in the space
+	@return OrganizationsApiGetEntityRequest
+*/
+func (a *OrganizationsApiService) GetEntity(ctx context.Context, organizationId string, entityType string, entityId string) OrganizationsApiGetEntityRequest {
+	return OrganizationsApiGetEntityRequest{
+		ApiService:     a,
+		ctx:            ctx,
+		organizationId: organizationId,
+		entityType:     entityType,
+		entityId:       entityId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return Entity
+func (a *OrganizationsApiService) GetEntityExecute(r OrganizationsApiGetEntityRequest) (*Entity, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Entity
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsApiService.GetEntity")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/orgs/{organizationId}/schemas/{entityType}/entities/{entityId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organizationId"+"}", url.PathEscape(parameterValueToString(r.organizationId, "organizationId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"entityType"+"}", url.PathEscape(parameterValueToString(r.entityType, "entityType")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"entityId"+"}", url.PathEscape(parameterValueToString(r.entityId, "entityId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if strlen(r.entityType) < 1 {
+		return localVarReturnValue, nil, reportError("entityType must have at least 1 elements")
+	}
+	if strlen(r.entityType) > 64 {
+		return localVarReturnValue, nil, reportError("entityType must have less than 64 elements")
+	}
+	if strlen(r.entityId) < 1 {
+		return localVarReturnValue, nil, reportError("entityId must have at least 1 elements")
+	}
+	if strlen(r.entityId) > 256 {
+		return localVarReturnValue, nil, reportError("entityId must have less than 256 elements")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type OrganizationsApiGetEntitySchemaRequest struct {
+	ctx            context.Context
+	ApiService     *OrganizationsApiService
+	organizationId string
+	entityType     string
+}
+
+func (r OrganizationsApiGetEntitySchemaRequest) Execute() (*EntitySchema, *http.Response, error) {
+	return r.ApiService.GetEntitySchemaExecute(r)
+}
+
+/*
+GetEntitySchema Get an entity schema by its type.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique id of the organization
+	@param entityType Type of the entity
+	@return OrganizationsApiGetEntitySchemaRequest
+*/
+func (a *OrganizationsApiService) GetEntitySchema(ctx context.Context, organizationId string, entityType string) OrganizationsApiGetEntitySchemaRequest {
+	return OrganizationsApiGetEntitySchemaRequest{
+		ApiService:     a,
+		ctx:            ctx,
+		organizationId: organizationId,
+		entityType:     entityType,
+	}
+}
+
+// Execute executes the request
+//
+//	@return EntitySchema
+func (a *OrganizationsApiService) GetEntitySchemaExecute(r OrganizationsApiGetEntitySchemaRequest) (*EntitySchema, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EntitySchema
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsApiService.GetEntitySchema")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/orgs/{organizationId}/schemas/{entityType}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organizationId"+"}", url.PathEscape(parameterValueToString(r.organizationId, "organizationId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"entityType"+"}", url.PathEscape(parameterValueToString(r.entityType, "entityType")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if strlen(r.entityType) < 1 {
+		return localVarReturnValue, nil, reportError("entityType must have at least 1 elements")
+	}
+	if strlen(r.entityType) > 64 {
+		return localVarReturnValue, nil, reportError("entityType must have less than 64 elements")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type OrganizationsApiGetEnvironmentByNameRequest struct {
@@ -1499,6 +1967,120 @@ func (a *OrganizationsApiService) GetOrganizationCustomFieldByNameExecute(r Orga
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type OrganizationsApiGetRecordingRequest struct {
+	ctx            context.Context
+	ApiService     *OrganizationsApiService
+	organizationId string
+	recordingId    string
+}
+
+func (r OrganizationsApiGetRecordingRequest) Execute() (*Recording, *http.Response, error) {
+	return r.ApiService.GetRecordingExecute(r)
+}
+
+/*
+GetRecording Get a recording by its ID
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique id of the organization
+	@param recordingId The unique id of a recording
+	@return OrganizationsApiGetRecordingRequest
+*/
+func (a *OrganizationsApiService) GetRecording(ctx context.Context, organizationId string, recordingId string) OrganizationsApiGetRecordingRequest {
+	return OrganizationsApiGetRecordingRequest{
+		ApiService:     a,
+		ctx:            ctx,
+		organizationId: organizationId,
+		recordingId:    recordingId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return Recording
+func (a *OrganizationsApiService) GetRecordingExecute(r OrganizationsApiGetRecordingRequest) (*Recording, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Recording
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsApiService.GetRecording")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/orgs/{organizationId}/recordings/{recordingId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organizationId"+"}", url.PathEscape(parameterValueToString(r.organizationId, "organizationId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"recordingId"+"}", url.PathEscape(parameterValueToString(r.recordingId, "recordingId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
 		}
 		var v Error
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -2137,6 +2719,136 @@ func (a *OrganizationsApiService) ListDirectorySyncGroupsExecute(r Organizations
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type OrganizationsApiListEntitySchemasRequest struct {
+	ctx            context.Context
+	ApiService     *OrganizationsApiService
+	organizationId string
+	page           *string
+	limit          *float32
+}
+
+// Identifier of the page results to fetch.
+func (r OrganizationsApiListEntitySchemasRequest) Page(page string) OrganizationsApiListEntitySchemasRequest {
+	r.page = &page
+	return r
+}
+
+// The number of results per page
+func (r OrganizationsApiListEntitySchemasRequest) Limit(limit float32) OrganizationsApiListEntitySchemasRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r OrganizationsApiListEntitySchemasRequest) Execute() (*ListEntitySchemas200Response, *http.Response, error) {
+	return r.ApiService.ListEntitySchemasExecute(r)
+}
+
+/*
+ListEntitySchemas List the entity schemas in an organization.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique id of the organization
+	@return OrganizationsApiListEntitySchemasRequest
+*/
+func (a *OrganizationsApiService) ListEntitySchemas(ctx context.Context, organizationId string) OrganizationsApiListEntitySchemasRequest {
+	return OrganizationsApiListEntitySchemasRequest{
+		ApiService:     a,
+		ctx:            ctx,
+		organizationId: organizationId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ListEntitySchemas200Response
+func (a *OrganizationsApiService) ListEntitySchemasExecute(r OrganizationsApiListEntitySchemasRequest) (*ListEntitySchemas200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListEntitySchemas200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsApiService.ListEntitySchemas")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/orgs/{organizationId}/schemas"
+	localVarPath = strings.Replace(localVarPath, "{"+"organizationId"+"}", url.PathEscape(parameterValueToString(r.organizationId, "organizationId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type OrganizationsApiListEnvironmentsRequest struct {
 	ctx            context.Context
 	ApiService     *OrganizationsApiService
@@ -2604,6 +3316,288 @@ func (a *OrganizationsApiService) ListOrganizationsForAuthenticatedUserExecute(r
 	}
 	if r.limit != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type OrganizationsApiListRecordingsRequest struct {
+	ctx            context.Context
+	ApiService     *OrganizationsApiService
+	organizationId string
+	page           *string
+	limit          *float32
+}
+
+// Identifier of the page results to fetch.
+func (r OrganizationsApiListRecordingsRequest) Page(page string) OrganizationsApiListRecordingsRequest {
+	r.page = &page
+	return r
+}
+
+// The number of results per page
+func (r OrganizationsApiListRecordingsRequest) Limit(limit float32) OrganizationsApiListRecordingsRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r OrganizationsApiListRecordingsRequest) Execute() (*ListRecordings200Response, *http.Response, error) {
+	return r.ApiService.ListRecordingsExecute(r)
+}
+
+/*
+ListRecordings List recordings
+
+List recordings in an organization.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique id of the organization
+	@return OrganizationsApiListRecordingsRequest
+*/
+func (a *OrganizationsApiService) ListRecordings(ctx context.Context, organizationId string) OrganizationsApiListRecordingsRequest {
+	return OrganizationsApiListRecordingsRequest{
+		ApiService:     a,
+		ctx:            ctx,
+		organizationId: organizationId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ListRecordings200Response
+func (a *OrganizationsApiService) ListRecordingsExecute(r OrganizationsApiListRecordingsRequest) (*ListRecordings200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListRecordings200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsApiService.ListRecordings")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/orgs/{organizationId}/recordings"
+	localVarPath = strings.Replace(localVarPath, "{"+"organizationId"+"}", url.PathEscape(parameterValueToString(r.organizationId, "organizationId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type OrganizationsApiListSchemaEntitiesRequest struct {
+	ctx            context.Context
+	ApiService     *OrganizationsApiService
+	organizationId string
+	entityType     string
+	page           *string
+	limit          *float32
+	query          *string
+}
+
+// Identifier of the page results to fetch.
+func (r OrganizationsApiListSchemaEntitiesRequest) Page(page string) OrganizationsApiListSchemaEntitiesRequest {
+	r.page = &page
+	return r
+}
+
+// The number of results per page
+func (r OrganizationsApiListSchemaEntitiesRequest) Limit(limit float32) OrganizationsApiListSchemaEntitiesRequest {
+	r.limit = &limit
+	return r
+}
+
+// Query to filter entities with, ex: a &#x3D;&#x3D; &#39;something&#39; &amp;&amp; b &gt;&#x3D; 10
+func (r OrganizationsApiListSchemaEntitiesRequest) Query(query string) OrganizationsApiListSchemaEntitiesRequest {
+	r.query = &query
+	return r
+}
+
+func (r OrganizationsApiListSchemaEntitiesRequest) Execute() (*ListSchemaEntities200Response, *http.Response, error) {
+	return r.ApiService.ListSchemaEntitiesExecute(r)
+}
+
+/*
+ListSchemaEntities List entities in an organization for a given type.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique id of the organization
+	@param entityType Type of the entity
+	@return OrganizationsApiListSchemaEntitiesRequest
+*/
+func (a *OrganizationsApiService) ListSchemaEntities(ctx context.Context, organizationId string, entityType string) OrganizationsApiListSchemaEntitiesRequest {
+	return OrganizationsApiListSchemaEntitiesRequest{
+		ApiService:     a,
+		ctx:            ctx,
+		organizationId: organizationId,
+		entityType:     entityType,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ListSchemaEntities200Response
+func (a *OrganizationsApiService) ListSchemaEntitiesExecute(r OrganizationsApiListSchemaEntitiesRequest) (*ListSchemaEntities200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListSchemaEntities200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsApiService.ListSchemaEntities")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/orgs/{organizationId}/schemas/{entityType}/entities"
+	localVarPath = strings.Replace(localVarPath, "{"+"organizationId"+"}", url.PathEscape(parameterValueToString(r.organizationId, "organizationId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"entityType"+"}", url.PathEscape(parameterValueToString(r.entityType, "entityType")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if strlen(r.entityType) < 1 {
+		return localVarReturnValue, nil, reportError("entityType must have at least 1 elements")
+	}
+	if strlen(r.entityType) > 64 {
+		return localVarReturnValue, nil, reportError("entityType must have less than 64 elements")
+	}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	if r.query != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3687,6 +4681,125 @@ func (a *OrganizationsApiService) SearchOrganizationContentExecute(r Organizatio
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type OrganizationsApiSetEntitySchemaRequest struct {
+	ctx             context.Context
+	ApiService      *OrganizationsApiService
+	organizationId  string
+	entityType      string
+	entityRawSchema *EntityRawSchema
+}
+
+func (r OrganizationsApiSetEntitySchemaRequest) EntityRawSchema(entityRawSchema EntityRawSchema) OrganizationsApiSetEntitySchemaRequest {
+	r.entityRawSchema = &entityRawSchema
+	return r
+}
+
+func (r OrganizationsApiSetEntitySchemaRequest) Execute() (*http.Response, error) {
+	return r.ApiService.SetEntitySchemaExecute(r)
+}
+
+/*
+SetEntitySchema Create or update an entity schema.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique id of the organization
+	@param entityType Type of the entity
+	@return OrganizationsApiSetEntitySchemaRequest
+*/
+func (a *OrganizationsApiService) SetEntitySchema(ctx context.Context, organizationId string, entityType string) OrganizationsApiSetEntitySchemaRequest {
+	return OrganizationsApiSetEntitySchemaRequest{
+		ApiService:     a,
+		ctx:            ctx,
+		organizationId: organizationId,
+		entityType:     entityType,
+	}
+}
+
+// Execute executes the request
+func (a *OrganizationsApiService) SetEntitySchemaExecute(r OrganizationsApiSetEntitySchemaRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod = http.MethodPut
+		localVarPostBody   interface{}
+		formFiles          []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsApiService.SetEntitySchema")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/orgs/{organizationId}/schemas/{entityType}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organizationId"+"}", url.PathEscape(parameterValueToString(r.organizationId, "organizationId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"entityType"+"}", url.PathEscape(parameterValueToString(r.entityType, "entityType")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if strlen(r.entityType) < 1 {
+		return nil, reportError("entityType must have at least 1 elements")
+	}
+	if strlen(r.entityType) > 64 {
+		return nil, reportError("entityType must have less than 64 elements")
+	}
+	if r.entityRawSchema == nil {
+		return nil, reportError("entityRawSchema is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.entityRawSchema
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type OrganizationsApiSetUserAsSSOMemberForOrganizationRequest struct {
 	ctx            context.Context
 	ApiService     *OrganizationsApiService
@@ -3866,6 +4979,246 @@ func (a *OrganizationsApiService) SetupDirectorySyncExecute(r OrganizationsApiSe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type OrganizationsApiStartRecordingRequest struct {
+	ctx                   context.Context
+	ApiService            *OrganizationsApiService
+	organizationId        string
+	startRecordingRequest *StartRecordingRequest
+}
+
+func (r OrganizationsApiStartRecordingRequest) StartRecordingRequest(startRecordingRequest StartRecordingRequest) OrganizationsApiStartRecordingRequest {
+	r.startRecordingRequest = &startRecordingRequest
+	return r
+}
+
+func (r OrganizationsApiStartRecordingRequest) Execute() (*Recording, *http.Response, error) {
+	return r.ApiService.StartRecordingExecute(r)
+}
+
+/*
+StartRecording Start a recording
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique id of the organization
+	@return OrganizationsApiStartRecordingRequest
+*/
+func (a *OrganizationsApiService) StartRecording(ctx context.Context, organizationId string) OrganizationsApiStartRecordingRequest {
+	return OrganizationsApiStartRecordingRequest{
+		ApiService:     a,
+		ctx:            ctx,
+		organizationId: organizationId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return Recording
+func (a *OrganizationsApiService) StartRecordingExecute(r OrganizationsApiStartRecordingRequest) (*Recording, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Recording
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsApiService.StartRecording")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/orgs/{organizationId}/recordings"
+	localVarPath = strings.Replace(localVarPath, "{"+"organizationId"+"}", url.PathEscape(parameterValueToString(r.organizationId, "organizationId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.startRecordingRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type OrganizationsApiStopRecordingRequest struct {
+	ctx                  context.Context
+	ApiService           *OrganizationsApiService
+	organizationId       string
+	recordingId          string
+	stopRecordingRequest *StopRecordingRequest
+}
+
+func (r OrganizationsApiStopRecordingRequest) StopRecordingRequest(stopRecordingRequest StopRecordingRequest) OrganizationsApiStopRecordingRequest {
+	r.stopRecordingRequest = &stopRecordingRequest
+	return r
+}
+
+func (r OrganizationsApiStopRecordingRequest) Execute() (*StopRecording200Response, *http.Response, error) {
+	return r.ApiService.StopRecordingExecute(r)
+}
+
+/*
+StopRecording Stop a recording
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique id of the organization
+	@param recordingId The unique id of a recording
+	@return OrganizationsApiStopRecordingRequest
+*/
+func (a *OrganizationsApiService) StopRecording(ctx context.Context, organizationId string, recordingId string) OrganizationsApiStopRecordingRequest {
+	return OrganizationsApiStopRecordingRequest{
+		ApiService:     a,
+		ctx:            ctx,
+		organizationId: organizationId,
+		recordingId:    recordingId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return StopRecording200Response
+func (a *OrganizationsApiService) StopRecordingExecute(r OrganizationsApiStopRecordingRequest) (*StopRecording200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *StopRecording200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsApiService.StopRecording")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/orgs/{organizationId}/recordings/{recordingId}/stop"
+	localVarPath = strings.Replace(localVarPath, "{"+"organizationId"+"}", url.PathEscape(parameterValueToString(r.organizationId, "organizationId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"recordingId"+"}", url.PathEscape(parameterValueToString(r.recordingId, "recordingId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.stopRecordingRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -4995,4 +6348,123 @@ func (a *OrganizationsApiService) UpgradeOrganizationPlanExecute(r Organizations
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type OrganizationsApiUpsertSchemaEntitiesRequest struct {
+	ctx                         context.Context
+	ApiService                  *OrganizationsApiService
+	organizationId              string
+	entityType                  string
+	upsertSchemaEntitiesRequest *UpsertSchemaEntitiesRequest
+}
+
+func (r OrganizationsApiUpsertSchemaEntitiesRequest) UpsertSchemaEntitiesRequest(upsertSchemaEntitiesRequest UpsertSchemaEntitiesRequest) OrganizationsApiUpsertSchemaEntitiesRequest {
+	r.upsertSchemaEntitiesRequest = &upsertSchemaEntitiesRequest
+	return r
+}
+
+func (r OrganizationsApiUpsertSchemaEntitiesRequest) Execute() (*http.Response, error) {
+	return r.ApiService.UpsertSchemaEntitiesExecute(r)
+}
+
+/*
+UpsertSchemaEntities Update/Create/Delete entities in a schema.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organizationId The unique id of the organization
+	@param entityType Type of the entity
+	@return OrganizationsApiUpsertSchemaEntitiesRequest
+*/
+func (a *OrganizationsApiService) UpsertSchemaEntities(ctx context.Context, organizationId string, entityType string) OrganizationsApiUpsertSchemaEntitiesRequest {
+	return OrganizationsApiUpsertSchemaEntitiesRequest{
+		ApiService:     a,
+		ctx:            ctx,
+		organizationId: organizationId,
+		entityType:     entityType,
+	}
+}
+
+// Execute executes the request
+func (a *OrganizationsApiService) UpsertSchemaEntitiesExecute(r OrganizationsApiUpsertSchemaEntitiesRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod = http.MethodPut
+		localVarPostBody   interface{}
+		formFiles          []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsApiService.UpsertSchemaEntities")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/orgs/{organizationId}/schemas/{entityType}/entities"
+	localVarPath = strings.Replace(localVarPath, "{"+"organizationId"+"}", url.PathEscape(parameterValueToString(r.organizationId, "organizationId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"entityType"+"}", url.PathEscape(parameterValueToString(r.entityType, "entityType")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if strlen(r.entityType) < 1 {
+		return nil, reportError("entityType must have at least 1 elements")
+	}
+	if strlen(r.entityType) > 64 {
+		return nil, reportError("entityType must have less than 64 elements")
+	}
+	if r.upsertSchemaEntitiesRequest == nil {
+		return nil, reportError("upsertSchemaEntitiesRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.upsertSchemaEntitiesRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
 }

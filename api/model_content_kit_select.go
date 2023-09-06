@@ -29,13 +29,16 @@ var _ MappedNullable = &ContentKitSelect{}
 type ContentKitSelect struct {
 	Type string `json:"type"`
 	// State binding. The value of the input will be stored as a property in the state named after this ID.
-	State        string                        `json:"state"`
-	InitialValue *ContentKitSelectInitialValue `json:"initialValue,omitempty"`
+	State         string                        `json:"state"`
+	InitialValue  *ContentKitSelectInitialValue `json:"initialValue,omitempty"`
+	OnValueChange *ContentKitAction             `json:"onValueChange,omitempty"`
 	// Text that appears in the form control when it has no value set
 	Placeholder *string `json:"placeholder,omitempty"`
 	// Should the select accept the selection of multiple options. If true, the state will be an array.
-	Multiple *bool                   `json:"multiple,omitempty"`
-	Options  ContentKitSelectOptions `json:"options"`
+	Multiple *bool `json:"multiple,omitempty"`
+	// Should the filter input be allowed to be selected as an option.
+	AcceptInput *bool                   `json:"acceptInput,omitempty"`
+	Options     ContentKitSelectOptions `json:"options"`
 }
 
 // NewContentKitSelect instantiates a new ContentKitSelect object
@@ -138,6 +141,38 @@ func (o *ContentKitSelect) SetInitialValue(v ContentKitSelectInitialValue) {
 	o.InitialValue = &v
 }
 
+// GetOnValueChange returns the OnValueChange field value if set, zero value otherwise.
+func (o *ContentKitSelect) GetOnValueChange() ContentKitAction {
+	if o == nil || IsNil(o.OnValueChange) {
+		var ret ContentKitAction
+		return ret
+	}
+	return *o.OnValueChange
+}
+
+// GetOnValueChangeOk returns a tuple with the OnValueChange field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContentKitSelect) GetOnValueChangeOk() (*ContentKitAction, bool) {
+	if o == nil || IsNil(o.OnValueChange) {
+		return nil, false
+	}
+	return o.OnValueChange, true
+}
+
+// HasOnValueChange returns a boolean if a field has been set.
+func (o *ContentKitSelect) HasOnValueChange() bool {
+	if o != nil && !IsNil(o.OnValueChange) {
+		return true
+	}
+
+	return false
+}
+
+// SetOnValueChange gets a reference to the given ContentKitAction and assigns it to the OnValueChange field.
+func (o *ContentKitSelect) SetOnValueChange(v ContentKitAction) {
+	o.OnValueChange = &v
+}
+
 // GetPlaceholder returns the Placeholder field value if set, zero value otherwise.
 func (o *ContentKitSelect) GetPlaceholder() string {
 	if o == nil || IsNil(o.Placeholder) {
@@ -202,6 +237,38 @@ func (o *ContentKitSelect) SetMultiple(v bool) {
 	o.Multiple = &v
 }
 
+// GetAcceptInput returns the AcceptInput field value if set, zero value otherwise.
+func (o *ContentKitSelect) GetAcceptInput() bool {
+	if o == nil || IsNil(o.AcceptInput) {
+		var ret bool
+		return ret
+	}
+	return *o.AcceptInput
+}
+
+// GetAcceptInputOk returns a tuple with the AcceptInput field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContentKitSelect) GetAcceptInputOk() (*bool, bool) {
+	if o == nil || IsNil(o.AcceptInput) {
+		return nil, false
+	}
+	return o.AcceptInput, true
+}
+
+// HasAcceptInput returns a boolean if a field has been set.
+func (o *ContentKitSelect) HasAcceptInput() bool {
+	if o != nil && !IsNil(o.AcceptInput) {
+		return true
+	}
+
+	return false
+}
+
+// SetAcceptInput gets a reference to the given bool and assigns it to the AcceptInput field.
+func (o *ContentKitSelect) SetAcceptInput(v bool) {
+	o.AcceptInput = &v
+}
+
 // GetOptions returns the Options field value
 func (o *ContentKitSelect) GetOptions() ContentKitSelectOptions {
 	if o == nil {
@@ -241,11 +308,17 @@ func (o ContentKitSelect) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.InitialValue) {
 		toSerialize["initialValue"] = o.InitialValue
 	}
+	if !IsNil(o.OnValueChange) {
+		toSerialize["onValueChange"] = o.OnValueChange
+	}
 	if !IsNil(o.Placeholder) {
 		toSerialize["placeholder"] = o.Placeholder
 	}
 	if !IsNil(o.Multiple) {
 		toSerialize["multiple"] = o.Multiple
+	}
+	if !IsNil(o.AcceptInput) {
+		toSerialize["acceptInput"] = o.AcceptInput
 	}
 	toSerialize["options"] = o.Options
 	return toSerialize, nil

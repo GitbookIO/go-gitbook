@@ -26,6 +26,7 @@ import (
 // ContentKitInlineElement - Any element that is inline.
 type ContentKitInlineElement struct {
 	ContentKitImage *ContentKitImage
+	ContentKitLink  *ContentKitLink
 	ContentKitText  *ContentKitText
 }
 
@@ -33,6 +34,13 @@ type ContentKitInlineElement struct {
 func ContentKitImageAsContentKitInlineElement(v *ContentKitImage) ContentKitInlineElement {
 	return ContentKitInlineElement{
 		ContentKitImage: v,
+	}
+}
+
+// ContentKitLinkAsContentKitInlineElement is a convenience function that returns ContentKitLink wrapped in ContentKitInlineElement
+func ContentKitLinkAsContentKitInlineElement(v *ContentKitLink) ContentKitInlineElement {
+	return ContentKitInlineElement{
+		ContentKitLink: v,
 	}
 }
 
@@ -60,6 +68,19 @@ func (dst *ContentKitInlineElement) UnmarshalJSON(data []byte) error {
 		dst.ContentKitImage = nil
 	}
 
+	// try to unmarshal data into ContentKitLink
+	err = newStrictDecoder(data).Decode(&dst.ContentKitLink)
+	if err == nil {
+		jsonContentKitLink, _ := json.Marshal(dst.ContentKitLink)
+		if string(jsonContentKitLink) == "{}" { // empty struct
+			dst.ContentKitLink = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.ContentKitLink = nil
+	}
+
 	// try to unmarshal data into ContentKitText
 	err = newStrictDecoder(data).Decode(&dst.ContentKitText)
 	if err == nil {
@@ -76,6 +97,7 @@ func (dst *ContentKitInlineElement) UnmarshalJSON(data []byte) error {
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.ContentKitImage = nil
+		dst.ContentKitLink = nil
 		dst.ContentKitText = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(ContentKitInlineElement)")
@@ -92,6 +114,10 @@ func (src ContentKitInlineElement) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.ContentKitImage)
 	}
 
+	if src.ContentKitLink != nil {
+		return json.Marshal(&src.ContentKitLink)
+	}
+
 	if src.ContentKitText != nil {
 		return json.Marshal(&src.ContentKitText)
 	}
@@ -106,6 +132,10 @@ func (obj *ContentKitInlineElement) GetActualInstance() interface{} {
 	}
 	if obj.ContentKitImage != nil {
 		return obj.ContentKitImage
+	}
+
+	if obj.ContentKitLink != nil {
+		return obj.ContentKitLink
 	}
 
 	if obj.ContentKitText != nil {

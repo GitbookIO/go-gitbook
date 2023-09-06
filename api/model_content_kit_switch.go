@@ -31,8 +31,9 @@ type ContentKitSwitch struct {
 	// State binding. The value of the input will be stored as a property in the state named after this ID.
 	State string `json:"state"`
 	// Value to initialize the switch with.
-	InitialValue *bool              `json:"initialValue,omitempty"`
-	Confirm      *ContentKitConfirm `json:"confirm,omitempty"`
+	InitialValue  *bool              `json:"initialValue,omitempty"`
+	OnValueChange *ContentKitAction  `json:"onValueChange,omitempty"`
+	Confirm       *ContentKitConfirm `json:"confirm,omitempty"`
 }
 
 // NewContentKitSwitch instantiates a new ContentKitSwitch object
@@ -134,6 +135,38 @@ func (o *ContentKitSwitch) SetInitialValue(v bool) {
 	o.InitialValue = &v
 }
 
+// GetOnValueChange returns the OnValueChange field value if set, zero value otherwise.
+func (o *ContentKitSwitch) GetOnValueChange() ContentKitAction {
+	if o == nil || IsNil(o.OnValueChange) {
+		var ret ContentKitAction
+		return ret
+	}
+	return *o.OnValueChange
+}
+
+// GetOnValueChangeOk returns a tuple with the OnValueChange field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContentKitSwitch) GetOnValueChangeOk() (*ContentKitAction, bool) {
+	if o == nil || IsNil(o.OnValueChange) {
+		return nil, false
+	}
+	return o.OnValueChange, true
+}
+
+// HasOnValueChange returns a boolean if a field has been set.
+func (o *ContentKitSwitch) HasOnValueChange() bool {
+	if o != nil && !IsNil(o.OnValueChange) {
+		return true
+	}
+
+	return false
+}
+
+// SetOnValueChange gets a reference to the given ContentKitAction and assigns it to the OnValueChange field.
+func (o *ContentKitSwitch) SetOnValueChange(v ContentKitAction) {
+	o.OnValueChange = &v
+}
+
 // GetConfirm returns the Confirm field value if set, zero value otherwise.
 func (o *ContentKitSwitch) GetConfirm() ContentKitConfirm {
 	if o == nil || IsNil(o.Confirm) {
@@ -180,6 +213,9 @@ func (o ContentKitSwitch) ToMap() (map[string]interface{}, error) {
 	toSerialize["state"] = o.State
 	if !IsNil(o.InitialValue) {
 		toSerialize["initialValue"] = o.InitialValue
+	}
+	if !IsNil(o.OnValueChange) {
+		toSerialize["onValueChange"] = o.OnValueChange
 	}
 	if !IsNil(o.Confirm) {
 		toSerialize["confirm"] = o.Confirm

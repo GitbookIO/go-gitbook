@@ -20,244 +20,160 @@ package gitbook
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
-// checks if the Revision type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Revision{}
-
-// Revision struct for Revision
+// Revision - struct for Revision
 type Revision struct {
-	// Type of Object, always equals to \"revision\"
-	Object string `json:"object"`
-	// Unique identifier for the revision
-	Id string `json:"id"`
-	// IDs of the parent revisions
-	Parents []string       `json:"parents"`
-	Pages   []RevisionPage `json:"pages"`
-	Files   []RevisionFile `json:"files"`
-	Git     *RevisionGit   `json:"git,omitempty"`
-	Urls    RevisionUrls   `json:"urls"`
+	RevisionTypeEdits    *RevisionTypeEdits
+	RevisionTypeMerge    *RevisionTypeMerge
+	RevisionTypeRollback *RevisionTypeRollback
+	RevisionTypeUpdate   *RevisionTypeUpdate
 }
 
-// NewRevision instantiates a new Revision object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewRevision(object string, id string, parents []string, pages []RevisionPage, files []RevisionFile, urls RevisionUrls) *Revision {
-	this := Revision{}
-	this.Object = object
-	this.Id = id
-	this.Parents = parents
-	this.Pages = pages
-	this.Files = files
-	this.Urls = urls
-	return &this
+// RevisionTypeEditsAsRevision is a convenience function that returns RevisionTypeEdits wrapped in Revision
+func RevisionTypeEditsAsRevision(v *RevisionTypeEdits) Revision {
+	return Revision{
+		RevisionTypeEdits: v,
+	}
 }
 
-// NewRevisionWithDefaults instantiates a new Revision object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewRevisionWithDefaults() *Revision {
-	this := Revision{}
-	return &this
+// RevisionTypeMergeAsRevision is a convenience function that returns RevisionTypeMerge wrapped in Revision
+func RevisionTypeMergeAsRevision(v *RevisionTypeMerge) Revision {
+	return Revision{
+		RevisionTypeMerge: v,
+	}
 }
 
-// GetObject returns the Object field value
-func (o *Revision) GetObject() string {
-	if o == nil {
-		var ret string
-		return ret
+// RevisionTypeRollbackAsRevision is a convenience function that returns RevisionTypeRollback wrapped in Revision
+func RevisionTypeRollbackAsRevision(v *RevisionTypeRollback) Revision {
+	return Revision{
+		RevisionTypeRollback: v,
+	}
+}
+
+// RevisionTypeUpdateAsRevision is a convenience function that returns RevisionTypeUpdate wrapped in Revision
+func RevisionTypeUpdateAsRevision(v *RevisionTypeUpdate) Revision {
+	return Revision{
+		RevisionTypeUpdate: v,
+	}
+}
+
+// Unmarshal JSON data into one of the pointers in the struct
+func (dst *Revision) UnmarshalJSON(data []byte) error {
+	var err error
+	match := 0
+	// try to unmarshal data into RevisionTypeEdits
+	err = newStrictDecoder(data).Decode(&dst.RevisionTypeEdits)
+	if err == nil {
+		jsonRevisionTypeEdits, _ := json.Marshal(dst.RevisionTypeEdits)
+		if string(jsonRevisionTypeEdits) == "{}" { // empty struct
+			dst.RevisionTypeEdits = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.RevisionTypeEdits = nil
 	}
 
-	return o.Object
-}
-
-// GetObjectOk returns a tuple with the Object field value
-// and a boolean to check if the value has been set.
-func (o *Revision) GetObjectOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Object, true
-}
-
-// SetObject sets field value
-func (o *Revision) SetObject(v string) {
-	o.Object = v
-}
-
-// GetId returns the Id field value
-func (o *Revision) GetId() string {
-	if o == nil {
-		var ret string
-		return ret
+	// try to unmarshal data into RevisionTypeMerge
+	err = newStrictDecoder(data).Decode(&dst.RevisionTypeMerge)
+	if err == nil {
+		jsonRevisionTypeMerge, _ := json.Marshal(dst.RevisionTypeMerge)
+		if string(jsonRevisionTypeMerge) == "{}" { // empty struct
+			dst.RevisionTypeMerge = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.RevisionTypeMerge = nil
 	}
 
-	return o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value
-// and a boolean to check if the value has been set.
-func (o *Revision) GetIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Id, true
-}
-
-// SetId sets field value
-func (o *Revision) SetId(v string) {
-	o.Id = v
-}
-
-// GetParents returns the Parents field value
-func (o *Revision) GetParents() []string {
-	if o == nil {
-		var ret []string
-		return ret
+	// try to unmarshal data into RevisionTypeRollback
+	err = newStrictDecoder(data).Decode(&dst.RevisionTypeRollback)
+	if err == nil {
+		jsonRevisionTypeRollback, _ := json.Marshal(dst.RevisionTypeRollback)
+		if string(jsonRevisionTypeRollback) == "{}" { // empty struct
+			dst.RevisionTypeRollback = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.RevisionTypeRollback = nil
 	}
 
-	return o.Parents
-}
-
-// GetParentsOk returns a tuple with the Parents field value
-// and a boolean to check if the value has been set.
-func (o *Revision) GetParentsOk() ([]string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Parents, true
-}
-
-// SetParents sets field value
-func (o *Revision) SetParents(v []string) {
-	o.Parents = v
-}
-
-// GetPages returns the Pages field value
-func (o *Revision) GetPages() []RevisionPage {
-	if o == nil {
-		var ret []RevisionPage
-		return ret
+	// try to unmarshal data into RevisionTypeUpdate
+	err = newStrictDecoder(data).Decode(&dst.RevisionTypeUpdate)
+	if err == nil {
+		jsonRevisionTypeUpdate, _ := json.Marshal(dst.RevisionTypeUpdate)
+		if string(jsonRevisionTypeUpdate) == "{}" { // empty struct
+			dst.RevisionTypeUpdate = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.RevisionTypeUpdate = nil
 	}
 
-	return o.Pages
-}
+	if match > 1 { // more than 1 match
+		// reset to nil
+		dst.RevisionTypeEdits = nil
+		dst.RevisionTypeMerge = nil
+		dst.RevisionTypeRollback = nil
+		dst.RevisionTypeUpdate = nil
 
-// GetPagesOk returns a tuple with the Pages field value
-// and a boolean to check if the value has been set.
-func (o *Revision) GetPagesOk() ([]RevisionPage, bool) {
-	if o == nil {
-		return nil, false
+		return fmt.Errorf("data matches more than one schema in oneOf(Revision)")
+	} else if match == 1 {
+		return nil // exactly one match
+	} else { // no match
+		return fmt.Errorf("data failed to match schemas in oneOf(Revision)")
 	}
-	return o.Pages, true
 }
 
-// SetPages sets field value
-func (o *Revision) SetPages(v []RevisionPage) {
-	o.Pages = v
-}
-
-// GetFiles returns the Files field value
-func (o *Revision) GetFiles() []RevisionFile {
-	if o == nil {
-		var ret []RevisionFile
-		return ret
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src Revision) MarshalJSON() ([]byte, error) {
+	if src.RevisionTypeEdits != nil {
+		return json.Marshal(&src.RevisionTypeEdits)
 	}
 
-	return o.Files
-}
-
-// GetFilesOk returns a tuple with the Files field value
-// and a boolean to check if the value has been set.
-func (o *Revision) GetFilesOk() ([]RevisionFile, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Files, true
-}
-
-// SetFiles sets field value
-func (o *Revision) SetFiles(v []RevisionFile) {
-	o.Files = v
-}
-
-// GetGit returns the Git field value if set, zero value otherwise.
-func (o *Revision) GetGit() RevisionGit {
-	if o == nil || IsNil(o.Git) {
-		var ret RevisionGit
-		return ret
-	}
-	return *o.Git
-}
-
-// GetGitOk returns a tuple with the Git field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Revision) GetGitOk() (*RevisionGit, bool) {
-	if o == nil || IsNil(o.Git) {
-		return nil, false
-	}
-	return o.Git, true
-}
-
-// HasGit returns a boolean if a field has been set.
-func (o *Revision) HasGit() bool {
-	if o != nil && !IsNil(o.Git) {
-		return true
+	if src.RevisionTypeMerge != nil {
+		return json.Marshal(&src.RevisionTypeMerge)
 	}
 
-	return false
-}
-
-// SetGit gets a reference to the given RevisionGit and assigns it to the Git field.
-func (o *Revision) SetGit(v RevisionGit) {
-	o.Git = &v
-}
-
-// GetUrls returns the Urls field value
-func (o *Revision) GetUrls() RevisionUrls {
-	if o == nil {
-		var ret RevisionUrls
-		return ret
+	if src.RevisionTypeRollback != nil {
+		return json.Marshal(&src.RevisionTypeRollback)
 	}
 
-	return o.Urls
-}
-
-// GetUrlsOk returns a tuple with the Urls field value
-// and a boolean to check if the value has been set.
-func (o *Revision) GetUrlsOk() (*RevisionUrls, bool) {
-	if o == nil {
-		return nil, false
+	if src.RevisionTypeUpdate != nil {
+		return json.Marshal(&src.RevisionTypeUpdate)
 	}
-	return &o.Urls, true
+
+	return nil, nil // no data in oneOf schemas
 }
 
-// SetUrls sets field value
-func (o *Revision) SetUrls(v RevisionUrls) {
-	o.Urls = v
-}
-
-func (o Revision) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+// Get the actual instance
+func (obj *Revision) GetActualInstance() interface{} {
+	if obj == nil {
+		return nil
 	}
-	return json.Marshal(toSerialize)
-}
-
-func (o Revision) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["object"] = o.Object
-	toSerialize["id"] = o.Id
-	toSerialize["parents"] = o.Parents
-	toSerialize["pages"] = o.Pages
-	toSerialize["files"] = o.Files
-	if !IsNil(o.Git) {
-		toSerialize["git"] = o.Git
+	if obj.RevisionTypeEdits != nil {
+		return obj.RevisionTypeEdits
 	}
-	toSerialize["urls"] = o.Urls
-	return toSerialize, nil
+
+	if obj.RevisionTypeMerge != nil {
+		return obj.RevisionTypeMerge
+	}
+
+	if obj.RevisionTypeRollback != nil {
+		return obj.RevisionTypeRollback
+	}
+
+	if obj.RevisionTypeUpdate != nil {
+		return obj.RevisionTypeUpdate
+	}
+
+	// all schemas are nil
+	return nil
 }
 
 type NullableRevision struct {

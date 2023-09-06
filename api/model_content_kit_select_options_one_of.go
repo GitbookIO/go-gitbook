@@ -25,16 +25,16 @@ import (
 // checks if the ContentKitSelectOptionsOneOf type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContentKitSelectOptionsOneOf{}
 
-// ContentKitSelectOptionsOneOf External source of options. The URL should respond with an array of options.
+// ContentKitSelectOptionsOneOf struct for ContentKitSelectOptionsOneOf
 type ContentKitSelectOptionsOneOf struct {
-	Url string `json:"url"`
+	Url ContentKitSelectOptionsOneOfUrl `json:"url"`
 }
 
 // NewContentKitSelectOptionsOneOf instantiates a new ContentKitSelectOptionsOneOf object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContentKitSelectOptionsOneOf(url string) *ContentKitSelectOptionsOneOf {
+func NewContentKitSelectOptionsOneOf(url ContentKitSelectOptionsOneOfUrl) *ContentKitSelectOptionsOneOf {
 	this := ContentKitSelectOptionsOneOf{}
 	this.Url = url
 	return &this
@@ -49,9 +49,9 @@ func NewContentKitSelectOptionsOneOfWithDefaults() *ContentKitSelectOptionsOneOf
 }
 
 // GetUrl returns the Url field value
-func (o *ContentKitSelectOptionsOneOf) GetUrl() string {
+func (o *ContentKitSelectOptionsOneOf) GetUrl() ContentKitSelectOptionsOneOfUrl {
 	if o == nil {
-		var ret string
+		var ret ContentKitSelectOptionsOneOfUrl
 		return ret
 	}
 
@@ -60,7 +60,7 @@ func (o *ContentKitSelectOptionsOneOf) GetUrl() string {
 
 // GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
-func (o *ContentKitSelectOptionsOneOf) GetUrlOk() (*string, bool) {
+func (o *ContentKitSelectOptionsOneOf) GetUrlOk() (*ContentKitSelectOptionsOneOfUrl, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,7 +68,7 @@ func (o *ContentKitSelectOptionsOneOf) GetUrlOk() (*string, bool) {
 }
 
 // SetUrl sets field value
-func (o *ContentKitSelectOptionsOneOf) SetUrl(v string) {
+func (o *ContentKitSelectOptionsOneOf) SetUrl(v ContentKitSelectOptionsOneOfUrl) {
 	o.Url = v
 }
 

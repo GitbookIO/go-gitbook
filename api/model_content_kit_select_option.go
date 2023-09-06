@@ -27,8 +27,9 @@ var _ MappedNullable = &ContentKitSelectOption{}
 
 // ContentKitSelectOption An individual option in a select element
 type ContentKitSelectOption struct {
-	Id    string `json:"id"`
-	Label string `json:"label"`
+	Id    string              `json:"id"`
+	Label string              `json:"label"`
+	Icon  *ContentKitCardIcon `json:"icon,omitempty"`
 }
 
 // NewContentKitSelectOption instantiates a new ContentKitSelectOption object
@@ -98,6 +99,38 @@ func (o *ContentKitSelectOption) SetLabel(v string) {
 	o.Label = v
 }
 
+// GetIcon returns the Icon field value if set, zero value otherwise.
+func (o *ContentKitSelectOption) GetIcon() ContentKitCardIcon {
+	if o == nil || IsNil(o.Icon) {
+		var ret ContentKitCardIcon
+		return ret
+	}
+	return *o.Icon
+}
+
+// GetIconOk returns a tuple with the Icon field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContentKitSelectOption) GetIconOk() (*ContentKitCardIcon, bool) {
+	if o == nil || IsNil(o.Icon) {
+		return nil, false
+	}
+	return o.Icon, true
+}
+
+// HasIcon returns a boolean if a field has been set.
+func (o *ContentKitSelectOption) HasIcon() bool {
+	if o != nil && !IsNil(o.Icon) {
+		return true
+	}
+
+	return false
+}
+
+// SetIcon gets a reference to the given ContentKitCardIcon and assigns it to the Icon field.
+func (o *ContentKitSelectOption) SetIcon(v ContentKitCardIcon) {
+	o.Icon = &v
+}
+
 func (o ContentKitSelectOption) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -110,6 +143,9 @@ func (o ContentKitSelectOption) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["label"] = o.Label
+	if !IsNil(o.Icon) {
+		toSerialize["icon"] = o.Icon
+	}
 	return toSerialize, nil
 }
 

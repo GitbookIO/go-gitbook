@@ -27,14 +27,15 @@ var _ MappedNullable = &ContentKitButton{}
 
 // ContentKitButton Pressable button triggering an action.
 type ContentKitButton struct {
-	Type     string             `json:"type"`
-	Style    *string            `json:"style,omitempty"`
-	OnPress  ContentKitAction   `json:"onPress"`
-	Icon     *ContentKitIcon    `json:"icon,omitempty"`
-	Label    *string            `json:"label,omitempty"`
-	Tooltip  *string            `json:"tooltip,omitempty"`
-	Confirm  *ContentKitConfirm `json:"confirm,omitempty"`
-	Disabled *bool              `json:"disabled,omitempty"`
+	Type         string             `json:"type"`
+	Style        *string            `json:"style,omitempty"`
+	OnPress      ContentKitAction   `json:"onPress"`
+	Icon         *ContentKitIcon    `json:"icon,omitempty"`
+	TrailingIcon *ContentKitIcon    `json:"trailingIcon,omitempty"`
+	Label        *string            `json:"label,omitempty"`
+	Tooltip      *string            `json:"tooltip,omitempty"`
+	Confirm      *ContentKitConfirm `json:"confirm,omitempty"`
+	Disabled     *bool              `json:"disabled,omitempty"`
 }
 
 // NewContentKitButton instantiates a new ContentKitButton object
@@ -166,6 +167,38 @@ func (o *ContentKitButton) HasIcon() bool {
 // SetIcon gets a reference to the given ContentKitIcon and assigns it to the Icon field.
 func (o *ContentKitButton) SetIcon(v ContentKitIcon) {
 	o.Icon = &v
+}
+
+// GetTrailingIcon returns the TrailingIcon field value if set, zero value otherwise.
+func (o *ContentKitButton) GetTrailingIcon() ContentKitIcon {
+	if o == nil || IsNil(o.TrailingIcon) {
+		var ret ContentKitIcon
+		return ret
+	}
+	return *o.TrailingIcon
+}
+
+// GetTrailingIconOk returns a tuple with the TrailingIcon field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContentKitButton) GetTrailingIconOk() (*ContentKitIcon, bool) {
+	if o == nil || IsNil(o.TrailingIcon) {
+		return nil, false
+	}
+	return o.TrailingIcon, true
+}
+
+// HasTrailingIcon returns a boolean if a field has been set.
+func (o *ContentKitButton) HasTrailingIcon() bool {
+	if o != nil && !IsNil(o.TrailingIcon) {
+		return true
+	}
+
+	return false
+}
+
+// SetTrailingIcon gets a reference to the given ContentKitIcon and assigns it to the TrailingIcon field.
+func (o *ContentKitButton) SetTrailingIcon(v ContentKitIcon) {
+	o.TrailingIcon = &v
 }
 
 // GetLabel returns the Label field value if set, zero value otherwise.
@@ -313,6 +346,9 @@ func (o ContentKitButton) ToMap() (map[string]interface{}, error) {
 	toSerialize["onPress"] = o.OnPress
 	if !IsNil(o.Icon) {
 		toSerialize["icon"] = o.Icon
+	}
+	if !IsNil(o.TrailingIcon) {
+		toSerialize["trailingIcon"] = o.TrailingIcon
 	}
 	if !IsNil(o.Label) {
 		toSerialize["label"] = o.Label

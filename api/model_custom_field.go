@@ -32,6 +32,8 @@ type CustomField struct {
 	Title       string          `json:"title"`
 	Description string          `json:"description"`
 	Type        CustomFieldType `json:"type"`
+	Placeholder string          `json:"placeholder"`
+	Options     []string        `json:"options,omitempty"`
 	CreatedAt   string          `json:"createdAt"`
 	UpdatedAt   string          `json:"updatedAt"`
 	Urls        CustomFieldUrls `json:"urls"`
@@ -41,13 +43,14 @@ type CustomField struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomField(id string, name string, title string, description string, type_ CustomFieldType, createdAt string, updatedAt string, urls CustomFieldUrls) *CustomField {
+func NewCustomField(id string, name string, title string, description string, type_ CustomFieldType, placeholder string, createdAt string, updatedAt string, urls CustomFieldUrls) *CustomField {
 	this := CustomField{}
 	this.Id = id
 	this.Name = name
 	this.Title = title
 	this.Description = description
 	this.Type = type_
+	this.Placeholder = placeholder
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
 	this.Urls = urls
@@ -182,6 +185,62 @@ func (o *CustomField) SetType(v CustomFieldType) {
 	o.Type = v
 }
 
+// GetPlaceholder returns the Placeholder field value
+func (o *CustomField) GetPlaceholder() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Placeholder
+}
+
+// GetPlaceholderOk returns a tuple with the Placeholder field value
+// and a boolean to check if the value has been set.
+func (o *CustomField) GetPlaceholderOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Placeholder, true
+}
+
+// SetPlaceholder sets field value
+func (o *CustomField) SetPlaceholder(v string) {
+	o.Placeholder = v
+}
+
+// GetOptions returns the Options field value if set, zero value otherwise.
+func (o *CustomField) GetOptions() []string {
+	if o == nil || IsNil(o.Options) {
+		var ret []string
+		return ret
+	}
+	return o.Options
+}
+
+// GetOptionsOk returns a tuple with the Options field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CustomField) GetOptionsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Options) {
+		return nil, false
+	}
+	return o.Options, true
+}
+
+// HasOptions returns a boolean if a field has been set.
+func (o *CustomField) HasOptions() bool {
+	if o != nil && !IsNil(o.Options) {
+		return true
+	}
+
+	return false
+}
+
+// SetOptions gets a reference to the given []string and assigns it to the Options field.
+func (o *CustomField) SetOptions(v []string) {
+	o.Options = v
+}
+
 // GetCreatedAt returns the CreatedAt field value
 func (o *CustomField) GetCreatedAt() string {
 	if o == nil {
@@ -269,6 +328,10 @@ func (o CustomField) ToMap() (map[string]interface{}, error) {
 	toSerialize["title"] = o.Title
 	toSerialize["description"] = o.Description
 	toSerialize["type"] = o.Type
+	toSerialize["placeholder"] = o.Placeholder
+	if !IsNil(o.Options) {
+		toSerialize["options"] = o.Options
+	}
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["updatedAt"] = o.UpdatedAt
 	toSerialize["urls"] = o.Urls

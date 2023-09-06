@@ -23,7 +23,7 @@ import (
 	"fmt"
 )
 
-// ContentKitSelectOptions - struct for ContentKitSelectOptions
+// ContentKitSelectOptions - Array of options to display in the select.
 type ContentKitSelectOptions struct {
 	ContentKitSelectOptionsOneOf  *ContentKitSelectOptionsOneOf
 	ArrayOfContentKitSelectOption *[]ContentKitSelectOption

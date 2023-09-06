@@ -31,6 +31,8 @@ type CreateOrganizationCustomFieldRequest struct {
 	Type        CustomFieldType `json:"type"`
 	Title       *string         `json:"title,omitempty"`
 	Description *string         `json:"description,omitempty"`
+	Placeholder *string         `json:"placeholder,omitempty"`
+	Options     []string        `json:"options,omitempty"`
 }
 
 // NewCreateOrganizationCustomFieldRequest instantiates a new CreateOrganizationCustomFieldRequest object
@@ -164,6 +166,70 @@ func (o *CreateOrganizationCustomFieldRequest) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetPlaceholder returns the Placeholder field value if set, zero value otherwise.
+func (o *CreateOrganizationCustomFieldRequest) GetPlaceholder() string {
+	if o == nil || IsNil(o.Placeholder) {
+		var ret string
+		return ret
+	}
+	return *o.Placeholder
+}
+
+// GetPlaceholderOk returns a tuple with the Placeholder field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateOrganizationCustomFieldRequest) GetPlaceholderOk() (*string, bool) {
+	if o == nil || IsNil(o.Placeholder) {
+		return nil, false
+	}
+	return o.Placeholder, true
+}
+
+// HasPlaceholder returns a boolean if a field has been set.
+func (o *CreateOrganizationCustomFieldRequest) HasPlaceholder() bool {
+	if o != nil && !IsNil(o.Placeholder) {
+		return true
+	}
+
+	return false
+}
+
+// SetPlaceholder gets a reference to the given string and assigns it to the Placeholder field.
+func (o *CreateOrganizationCustomFieldRequest) SetPlaceholder(v string) {
+	o.Placeholder = &v
+}
+
+// GetOptions returns the Options field value if set, zero value otherwise.
+func (o *CreateOrganizationCustomFieldRequest) GetOptions() []string {
+	if o == nil || IsNil(o.Options) {
+		var ret []string
+		return ret
+	}
+	return o.Options
+}
+
+// GetOptionsOk returns a tuple with the Options field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateOrganizationCustomFieldRequest) GetOptionsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Options) {
+		return nil, false
+	}
+	return o.Options, true
+}
+
+// HasOptions returns a boolean if a field has been set.
+func (o *CreateOrganizationCustomFieldRequest) HasOptions() bool {
+	if o != nil && !IsNil(o.Options) {
+		return true
+	}
+
+	return false
+}
+
+// SetOptions gets a reference to the given []string and assigns it to the Options field.
+func (o *CreateOrganizationCustomFieldRequest) SetOptions(v []string) {
+	o.Options = v
+}
+
 func (o CreateOrganizationCustomFieldRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -181,6 +247,12 @@ func (o CreateOrganizationCustomFieldRequest) ToMap() (map[string]interface{}, e
 	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.Placeholder) {
+		toSerialize["placeholder"] = o.Placeholder
+	}
+	if !IsNil(o.Options) {
+		toSerialize["options"] = o.Options
 	}
 	return toSerialize, nil
 }

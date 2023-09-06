@@ -30,6 +30,8 @@ type Integration struct {
 	Object string `json:"object"`
 	// Unique named identifier for the integration
 	Name string `json:"name"`
+	// Version of the integration
+	Version float32 `json:"version"`
 	// Title of the integration
 	Title string `json:"title"`
 	// Description of the integration
@@ -56,10 +58,11 @@ type Integration struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntegration(object string, name string, title string, previewImages []string, visibility IntegrationVisibility, scopes []IntegrationScope, categories []IntegrationCategory, externalLinks []IntegrationExternalLinksInner, urls IntegrationUrls) *Integration {
+func NewIntegration(object string, name string, version float32, title string, previewImages []string, visibility IntegrationVisibility, scopes []IntegrationScope, categories []IntegrationCategory, externalLinks []IntegrationExternalLinksInner, urls IntegrationUrls) *Integration {
 	this := Integration{}
 	this.Object = object
 	this.Name = name
+	this.Version = version
 	this.Title = title
 	this.PreviewImages = previewImages
 	this.Visibility = visibility
@@ -124,6 +127,30 @@ func (o *Integration) GetNameOk() (*string, bool) {
 // SetName sets field value
 func (o *Integration) SetName(v string) {
 	o.Name = v
+}
+
+// GetVersion returns the Version field value
+func (o *Integration) GetVersion() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.Version
+}
+
+// GetVersionOk returns a tuple with the Version field value
+// and a boolean to check if the value has been set.
+func (o *Integration) GetVersionOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Version, true
+}
+
+// SetVersion sets field value
+func (o *Integration) SetVersion(v float32) {
+	o.Version = v
 }
 
 // GetTitle returns the Title field value
@@ -466,6 +493,7 @@ func (o Integration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["object"] = o.Object
 	toSerialize["name"] = o.Name
+	toSerialize["version"] = o.Version
 	toSerialize["title"] = o.Title
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description

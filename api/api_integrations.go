@@ -278,131 +278,6 @@ func (a *IntegrationsApiService) GetIntegrationByNameExecute(r IntegrationsApiGe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type IntegrationsApiGetIntegrationEntitiesRequest struct {
-	ctx             context.Context
-	ApiService      *IntegrationsApiService
-	integrationName string
-	installationId  string
-}
-
-func (r IntegrationsApiGetIntegrationEntitiesRequest) Execute() (*GetIntegrationEntities200Response, *http.Response, error) {
-	return r.ApiService.GetIntegrationEntitiesExecute(r)
-}
-
-/*
-GetIntegrationEntities List entities managed by an integration in an installation.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param integrationName Name of the integration
-	@param installationId Identifier of the installation
-	@return IntegrationsApiGetIntegrationEntitiesRequest
-*/
-func (a *IntegrationsApiService) GetIntegrationEntities(ctx context.Context, integrationName string, installationId string) IntegrationsApiGetIntegrationEntitiesRequest {
-	return IntegrationsApiGetIntegrationEntitiesRequest{
-		ApiService:      a,
-		ctx:             ctx,
-		integrationName: integrationName,
-		installationId:  installationId,
-	}
-}
-
-// Execute executes the request
-//
-//	@return GetIntegrationEntities200Response
-func (a *IntegrationsApiService) GetIntegrationEntitiesExecute(r IntegrationsApiGetIntegrationEntitiesRequest) (*GetIntegrationEntities200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetIntegrationEntities200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsApiService.GetIntegrationEntities")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/integrations/{integrationName}/installations/{installationId}/entities"
-	localVarPath = strings.Replace(localVarPath, "{"+"integrationName"+"}", url.PathEscape(parameterValueToString(r.integrationName, "integrationName")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"installationId"+"}", url.PathEscape(parameterValueToString(r.installationId, "installationId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v GetSpaceGitInfo404Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type IntegrationsApiGetIntegrationEventRequest struct {
 	ctx             context.Context
 	ApiService      *IntegrationsApiService
@@ -575,6 +450,135 @@ func (a *IntegrationsApiService) GetIntegrationInstallationByIdExecute(r Integra
 	localVarPath := localBasePath + "/integrations/{integrationName}/installations/{installationId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"integrationName"+"}", url.PathEscape(parameterValueToString(r.integrationName, "integrationName")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"installationId"+"}", url.PathEscape(parameterValueToString(r.installationId, "installationId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GetSpaceGitInfo404Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type IntegrationsApiGetIntegrationSpaceInstallationRequest struct {
+	ctx             context.Context
+	ApiService      *IntegrationsApiService
+	integrationName string
+	installationId  string
+	spaceId         string
+}
+
+func (r IntegrationsApiGetIntegrationSpaceInstallationRequest) Execute() (*IntegrationSpaceInstallation, *http.Response, error) {
+	return r.ApiService.GetIntegrationSpaceInstallationExecute(r)
+}
+
+/*
+GetIntegrationSpaceInstallation Get a specific integration's space installation
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param integrationName Name of the integration
+	@param installationId Identifier of the installation
+	@param spaceId The unique id of the space
+	@return IntegrationsApiGetIntegrationSpaceInstallationRequest
+*/
+func (a *IntegrationsApiService) GetIntegrationSpaceInstallation(ctx context.Context, integrationName string, installationId string, spaceId string) IntegrationsApiGetIntegrationSpaceInstallationRequest {
+	return IntegrationsApiGetIntegrationSpaceInstallationRequest{
+		ApiService:      a,
+		ctx:             ctx,
+		integrationName: integrationName,
+		installationId:  installationId,
+		spaceId:         spaceId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return IntegrationSpaceInstallation
+func (a *IntegrationsApiService) GetIntegrationSpaceInstallationExecute(r IntegrationsApiGetIntegrationSpaceInstallationRequest) (*IntegrationSpaceInstallation, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IntegrationSpaceInstallation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsApiService.GetIntegrationSpaceInstallation")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/integrations/{integrationName}/installations/{installationId}/spaces/{spaceId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"integrationName"+"}", url.PathEscape(parameterValueToString(r.integrationName, "integrationName")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"installationId"+"}", url.PathEscape(parameterValueToString(r.installationId, "installationId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"spaceId"+"}", url.PathEscape(parameterValueToString(r.spaceId, "spaceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1640,130 +1644,6 @@ func (a *IntegrationsApiService) RemoveIntegrationDevSpaceExecute(r Integrations
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v GetSpaceGitInfo404Response
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type IntegrationsApiSyncIntegrationEntitiesRequest struct {
-	ctx                            context.Context
-	ApiService                     *IntegrationsApiService
-	integrationName                string
-	installationId                 string
-	syncIntegrationEntitiesRequest *SyncIntegrationEntitiesRequest
-}
-
-func (r IntegrationsApiSyncIntegrationEntitiesRequest) SyncIntegrationEntitiesRequest(syncIntegrationEntitiesRequest SyncIntegrationEntitiesRequest) IntegrationsApiSyncIntegrationEntitiesRequest {
-	r.syncIntegrationEntitiesRequest = &syncIntegrationEntitiesRequest
-	return r
-}
-
-func (r IntegrationsApiSyncIntegrationEntitiesRequest) Execute() (*http.Response, error) {
-	return r.ApiService.SyncIntegrationEntitiesExecute(r)
-}
-
-/*
-SyncIntegrationEntities Update all entities for an integration installation. Entities will be created and updated, missing entities will be deleted.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param integrationName Name of the integration
-	@param installationId Identifier of the installation
-	@return IntegrationsApiSyncIntegrationEntitiesRequest
-*/
-func (a *IntegrationsApiService) SyncIntegrationEntities(ctx context.Context, integrationName string, installationId string) IntegrationsApiSyncIntegrationEntitiesRequest {
-	return IntegrationsApiSyncIntegrationEntitiesRequest{
-		ApiService:      a,
-		ctx:             ctx,
-		integrationName: integrationName,
-		installationId:  installationId,
-	}
-}
-
-// Execute executes the request
-func (a *IntegrationsApiService) SyncIntegrationEntitiesExecute(r IntegrationsApiSyncIntegrationEntitiesRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodPost
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsApiService.SyncIntegrationEntities")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/integrations/{integrationName}/installations/{installationId}/entities"
-	localVarPath = strings.Replace(localVarPath, "{"+"integrationName"+"}", url.PathEscape(parameterValueToString(r.integrationName, "integrationName")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"installationId"+"}", url.PathEscape(parameterValueToString(r.installationId, "installationId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.syncIntegrationEntitiesRequest == nil {
-		return nil, reportError("syncIntegrationEntitiesRequest is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.syncIntegrationEntitiesRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err

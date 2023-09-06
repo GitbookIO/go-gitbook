@@ -37,6 +37,7 @@ type Space struct {
 	Visibility ContentVisibility `json:"visibility"`
 	CreatedAt  string            `json:"createdAt"`
 	UpdatedAt  string            `json:"updatedAt"`
+	DeletedAt  *string           `json:"deletedAt,omitempty"`
 	Urls       SpaceUrls         `json:"urls"`
 	// ID of the organization owning this space
 	Organization *string `json:"organization,omitempty"`
@@ -243,6 +244,38 @@ func (o *Space) SetUpdatedAt(v string) {
 	o.UpdatedAt = v
 }
 
+// GetDeletedAt returns the DeletedAt field value if set, zero value otherwise.
+func (o *Space) GetDeletedAt() string {
+	if o == nil || IsNil(o.DeletedAt) {
+		var ret string
+		return ret
+	}
+	return *o.DeletedAt
+}
+
+// GetDeletedAtOk returns a tuple with the DeletedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Space) GetDeletedAtOk() (*string, bool) {
+	if o == nil || IsNil(o.DeletedAt) {
+		return nil, false
+	}
+	return o.DeletedAt, true
+}
+
+// HasDeletedAt returns a boolean if a field has been set.
+func (o *Space) HasDeletedAt() bool {
+	if o != nil && !IsNil(o.DeletedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeletedAt gets a reference to the given string and assigns it to the DeletedAt field.
+func (o *Space) SetDeletedAt(v string) {
+	o.DeletedAt = &v
+}
+
 // GetUrls returns the Urls field value
 func (o *Space) GetUrls() SpaceUrls {
 	if o == nil {
@@ -418,6 +451,9 @@ func (o Space) ToMap() (map[string]interface{}, error) {
 	toSerialize["visibility"] = o.Visibility
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["updatedAt"] = o.UpdatedAt
+	if !IsNil(o.DeletedAt) {
+		toSerialize["deletedAt"] = o.DeletedAt
+	}
 	toSerialize["urls"] = o.Urls
 	if !IsNil(o.Organization) {
 		toSerialize["organization"] = o.Organization

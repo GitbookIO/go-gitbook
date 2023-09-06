@@ -31,6 +31,7 @@ const (
 	CONTENTKITICON_CLOSE         ContentKitIcon = "close"
 	CONTENTKITICON_EDIT          ContentKitIcon = "edit"
 	CONTENTKITICON_GITHUB        ContentKitIcon = "github"
+	CONTENTKITICON_GITLAB        ContentKitIcon = "gitlab"
 	CONTENTKITICON_MAXIMIZE      ContentKitIcon = "maximize"
 	CONTENTKITICON_EMAIL         ContentKitIcon = "email"
 	CONTENTKITICON_SETTINGS      ContentKitIcon = "settings"
@@ -40,6 +41,8 @@ const (
 	CONTENTKITICON_WARNING       ContentKitIcon = "warning"
 	CONTENTKITICON_LINK          ContentKitIcon = "link"
 	CONTENTKITICON_LINK_EXTERNAL ContentKitIcon = "link-external"
+	CONTENTKITICON_EYE           ContentKitIcon = "eye"
+	CONTENTKITICON_LOCK          ContentKitIcon = "lock"
 )
 
 // All allowed values of ContentKitIcon enum
@@ -47,6 +50,7 @@ var AllowedContentKitIconEnumValues = []ContentKitIcon{
 	"close",
 	"edit",
 	"github",
+	"gitlab",
 	"maximize",
 	"email",
 	"settings",
@@ -56,6 +60,8 @@ var AllowedContentKitIconEnumValues = []ContentKitIcon{
 	"warning",
 	"link",
 	"link-external",
+	"eye",
+	"lock",
 }
 
 func (v *ContentKitIcon) UnmarshalJSON(src []byte) error {

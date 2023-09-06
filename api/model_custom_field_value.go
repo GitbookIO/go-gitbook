@@ -25,9 +25,17 @@ import (
 
 // CustomFieldValue - struct for CustomFieldValue
 type CustomFieldValue struct {
-	Bool    *bool
-	Float32 *float32
-	String  *string
+	ArrayOfString *[]string
+	Bool          *bool
+	Float32       *float32
+	String        *string
+}
+
+// []stringAsCustomFieldValue is a convenience function that returns []string wrapped in CustomFieldValue
+func ArrayOfStringAsCustomFieldValue(v *[]string) CustomFieldValue {
+	return CustomFieldValue{
+		ArrayOfString: v,
+	}
 }
 
 // boolAsCustomFieldValue is a convenience function that returns bool wrapped in CustomFieldValue
@@ -55,6 +63,19 @@ func StringAsCustomFieldValue(v *string) CustomFieldValue {
 func (dst *CustomFieldValue) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
+	// try to unmarshal data into ArrayOfString
+	err = newStrictDecoder(data).Decode(&dst.ArrayOfString)
+	if err == nil {
+		jsonArrayOfString, _ := json.Marshal(dst.ArrayOfString)
+		if string(jsonArrayOfString) == "{}" { // empty struct
+			dst.ArrayOfString = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.ArrayOfString = nil
+	}
+
 	// try to unmarshal data into Bool
 	err = newStrictDecoder(data).Decode(&dst.Bool)
 	if err == nil {
@@ -96,6 +117,7 @@ func (dst *CustomFieldValue) UnmarshalJSON(data []byte) error {
 
 	if match > 1 { // more than 1 match
 		// reset to nil
+		dst.ArrayOfString = nil
 		dst.Bool = nil
 		dst.Float32 = nil
 		dst.String = nil
@@ -110,6 +132,10 @@ func (dst *CustomFieldValue) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src CustomFieldValue) MarshalJSON() ([]byte, error) {
+	if src.ArrayOfString != nil {
+		return json.Marshal(&src.ArrayOfString)
+	}
+
 	if src.Bool != nil {
 		return json.Marshal(&src.Bool)
 	}
@@ -130,6 +156,10 @@ func (obj *CustomFieldValue) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
+	if obj.ArrayOfString != nil {
+		return obj.ArrayOfString
+	}
+
 	if obj.Bool != nil {
 		return obj.Bool
 	}

@@ -32,8 +32,10 @@ type ContentKitDescendantElement struct {
 	ContentKitCodeBlock *ContentKitCodeBlock
 	ContentKitDivider   *ContentKitDivider
 	ContentKitHStack    *ContentKitHStack
+	ContentKitHint      *ContentKitHint
 	ContentKitImage     *ContentKitImage
 	ContentKitInput     *ContentKitInput
+	ContentKitLink      *ContentKitLink
 	ContentKitMarkdown  *ContentKitMarkdown
 	ContentKitRadio     *ContentKitRadio
 	ContentKitSelect    *ContentKitSelect
@@ -93,6 +95,13 @@ func ContentKitHStackAsContentKitDescendantElement(v *ContentKitHStack) ContentK
 	}
 }
 
+// ContentKitHintAsContentKitDescendantElement is a convenience function that returns ContentKitHint wrapped in ContentKitDescendantElement
+func ContentKitHintAsContentKitDescendantElement(v *ContentKitHint) ContentKitDescendantElement {
+	return ContentKitDescendantElement{
+		ContentKitHint: v,
+	}
+}
+
 // ContentKitImageAsContentKitDescendantElement is a convenience function that returns ContentKitImage wrapped in ContentKitDescendantElement
 func ContentKitImageAsContentKitDescendantElement(v *ContentKitImage) ContentKitDescendantElement {
 	return ContentKitDescendantElement{
@@ -104,6 +113,13 @@ func ContentKitImageAsContentKitDescendantElement(v *ContentKitImage) ContentKit
 func ContentKitInputAsContentKitDescendantElement(v *ContentKitInput) ContentKitDescendantElement {
 	return ContentKitDescendantElement{
 		ContentKitInput: v,
+	}
+}
+
+// ContentKitLinkAsContentKitDescendantElement is a convenience function that returns ContentKitLink wrapped in ContentKitDescendantElement
+func ContentKitLinkAsContentKitDescendantElement(v *ContentKitLink) ContentKitDescendantElement {
+	return ContentKitDescendantElement{
+		ContentKitLink: v,
 	}
 }
 
@@ -258,6 +274,19 @@ func (dst *ContentKitDescendantElement) UnmarshalJSON(data []byte) error {
 		dst.ContentKitHStack = nil
 	}
 
+	// try to unmarshal data into ContentKitHint
+	err = newStrictDecoder(data).Decode(&dst.ContentKitHint)
+	if err == nil {
+		jsonContentKitHint, _ := json.Marshal(dst.ContentKitHint)
+		if string(jsonContentKitHint) == "{}" { // empty struct
+			dst.ContentKitHint = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.ContentKitHint = nil
+	}
+
 	// try to unmarshal data into ContentKitImage
 	err = newStrictDecoder(data).Decode(&dst.ContentKitImage)
 	if err == nil {
@@ -282,6 +311,19 @@ func (dst *ContentKitDescendantElement) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.ContentKitInput = nil
+	}
+
+	// try to unmarshal data into ContentKitLink
+	err = newStrictDecoder(data).Decode(&dst.ContentKitLink)
+	if err == nil {
+		jsonContentKitLink, _ := json.Marshal(dst.ContentKitLink)
+		if string(jsonContentKitLink) == "{}" { // empty struct
+			dst.ContentKitLink = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.ContentKitLink = nil
 	}
 
 	// try to unmarshal data into ContentKitMarkdown
@@ -397,8 +439,10 @@ func (dst *ContentKitDescendantElement) UnmarshalJSON(data []byte) error {
 		dst.ContentKitCodeBlock = nil
 		dst.ContentKitDivider = nil
 		dst.ContentKitHStack = nil
+		dst.ContentKitHint = nil
 		dst.ContentKitImage = nil
 		dst.ContentKitInput = nil
+		dst.ContentKitLink = nil
 		dst.ContentKitMarkdown = nil
 		dst.ContentKitRadio = nil
 		dst.ContentKitSelect = nil
@@ -446,12 +490,20 @@ func (src ContentKitDescendantElement) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.ContentKitHStack)
 	}
 
+	if src.ContentKitHint != nil {
+		return json.Marshal(&src.ContentKitHint)
+	}
+
 	if src.ContentKitImage != nil {
 		return json.Marshal(&src.ContentKitImage)
 	}
 
 	if src.ContentKitInput != nil {
 		return json.Marshal(&src.ContentKitInput)
+	}
+
+	if src.ContentKitLink != nil {
+		return json.Marshal(&src.ContentKitLink)
 	}
 
 	if src.ContentKitMarkdown != nil {
@@ -522,12 +574,20 @@ func (obj *ContentKitDescendantElement) GetActualInstance() interface{} {
 		return obj.ContentKitHStack
 	}
 
+	if obj.ContentKitHint != nil {
+		return obj.ContentKitHint
+	}
+
 	if obj.ContentKitImage != nil {
 		return obj.ContentKitImage
 	}
 
 	if obj.ContentKitInput != nil {
 		return obj.ContentKitInput
+	}
+
+	if obj.ContentKitLink != nil {
+		return obj.ContentKitLink
 	}
 
 	if obj.ContentKitMarkdown != nil {

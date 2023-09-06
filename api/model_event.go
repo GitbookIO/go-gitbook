@@ -25,16 +25,17 @@ import (
 
 // Event - Any event that can be received from GitBook.
 type Event struct {
-	FetchEvent                  *FetchEvent
-	FetchPublishedScriptEvent   *FetchPublishedScriptEvent
-	InstallationSetupEvent      *InstallationSetupEvent
-	SpaceContentUpdatedEvent    *SpaceContentUpdatedEvent
-	SpaceGitSyncCompletedEvent  *SpaceGitSyncCompletedEvent
-	SpaceGitSyncStartedEvent    *SpaceGitSyncStartedEvent
-	SpaceInstallationSetupEvent *SpaceInstallationSetupEvent
-	SpaceViewEvent              *SpaceViewEvent
-	SpaceVisibilityUpdatedEvent *SpaceVisibilityUpdatedEvent
-	UIRenderEvent               *UIRenderEvent
+	FetchEvent                    *FetchEvent
+	FetchPublishedScriptEvent     *FetchPublishedScriptEvent
+	InstallationSetupEvent        *InstallationSetupEvent
+	SpaceContentUpdatedEvent      *SpaceContentUpdatedEvent
+	SpaceGitSyncCompletedEvent    *SpaceGitSyncCompletedEvent
+	SpaceGitSyncStartedEvent      *SpaceGitSyncStartedEvent
+	SpaceInstallationDeletedEvent *SpaceInstallationDeletedEvent
+	SpaceInstallationSetupEvent   *SpaceInstallationSetupEvent
+	SpaceViewEvent                *SpaceViewEvent
+	SpaceVisibilityUpdatedEvent   *SpaceVisibilityUpdatedEvent
+	UIRenderEvent                 *UIRenderEvent
 }
 
 // FetchEventAsEvent is a convenience function that returns FetchEvent wrapped in Event
@@ -76,6 +77,13 @@ func SpaceGitSyncCompletedEventAsEvent(v *SpaceGitSyncCompletedEvent) Event {
 func SpaceGitSyncStartedEventAsEvent(v *SpaceGitSyncStartedEvent) Event {
 	return Event{
 		SpaceGitSyncStartedEvent: v,
+	}
+}
+
+// SpaceInstallationDeletedEventAsEvent is a convenience function that returns SpaceInstallationDeletedEvent wrapped in Event
+func SpaceInstallationDeletedEventAsEvent(v *SpaceInstallationDeletedEvent) Event {
+	return Event{
+		SpaceInstallationDeletedEvent: v,
 	}
 }
 
@@ -189,6 +197,19 @@ func (dst *Event) UnmarshalJSON(data []byte) error {
 		dst.SpaceGitSyncStartedEvent = nil
 	}
 
+	// try to unmarshal data into SpaceInstallationDeletedEvent
+	err = newStrictDecoder(data).Decode(&dst.SpaceInstallationDeletedEvent)
+	if err == nil {
+		jsonSpaceInstallationDeletedEvent, _ := json.Marshal(dst.SpaceInstallationDeletedEvent)
+		if string(jsonSpaceInstallationDeletedEvent) == "{}" { // empty struct
+			dst.SpaceInstallationDeletedEvent = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.SpaceInstallationDeletedEvent = nil
+	}
+
 	// try to unmarshal data into SpaceInstallationSetupEvent
 	err = newStrictDecoder(data).Decode(&dst.SpaceInstallationSetupEvent)
 	if err == nil {
@@ -249,6 +270,7 @@ func (dst *Event) UnmarshalJSON(data []byte) error {
 		dst.SpaceContentUpdatedEvent = nil
 		dst.SpaceGitSyncCompletedEvent = nil
 		dst.SpaceGitSyncStartedEvent = nil
+		dst.SpaceInstallationDeletedEvent = nil
 		dst.SpaceInstallationSetupEvent = nil
 		dst.SpaceViewEvent = nil
 		dst.SpaceVisibilityUpdatedEvent = nil
@@ -286,6 +308,10 @@ func (src Event) MarshalJSON() ([]byte, error) {
 
 	if src.SpaceGitSyncStartedEvent != nil {
 		return json.Marshal(&src.SpaceGitSyncStartedEvent)
+	}
+
+	if src.SpaceInstallationDeletedEvent != nil {
+		return json.Marshal(&src.SpaceInstallationDeletedEvent)
 	}
 
 	if src.SpaceInstallationSetupEvent != nil {
@@ -334,6 +360,10 @@ func (obj *Event) GetActualInstance() interface{} {
 
 	if obj.SpaceGitSyncStartedEvent != nil {
 		return obj.SpaceGitSyncStartedEvent
+	}
+
+	if obj.SpaceInstallationDeletedEvent != nil {
+		return obj.SpaceInstallationDeletedEvent
 	}
 
 	if obj.SpaceInstallationSetupEvent != nil {

@@ -34,20 +34,23 @@ type OrganizationTeam struct {
 	// Title of the team.
 	Title string `json:"title"`
 	// Count of members in this team.
-	Members   int32  `json:"members"`
-	CreatedAt string `json:"createdAt"`
+	Members int32 `json:"members"`
+	// Count of spaces this team has access to.
+	Spaces    float32 `json:"spaces"`
+	CreatedAt string  `json:"createdAt"`
 }
 
 // NewOrganizationTeam instantiates a new OrganizationTeam object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrganizationTeam(object string, id string, title string, members int32, createdAt string) *OrganizationTeam {
+func NewOrganizationTeam(object string, id string, title string, members int32, spaces float32, createdAt string) *OrganizationTeam {
 	this := OrganizationTeam{}
 	this.Object = object
 	this.Id = id
 	this.Title = title
 	this.Members = members
+	this.Spaces = spaces
 	this.CreatedAt = createdAt
 	return &this
 }
@@ -156,6 +159,30 @@ func (o *OrganizationTeam) SetMembers(v int32) {
 	o.Members = v
 }
 
+// GetSpaces returns the Spaces field value
+func (o *OrganizationTeam) GetSpaces() float32 {
+	if o == nil {
+		var ret float32
+		return ret
+	}
+
+	return o.Spaces
+}
+
+// GetSpacesOk returns a tuple with the Spaces field value
+// and a boolean to check if the value has been set.
+func (o *OrganizationTeam) GetSpacesOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Spaces, true
+}
+
+// SetSpaces sets field value
+func (o *OrganizationTeam) SetSpaces(v float32) {
+	o.Spaces = v
+}
+
 // GetCreatedAt returns the CreatedAt field value
 func (o *OrganizationTeam) GetCreatedAt() string {
 	if o == nil {
@@ -194,6 +221,7 @@ func (o OrganizationTeam) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["title"] = o.Title
 	toSerialize["members"] = o.Members
+	toSerialize["spaces"] = o.Spaces
 	toSerialize["createdAt"] = o.CreatedAt
 	return toSerialize, nil
 }

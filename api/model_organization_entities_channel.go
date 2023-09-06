@@ -25,20 +25,22 @@ import (
 // checks if the OrganizationEntitiesChannel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OrganizationEntitiesChannel{}
 
-// OrganizationEntitiesChannel Subscription channel for all integration entities in an organization.
+// OrganizationEntitiesChannel Subscription channel for entities in an organization.
 type OrganizationEntitiesChannel struct {
 	Channel      string `json:"channel"`
 	Organization string `json:"organization"`
+	EntityType   string `json:"entityType"`
 }
 
 // NewOrganizationEntitiesChannel instantiates a new OrganizationEntitiesChannel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrganizationEntitiesChannel(channel string, organization string) *OrganizationEntitiesChannel {
+func NewOrganizationEntitiesChannel(channel string, organization string, entityType string) *OrganizationEntitiesChannel {
 	this := OrganizationEntitiesChannel{}
 	this.Channel = channel
 	this.Organization = organization
+	this.EntityType = entityType
 	return &this
 }
 
@@ -98,6 +100,30 @@ func (o *OrganizationEntitiesChannel) SetOrganization(v string) {
 	o.Organization = v
 }
 
+// GetEntityType returns the EntityType field value
+func (o *OrganizationEntitiesChannel) GetEntityType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.EntityType
+}
+
+// GetEntityTypeOk returns a tuple with the EntityType field value
+// and a boolean to check if the value has been set.
+func (o *OrganizationEntitiesChannel) GetEntityTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.EntityType, true
+}
+
+// SetEntityType sets field value
+func (o *OrganizationEntitiesChannel) SetEntityType(v string) {
+	o.EntityType = v
+}
+
 func (o OrganizationEntitiesChannel) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -110,6 +136,7 @@ func (o OrganizationEntitiesChannel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["channel"] = o.Channel
 	toSerialize["organization"] = o.Organization
+	toSerialize["entityType"] = o.EntityType
 	return toSerialize, nil
 }
 

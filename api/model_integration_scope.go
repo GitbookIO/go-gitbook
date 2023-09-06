@@ -28,20 +28,22 @@ type IntegrationScope string
 
 // List of IntegrationScope
 const (
-	INTEGRATIONSCOPE_ORGANIZATIONENTITIESWRITE IntegrationScope = "organization:entities:write"
-	INTEGRATIONSCOPE_SPACEVIEWSREAD            IntegrationScope = "space:views:read"
-	INTEGRATIONSCOPE_SPACECONTENTREAD          IntegrationScope = "space:content:read"
-	INTEGRATIONSCOPE_SPACECONTENTWRITE         IntegrationScope = "space:content:write"
-	INTEGRATIONSCOPE_SPACEMETADATAREAD         IntegrationScope = "space:metadata:read"
-	INTEGRATIONSCOPE_SPACEMETADATAWRITE        IntegrationScope = "space:metadata:write"
-	INTEGRATIONSCOPE_SPACESCRIPTINJECT         IntegrationScope = "space:script:inject"
-	INTEGRATIONSCOPE_SPACESCRIPTCOOKIES        IntegrationScope = "space:script:cookies"
-	INTEGRATIONSCOPE_SPACEGITSYNC              IntegrationScope = "space:git:sync"
+	INTEGRATIONSCOPE_ENTITIESWRITE      IntegrationScope = "entities:write"
+	INTEGRATIONSCOPE_RECORDINGWRITE     IntegrationScope = "recording:write"
+	INTEGRATIONSCOPE_SPACEVIEWSREAD     IntegrationScope = "space:views:read"
+	INTEGRATIONSCOPE_SPACECONTENTREAD   IntegrationScope = "space:content:read"
+	INTEGRATIONSCOPE_SPACECONTENTWRITE  IntegrationScope = "space:content:write"
+	INTEGRATIONSCOPE_SPACEMETADATAREAD  IntegrationScope = "space:metadata:read"
+	INTEGRATIONSCOPE_SPACEMETADATAWRITE IntegrationScope = "space:metadata:write"
+	INTEGRATIONSCOPE_SPACESCRIPTINJECT  IntegrationScope = "space:script:inject"
+	INTEGRATIONSCOPE_SPACESCRIPTCOOKIES IntegrationScope = "space:script:cookies"
+	INTEGRATIONSCOPE_SPACEGITSYNC       IntegrationScope = "space:git:sync"
 )
 
 // All allowed values of IntegrationScope enum
 var AllowedIntegrationScopeEnumValues = []IntegrationScope{
-	"organization:entities:write",
+	"entities:write",
+	"recording:write",
 	"space:views:read",
 	"space:content:read",
 	"space:content:write",

@@ -32,6 +32,8 @@ type SubscriptionChannel struct {
 	OrganizationEnvironmentsChannel   *OrganizationEnvironmentsChannel
 	OrganizationMemberChannel         *OrganizationMemberChannel
 	OrganizationMembersChannel        *OrganizationMembersChannel
+	OrganizationRecordingsChannel     *OrganizationRecordingsChannel
+	OrganizationSchemasChannel        *OrganizationSchemasChannel
 	OrganizationSpaceRelationsChannel *OrganizationSpaceRelationsChannel
 	OrganizationSpacesChannel         *OrganizationSpacesChannel
 	OrganizationTeamChannel           *OrganizationTeamChannel
@@ -98,6 +100,20 @@ func OrganizationMemberChannelAsSubscriptionChannel(v *OrganizationMemberChannel
 func OrganizationMembersChannelAsSubscriptionChannel(v *OrganizationMembersChannel) SubscriptionChannel {
 	return SubscriptionChannel{
 		OrganizationMembersChannel: v,
+	}
+}
+
+// OrganizationRecordingsChannelAsSubscriptionChannel is a convenience function that returns OrganizationRecordingsChannel wrapped in SubscriptionChannel
+func OrganizationRecordingsChannelAsSubscriptionChannel(v *OrganizationRecordingsChannel) SubscriptionChannel {
+	return SubscriptionChannel{
+		OrganizationRecordingsChannel: v,
+	}
+}
+
+// OrganizationSchemasChannelAsSubscriptionChannel is a convenience function that returns OrganizationSchemasChannel wrapped in SubscriptionChannel
+func OrganizationSchemasChannelAsSubscriptionChannel(v *OrganizationSchemasChannel) SubscriptionChannel {
+	return SubscriptionChannel{
+		OrganizationSchemasChannel: v,
 	}
 }
 
@@ -320,6 +336,32 @@ func (dst *SubscriptionChannel) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.OrganizationMembersChannel = nil
+	}
+
+	// try to unmarshal data into OrganizationRecordingsChannel
+	err = newStrictDecoder(data).Decode(&dst.OrganizationRecordingsChannel)
+	if err == nil {
+		jsonOrganizationRecordingsChannel, _ := json.Marshal(dst.OrganizationRecordingsChannel)
+		if string(jsonOrganizationRecordingsChannel) == "{}" { // empty struct
+			dst.OrganizationRecordingsChannel = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.OrganizationRecordingsChannel = nil
+	}
+
+	// try to unmarshal data into OrganizationSchemasChannel
+	err = newStrictDecoder(data).Decode(&dst.OrganizationSchemasChannel)
+	if err == nil {
+		jsonOrganizationSchemasChannel, _ := json.Marshal(dst.OrganizationSchemasChannel)
+		if string(jsonOrganizationSchemasChannel) == "{}" { // empty struct
+			dst.OrganizationSchemasChannel = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.OrganizationSchemasChannel = nil
 	}
 
 	// try to unmarshal data into OrganizationSpaceRelationsChannel
@@ -565,6 +607,8 @@ func (dst *SubscriptionChannel) UnmarshalJSON(data []byte) error {
 		dst.OrganizationEnvironmentsChannel = nil
 		dst.OrganizationMemberChannel = nil
 		dst.OrganizationMembersChannel = nil
+		dst.OrganizationRecordingsChannel = nil
+		dst.OrganizationSchemasChannel = nil
 		dst.OrganizationSpaceRelationsChannel = nil
 		dst.OrganizationSpacesChannel = nil
 		dst.OrganizationTeamChannel = nil
@@ -620,6 +664,14 @@ func (src SubscriptionChannel) MarshalJSON() ([]byte, error) {
 
 	if src.OrganizationMembersChannel != nil {
 		return json.Marshal(&src.OrganizationMembersChannel)
+	}
+
+	if src.OrganizationRecordingsChannel != nil {
+		return json.Marshal(&src.OrganizationRecordingsChannel)
+	}
+
+	if src.OrganizationSchemasChannel != nil {
+		return json.Marshal(&src.OrganizationSchemasChannel)
 	}
 
 	if src.OrganizationSpaceRelationsChannel != nil {
@@ -728,6 +780,14 @@ func (obj *SubscriptionChannel) GetActualInstance() interface{} {
 
 	if obj.OrganizationMembersChannel != nil {
 		return obj.OrganizationMembersChannel
+	}
+
+	if obj.OrganizationRecordingsChannel != nil {
+		return obj.OrganizationRecordingsChannel
+	}
+
+	if obj.OrganizationSchemasChannel != nil {
+		return obj.OrganizationSchemasChannel
 	}
 
 	if obj.OrganizationSpaceRelationsChannel != nil {
