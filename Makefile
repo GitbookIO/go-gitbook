@@ -23,7 +23,7 @@ generate: clean
 	go mod tidy
 
 clean:
-	rm -rf api go.mod go.sum
+	rm -rf api go.mod go.sum docs
 
 
 .PHONY: generate clean
